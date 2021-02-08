@@ -1,0 +1,81 @@
+//
+//  OpenSSLTools.m
+//  transactId-library-ios
+//
+//  Created by Developer on 02.02.2021.
+//
+
+#import "OpenSSLTools.h"
+#include <OpenSSL/OpenSSL.h>
+#import "OpenSSLHelper.h"
+
+@implementation OpenSSLKeyGenerateResult
+    
+- (instancetype)initWithPublicKey:(NSString *)publicKey
+                       privateKey:(NSString *)privateKey
+                              csr:(NSString *)csr
+{
+    if (self = [super init]) {
+        self.publicKeyBase64 = publicKey;
+        self.privateKeyBase64 = privateKey;
+        self.csrBase64 = csr;
+    }
+    return self;
+}
+    
+@end
+
+@implementation OpenSSLKeyGenerationParams
+
+- (instancetype)initWithCn:(NSString *)cn
+                       org:(NSString *)org
+                   country:(NSString *)country
+                     state:(NSString *)state
+                      city:(NSString *)city
+                passphrase:(NSString *)passphrase
+{
+    if (self = [super init]) {
+        self.CN = cn;
+        self.O = org;
+        self.C = country;
+        self.ST = state;
+        self.L = city;
+        self.passphrase = passphrase;
+    }
+    return self;
+}
+
+@end
+
+@implementation OpenSSLTools
+
+- (instancetype)init {
+    if (self = [super init]) {
+        OpenSSL_add_all_algorithms();
+    }
+    return self;
+}
+
+- (OpenSSLKeyGenerateResult *)generateCertificate:(OpenSSLKeyGenerationParams *)generationParameters {
+
+    transact_id_ssl::CsrData csrData;
+    
+    csrData.country = std::string(generationParameters.C.UTF8String);
+    csrData.state = std::string(generationParameters.ST.UTF8String);
+    csrData.city = std::string(generationParameters.L.UTF8String);
+    csrData.org = std::string(generationParameters.O.UTF8String);
+    csrData.cn = std::string(generationParameters.CN.UTF8String);
+    csrData.passphrase = std::string(generationParameters.passphrase.UTF8String);
+    
+    transact_id_ssl::generateCsr(csrData);
+    
+    NSString *publicKey = [NSString stringWithUTF8String:csrData.publicKey.c_str()];
+    NSString *privateKey = [NSString stringWithUTF8String:csrData.privateKey.c_str()];
+    NSString *csr = [NSString stringWithUTF8String:csrData.request.c_str()];
+    
+    return [[OpenSSLKeyGenerateResult alloc] initWithPublicKey:publicKey
+                                                    privateKey:privateKey
+                                                           csr:csr];
+}
+
+@end
