@@ -33,7 +33,46 @@
 		8B36B32425CACE1800CE14E9 /* LocalStoreProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B32325CACE1800CE14E9 /* LocalStoreProvider.swift */; };
 		8B36B37D25CADE9E00CE14E9 /* transactId_library_ios_tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B37C25CADE9E00CE14E9 /* transactId_library_ios_tests.swift */; };
 		8B36B37F25CADE9E00CE14E9 /* transactId_library_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B36B2AD25C984B400CE14E9 /* transactId_library_ios.framework */; };
+		8B3E007425D6892E00B8BE68 /* CertificateValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E007325D6892E00B8BE68 /* CertificateValidatorTests.swift */; };
+		8B3E007725D6895900B8BE68 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E007625D6895900B8BE68 /* TestData.swift */; };
+		8B3E007A25D68AE900B8BE68 /* CertificateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C5325D2A7B000C922A3 /* CertificateValidator.swift */; };
+		8B3E007D25D68B8200B8BE68 /* CertificateChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E007C25D68B8200B8BE68 /* CertificateChain.swift */; };
+		8B47532825D2B0C900383451 /* OwnerParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47532725D2B0C900383451 /* OwnerParameters.swift */; };
+		8B47532C25D2B19900383451 /* PkiDataParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47532B25D2B19900383451 /* PkiDataParameters.swift */; };
+		8B47533025D2B22F00383451 /* PkiType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47532F25D2B22F00383451 /* PkiType.swift */; };
+		8B47533525D2B38800383451 /* OriginatorParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47533425D2B38800383451 /* OriginatorParameters.swift */; };
+		8B47533825D2B58300383451 /* SenderParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47533725D2B58300383451 /* SenderParameters.swift */; };
+		8B47533C25D2B5D000383451 /* EncryptionParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47533B25D2B5D000383451 /* EncryptionParameters.swift */; };
+		8B47533F25D2B77700383451 /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47533E25D2B77700383451 /* Output.swift */; };
+		8B47534225D2B7F300383451 /* AddressCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47534125D2B7F300383451 /* AddressCurrency.swift */; };
+		8B47534525D2B87500383451 /* AddressInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47534425D2B87500383451 /* AddressInformation.swift */; };
+		8B47534925D2B96200383451 /* AddressTagInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47534825D2B96200383451 /* AddressTagInformation.swift */; };
+		8B47534C25D2B99700383451 /* AddressTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47534B25D2B99700383451 /* AddressTags.swift */; };
+		8B47535025D2B9DD00383451 /* BeneficiaryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47534F25D2B9DD00383451 /* BeneficiaryParameters.swift */; };
+		8B47535325D2BA3300383451 /* MessageInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47535225D2BA3300383451 /* MessageInformation.swift */; };
+		8B47535625D2BA8400383451 /* StatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47535525D2BA8400383451 /* StatusCode.swift */; };
+		8B47535925D2BBD300383451 /* OwnerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47535825D2BBD300383451 /* OwnerType.swift */; };
+		8B47536125D2BE1A00383451 /* Array<OwnerParameters>+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47536025D2BE1A00383451 /* Array<OwnerParameters>+Extension.swift */; };
+		8B5BF57625D300B30086E7AF /* Exception.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BF57525D300B30086E7AF /* Exception.swift */; };
+		8B5BF57A25D3015D0086E7AF /* ExceptionMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BF57925D3015D0086E7AF /* ExceptionMessages.swift */; };
 		8BE3FDBA25D1736000D78B62 /* PearlApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3FDB925D1736000D78B62 /* PearlApiService.swift */; };
+		8BE3FDC325D176FE00D78B62 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3FDC225D176FE00D78B62 /* Token.swift */; };
+		8BE3FDC625D1776600D78B62 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3FDC525D1776600D78B62 /* Response.swift */; };
+		8BE3FDC925D1778B00D78B62 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3FDC825D1778B00D78B62 /* Request.swift */; };
+		8BE3FDCC25D177AB00D78B62 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3FDCB25D177AB00D78B62 /* TokenResponse.swift */; };
+		8BE3FDD025D1780000D78B62 /* TokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3FDCF25D1780000D78B62 /* TokenRequest.swift */; };
+		8BE3FDD425D17B4400D78B62 /* PearlApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3FDD325D17B4400D78B62 /* PearlApiRouter.swift */; };
+		8BE3FDD825D17BD500D78B62 /* SettingsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3FDD725D17BD500D78B62 /* SettingsProvider.swift */; };
+		8BF24C3025D1CB3900C922A3 /* TrustStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C2F25D1CB3900C922A3 /* TrustStore.swift */; };
+		8BF24C3625D29E0600C922A3 /* Bip75.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C3525D29E0600C922A3 /* Bip75.swift */; };
+		8BF24C3925D29F4E00C922A3 /* InvoiceRequestParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C3825D29F4E00C922A3 /* InvoiceRequestParameters.swift */; };
+		8BF24C3C25D29F6800C922A3 /* InvoiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C3B25D29F6800C922A3 /* InvoiceRequest.swift */; };
+		8BF24C3F25D29F8200C922A3 /* RecipientParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C3E25D29F8200C922A3 /* RecipientParameters.swift */; };
+		8BF24C4225D2A18E00C922A3 /* Bip75Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C4125D2A18E00C922A3 /* Bip75Factory.swift */; };
+		8BF24C4525D2A3D000C922A3 /* Bip75Netki.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C4425D2A3D000C922A3 /* Bip75Netki.swift */; };
+		8BF24C4B25D2A45900C922A3 /* Bip75Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C4A25D2A45900C922A3 /* Bip75Service.swift */; };
+		8BF24C5025D2A4EC00C922A3 /* Bip75ServiceNetki.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C4F25D2A4EC00C922A3 /* Bip75ServiceNetki.swift */; };
+		8BF24C5425D2A7B000C922A3 /* CertificateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C5325D2A7B000C922A3 /* CertificateValidator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,7 +152,45 @@
 		8B36B37A25CADE9E00CE14E9 /* transactId_library_ios-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "transactId_library_ios-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B36B37C25CADE9E00CE14E9 /* transactId_library_ios_tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = transactId_library_ios_tests.swift; sourceTree = "<group>"; };
 		8B36B37E25CADE9E00CE14E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8B3E007325D6892E00B8BE68 /* CertificateValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateValidatorTests.swift; sourceTree = "<group>"; };
+		8B3E007625D6895900B8BE68 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		8B3E007C25D68B8200B8BE68 /* CertificateChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateChain.swift; sourceTree = "<group>"; };
+		8B47532725D2B0C900383451 /* OwnerParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerParameters.swift; sourceTree = "<group>"; };
+		8B47532B25D2B19900383451 /* PkiDataParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PkiDataParameters.swift; sourceTree = "<group>"; };
+		8B47532F25D2B22F00383451 /* PkiType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PkiType.swift; sourceTree = "<group>"; };
+		8B47533425D2B38800383451 /* OriginatorParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginatorParameters.swift; sourceTree = "<group>"; };
+		8B47533725D2B58300383451 /* SenderParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderParameters.swift; sourceTree = "<group>"; };
+		8B47533B25D2B5D000383451 /* EncryptionParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionParameters.swift; sourceTree = "<group>"; };
+		8B47533E25D2B77700383451 /* Output.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
+		8B47534125D2B7F300383451 /* AddressCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCurrency.swift; sourceTree = "<group>"; };
+		8B47534425D2B87500383451 /* AddressInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInformation.swift; sourceTree = "<group>"; };
+		8B47534825D2B96200383451 /* AddressTagInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTagInformation.swift; sourceTree = "<group>"; };
+		8B47534B25D2B99700383451 /* AddressTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTags.swift; sourceTree = "<group>"; };
+		8B47534F25D2B9DD00383451 /* BeneficiaryParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeneficiaryParameters.swift; sourceTree = "<group>"; };
+		8B47535225D2BA3300383451 /* MessageInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInformation.swift; sourceTree = "<group>"; };
+		8B47535525D2BA8400383451 /* StatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCode.swift; sourceTree = "<group>"; };
+		8B47535825D2BBD300383451 /* OwnerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerType.swift; sourceTree = "<group>"; };
+		8B47536025D2BE1A00383451 /* Array<OwnerParameters>+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array<OwnerParameters>+Extension.swift"; sourceTree = "<group>"; };
+		8B5BF57525D300B30086E7AF /* Exception.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exception.swift; sourceTree = "<group>"; };
+		8B5BF57925D3015D0086E7AF /* ExceptionMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionMessages.swift; sourceTree = "<group>"; };
 		8BE3FDB925D1736000D78B62 /* PearlApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PearlApiService.swift; sourceTree = "<group>"; };
+		8BE3FDC225D176FE00D78B62 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		8BE3FDC525D1776600D78B62 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		8BE3FDC825D1778B00D78B62 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		8BE3FDCB25D177AB00D78B62 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
+		8BE3FDCF25D1780000D78B62 /* TokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRequest.swift; sourceTree = "<group>"; };
+		8BE3FDD325D17B4400D78B62 /* PearlApiRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PearlApiRouter.swift; sourceTree = "<group>"; };
+		8BE3FDD725D17BD500D78B62 /* SettingsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProvider.swift; sourceTree = "<group>"; };
+		8BF24C2F25D1CB3900C922A3 /* TrustStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustStore.swift; sourceTree = "<group>"; };
+		8BF24C3525D29E0600C922A3 /* Bip75.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bip75.swift; sourceTree = "<group>"; };
+		8BF24C3825D29F4E00C922A3 /* InvoiceRequestParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceRequestParameters.swift; sourceTree = "<group>"; };
+		8BF24C3B25D29F6800C922A3 /* InvoiceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceRequest.swift; sourceTree = "<group>"; };
+		8BF24C3E25D29F8200C922A3 /* RecipientParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientParameters.swift; sourceTree = "<group>"; };
+		8BF24C4125D2A18E00C922A3 /* Bip75Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bip75Factory.swift; sourceTree = "<group>"; };
+		8BF24C4425D2A3D000C922A3 /* Bip75Netki.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bip75Netki.swift; sourceTree = "<group>"; };
+		8BF24C4A25D2A45900C922A3 /* Bip75Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bip75Service.swift; sourceTree = "<group>"; };
+		8BF24C4F25D2A4EC00C922A3 /* Bip75ServiceNetki.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bip75ServiceNetki.swift; sourceTree = "<group>"; };
+		8BF24C5325D2A7B000C922A3 /* CertificateValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateValidator.swift; sourceTree = "<group>"; };
 		C2DA8CDF7CBF5B6A822164E3 /* Pods_transactId_library_ios_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_transactId_library_ios_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29C197622F1D81FA241DE14 /* Pods-transactId-library-ios-transactId_library_ios-tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-transactId-library-ios-transactId_library_ios-tests.debug.xcconfig"; path = "Target Support Files/Pods-transactId-library-ios-transactId_library_ios-tests/Pods-transactId-library-ios-transactId_library_ios-tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D9E2A63D4914F8EA92D85EE9 /* Pods-transactId-library-ios-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-transactId-library-ios-Tests.debug.xcconfig"; path = "Target Support Files/Pods-transactId-library-ios-Tests/Pods-transactId-library-ios-Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -201,13 +278,18 @@
 		8B36B2AF25C984B400CE14E9 /* transactId-library-ios */ = {
 			isa = PBXGroup;
 			children = (
-				8B36B2DB25C99A1700CE14E9 /* OpenSSL */,
-				8B36B2CE25C98BCB00CE14E9 /* Models */,
-				8B36B2D425C98D8700CE14E9 /* Services */,
-				8B36B2CF25C98C2600CE14E9 /* Utilities */,
+				8B5BF57425D300980086E7AF /* Exceptions */,
+				8B47535F25D2BE0200383451 /* Extensions */,
 				8B36B2B025C984B400CE14E9 /* transactId_library_ios.h */,
 				8B36B2B125C984B400CE14E9 /* Info.plist */,
 				8B36B2D025C98C9400CE14E9 /* TransactId.swift */,
+				8BF24C3425D29DE300C922A3 /* Bip75 */,
+				8B36B2CE25C98BCB00CE14E9 /* Models */,
+				8B36B2DB25C99A1700CE14E9 /* OpenSSL */,
+				8BF24C5225D2A79600C922A3 /* Security */,
+				8B36B2D425C98D8700CE14E9 /* Services */,
+				8BF24C2E25D1CB0F00C922A3 /* TrustStore */,
+				8B36B2CF25C98C2600CE14E9 /* Utilities */,
 			);
 			path = "transactId-library-ios";
 			sourceTree = "<group>";
@@ -215,8 +297,23 @@
 		8B36B2CE25C98BCB00CE14E9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8B36B2D225C98D7000CE14E9 /* Attestation.swift */,
-				8B36B2D525C98ECA00CE14E9 /* Csr.swift */,
+				8B47534425D2B87500383451 /* AddressInformation.swift */,
+				8B47534825D2B96200383451 /* AddressTagInformation.swift */,
+				8B47534B25D2B99700383451 /* AddressTags.swift */,
+				8B47533B25D2B5D000383451 /* EncryptionParameters.swift */,
+				8BF24C3B25D29F6800C922A3 /* InvoiceRequest.swift */,
+				8BF24C3825D29F4E00C922A3 /* InvoiceRequestParameters.swift */,
+				8B47533425D2B38800383451 /* OriginatorParameters.swift */,
+				8B47533E25D2B77700383451 /* Output.swift */,
+				8B47532725D2B0C900383451 /* OwnerParameters.swift */,
+				8B47532B25D2B19900383451 /* PkiDataParameters.swift */,
+				8BF24C3E25D29F8200C922A3 /* RecipientParameters.swift */,
+				8B47533725D2B58300383451 /* SenderParameters.swift */,
+				8B47532E25D2B21700383451 /* Enums */,
+				8B47532625D2B0A000383451 /* models */,
+				8B47534F25D2B9DD00383451 /* BeneficiaryParameters.swift */,
+				8B47535225D2BA3300383451 /* MessageInformation.swift */,
+				8B3E007C25D68B8200B8BE68 /* CertificateChain.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -225,8 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				8B36B2E725C9B3E000CE14E9 /* CSRUtilities.swift */,
-				8B36B32325CACE1800CE14E9 /* LocalStoreProvider.swift */,
-				8B290AE225CBE369006B96B3 /* KeyChainProvider.swift */,
+				8BE3FDD725D17BD500D78B62 /* SettingsProvider.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -234,7 +330,7 @@
 		8B36B2D425C98D8700CE14E9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				8BE3FDB925D1736000D78B62 /* PearlApiService.swift */,
+				8BE3FDD225D17B1300D78B62 /* PearlApiService */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -255,8 +351,91 @@
 			children = (
 				8B36B37C25CADE9E00CE14E9 /* transactId_library_ios_tests.swift */,
 				8B36B37E25CADE9E00CE14E9 /* Info.plist */,
+				8B3E007325D6892E00B8BE68 /* CertificateValidatorTests.swift */,
+				8B3E007625D6895900B8BE68 /* TestData.swift */,
 			);
 			path = "transactId_library_ios-tests";
+			sourceTree = "<group>";
+		};
+		8B47532625D2B0A000383451 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				8B36B2D225C98D7000CE14E9 /* Attestation.swift */,
+				8B36B2D525C98ECA00CE14E9 /* Csr.swift */,
+				8BE3FDC825D1778B00D78B62 /* Request.swift */,
+				8BE3FDC525D1776600D78B62 /* Response.swift */,
+				8BE3FDC225D176FE00D78B62 /* Token.swift */,
+				8BE3FDCB25D177AB00D78B62 /* TokenResponse.swift */,
+				8BE3FDCF25D1780000D78B62 /* TokenRequest.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		8B47532E25D2B21700383451 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				8B47532F25D2B22F00383451 /* PkiType.swift */,
+				8B47534125D2B7F300383451 /* AddressCurrency.swift */,
+				8B47535525D2BA8400383451 /* StatusCode.swift */,
+				8B47535825D2BBD300383451 /* OwnerType.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		8B47535F25D2BE0200383451 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8B47536025D2BE1A00383451 /* Array<OwnerParameters>+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8B5BF57425D300980086E7AF /* Exceptions */ = {
+			isa = PBXGroup;
+			children = (
+				8B5BF57525D300B30086E7AF /* Exception.swift */,
+				8B5BF57925D3015D0086E7AF /* ExceptionMessages.swift */,
+			);
+			path = Exceptions;
+			sourceTree = "<group>";
+		};
+		8BE3FDD225D17B1300D78B62 /* PearlApiService */ = {
+			isa = PBXGroup;
+			children = (
+				8BE3FDB925D1736000D78B62 /* PearlApiService.swift */,
+				8BE3FDD325D17B4400D78B62 /* PearlApiRouter.swift */,
+			);
+			path = PearlApiService;
+			sourceTree = "<group>";
+		};
+		8BF24C2E25D1CB0F00C922A3 /* TrustStore */ = {
+			isa = PBXGroup;
+			children = (
+				8BF24C2F25D1CB3900C922A3 /* TrustStore.swift */,
+				8B36B32325CACE1800CE14E9 /* LocalStoreProvider.swift */,
+				8B290AE225CBE369006B96B3 /* KeyChainProvider.swift */,
+			);
+			path = TrustStore;
+			sourceTree = "<group>";
+		};
+		8BF24C3425D29DE300C922A3 /* Bip75 */ = {
+			isa = PBXGroup;
+			children = (
+				8BF24C4125D2A18E00C922A3 /* Bip75Factory.swift */,
+				8BF24C3525D29E0600C922A3 /* Bip75.swift */,
+				8BF24C4425D2A3D000C922A3 /* Bip75Netki.swift */,
+				8BF24C4A25D2A45900C922A3 /* Bip75Service.swift */,
+				8BF24C4F25D2A4EC00C922A3 /* Bip75ServiceNetki.swift */,
+			);
+			path = Bip75;
+			sourceTree = "<group>";
+		};
+		8BF24C5225D2A79600C922A3 /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				8BF24C5325D2A7B000C922A3 /* CertificateValidator.swift */,
+			);
+			path = Security;
 			sourceTree = "<group>";
 		};
 		BB939B437D6DBAA2FF961A4A /* Frameworks */ = {
@@ -551,13 +730,49 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BF24C3025D1CB3900C922A3 /* TrustStore.swift in Sources */,
+				8B47535025D2B9DD00383451 /* BeneficiaryParameters.swift in Sources */,
+				8BF24C3C25D29F6800C922A3 /* InvoiceRequest.swift in Sources */,
 				8B290AE325CBE369006B96B3 /* KeyChainProvider.swift in Sources */,
+				8B47534225D2B7F300383451 /* AddressCurrency.swift in Sources */,
+				8B47536125D2BE1A00383451 /* Array<OwnerParameters>+Extension.swift in Sources */,
+				8BE3FDC925D1778B00D78B62 /* Request.swift in Sources */,
+				8B47533825D2B58300383451 /* SenderParameters.swift in Sources */,
+				8B3E007D25D68B8200B8BE68 /* CertificateChain.swift in Sources */,
+				8B47534C25D2B99700383451 /* AddressTags.swift in Sources */,
+				8B5BF57625D300B30086E7AF /* Exception.swift in Sources */,
+				8BE3FDC325D176FE00D78B62 /* Token.swift in Sources */,
+				8B47533525D2B38800383451 /* OriginatorParameters.swift in Sources */,
+				8BE3FDCC25D177AB00D78B62 /* TokenResponse.swift in Sources */,
 				8B36B2D325C98D7000CE14E9 /* Attestation.swift in Sources */,
 				8B36B32425CACE1800CE14E9 /* LocalStoreProvider.swift in Sources */,
+				8B47533025D2B22F00383451 /* PkiType.swift in Sources */,
+				8BF24C4225D2A18E00C922A3 /* Bip75Factory.swift in Sources */,
+				8BE3FDD425D17B4400D78B62 /* PearlApiRouter.swift in Sources */,
 				8BE3FDBA25D1736000D78B62 /* PearlApiService.swift in Sources */,
+				8BF24C3625D29E0600C922A3 /* Bip75.swift in Sources */,
+				8BF24C5425D2A7B000C922A3 /* CertificateValidator.swift in Sources */,
 				8B36B2D625C98ECA00CE14E9 /* Csr.swift in Sources */,
+				8BF24C4B25D2A45900C922A3 /* Bip75Service.swift in Sources */,
 				8B36B2DF25C99AAE00CE14E9 /* OpenSSLHelper.cpp in Sources */,
+				8BE3FDD025D1780000D78B62 /* TokenRequest.swift in Sources */,
+				8B47533C25D2B5D000383451 /* EncryptionParameters.swift in Sources */,
+				8B47534925D2B96200383451 /* AddressTagInformation.swift in Sources */,
+				8BF24C5025D2A4EC00C922A3 /* Bip75ServiceNetki.swift in Sources */,
+				8B47535625D2BA8400383451 /* StatusCode.swift in Sources */,
+				8B5BF57A25D3015D0086E7AF /* ExceptionMessages.swift in Sources */,
+				8BE3FDC625D1776600D78B62 /* Response.swift in Sources */,
+				8BF24C3F25D29F8200C922A3 /* RecipientParameters.swift in Sources */,
+				8B47532C25D2B19900383451 /* PkiDataParameters.swift in Sources */,
+				8B47533F25D2B77700383451 /* Output.swift in Sources */,
 				8B36B2E625C9A68800CE14E9 /* OpenSSLTools.mm in Sources */,
+				8B47535325D2BA3300383451 /* MessageInformation.swift in Sources */,
+				8B47532825D2B0C900383451 /* OwnerParameters.swift in Sources */,
+				8B47534525D2B87500383451 /* AddressInformation.swift in Sources */,
+				8BF24C3925D29F4E00C922A3 /* InvoiceRequestParameters.swift in Sources */,
+				8B47535925D2BBD300383451 /* OwnerType.swift in Sources */,
+				8BF24C4525D2A3D000C922A3 /* Bip75Netki.swift in Sources */,
+				8BE3FDD825D17BD500D78B62 /* SettingsProvider.swift in Sources */,
 				8B36B2D125C98C9400CE14E9 /* TransactId.swift in Sources */,
 				8B36B2E825C9B3E000CE14E9 /* CSRUtilities.swift in Sources */,
 			);
@@ -567,6 +782,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B3E007725D6895900B8BE68 /* TestData.swift in Sources */,
+				8B3E007425D6892E00B8BE68 /* CertificateValidatorTests.swift in Sources */,
+				8B3E007A25D68AE900B8BE68 /* CertificateValidator.swift in Sources */,
 				8B36B37D25CADE9E00CE14E9 /* transactId_library_ios_tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -78,4 +78,35 @@
                                                            csr:csr];
 }
 
+- (NSArray *)chainsFromPemCertificate:(NSString *)certificate {
+            
+    std::vector<std::string> chains = transact_id_ssl::certificatePemToChains(std::string(certificate.UTF8String).c_str());
+    
+    NSMutableArray *certificates = [NSMutableArray new];
+    
+    for(int i = 0; i < chains.size(); i++){
+        NSString * chain = [NSString stringWithUTF8String: chains[i].c_str()];
+        [certificates addObject:chain];
+    }
+    
+    return [certificates copy];
+    
+}
+
+- (BOOL)isSigned:(NSString *)certificate {
+    return transact_id_ssl::isSigned(std::string(certificate.UTF8String).c_str());
+}
+
+- (BOOL)isRootCertificate:(NSString *)certificate {
+    return transact_id_ssl::isRootCertificate(std::string(certificate.UTF8String).c_str());
+}
+
+- (BOOL)isIntermediateCertificate:(NSString *)certificate {
+    return transact_id_ssl::isIntermediateCertificate(std::string(certificate.UTF8String).c_str());
+}
+
+- (BOOL)isClientCertificate:(NSString *)certificate {
+    return transact_id_ssl::isClientCertificate(std::string(certificate.UTF8String).c_str());
+}
+
 @end

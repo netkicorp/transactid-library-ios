@@ -20,9 +20,15 @@ class Attestation {
     
     func toDict() -> [String: Any] {
         var retVal = [String: Any]()
-        if let attestationField = self.attestationField { retVal["attestation_field"] = attestationField }
-        if let publicKey = self.publicKey { retVal["public_key"] = publicKey }
-        if let csr = self.csr { retVal["csr"] = csr }
+        if let attestationField = self.attestationField {
+            retVal["attestation_field"] = attestationField
+        }
+        if let publicKey = self.publicKey {
+            retVal["public_key"] = publicKey
+        }
+        if let csr = self.csr {
+            retVal["csr"] = csr
+        }
 
         return retVal
     }

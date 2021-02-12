@@ -9,6 +9,7 @@
 #define OpenSSLHelper_h
 
 #include <string>
+#include <vector>
 
 namespace transact_id_ssl {
 
@@ -61,6 +62,16 @@ struct SignData : public Operation
 };
 
 bool signMessage(SignData& data);
+
+std::vector<std::string> certificatePemToChains(const char* cert_pem);
+
+bool isSigned(const char* cert_pem);
+
+bool isRootCertificate(const char* cert_pem);
+
+bool isIntermediateCertificate(const char* cert_pem);
+
+bool isClientCertificate(const char* cert_pem);
 
 } //namespace transact_id_ssl
 

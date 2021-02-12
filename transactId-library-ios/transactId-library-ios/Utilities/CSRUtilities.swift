@@ -42,10 +42,8 @@ public class CSRUtilities {
     public func generateCertificateSigningRequestOpenSSL(csrInfo: [Csr]) -> OpenSSLKeyGenerateResult? {
         let openSSLTools = OpenSSLTools()
             
-        if let keygenParams = self.keygenParamsFromCsr(csrInfo: csrInfo) {
-            let result = openSSLTools.generateCertificate(keygenParams)
-            
-            return result
+        if let keygenParams = self.keygenParamsFromCsr(csrInfo: csrInfo) {            
+            return openSSLTools.generateCertificate(keygenParams)
         }
     
         return nil
