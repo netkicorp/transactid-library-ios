@@ -7,7 +7,7 @@
 
 import Foundation
 
-class KeyChainProvider {
+class KeyChainProvider : TrustStore {
     
     func storePublicKey(publicKey: String) {
         
@@ -73,7 +73,9 @@ class KeyChainProvider {
                 if let cfdata = SecKeyCopyExternalRepresentation(key, &error) {
                     let data: Data = cfdata as Data
                     
-                    return data.base64EncodedString()
+                    let base64String = data.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters).replacingOccurrences(of: "\r", with: "")
+                    
+                    return "-----BEGIN PUBLIC KEY-----\n" + base64String + "\n-----END PUBLIC KEY-----\n"
                 }
             }
         }
@@ -128,7 +130,8 @@ class KeyChainProvider {
         }
     }
     
-    func retivePrivateKey() -> String? {
+    func retrivePrivateKey() -> String? {
+
         if let bundleIdentifier = Bundle.main.bundleIdentifier {
             if let tag = "\(bundleIdentifier).privateKey".data(using: .utf8) {
                 
@@ -151,7 +154,9 @@ class KeyChainProvider {
                 if let cfdata = SecKeyCopyExternalRepresentation(key, &error) {
                     let data: Data = cfdata as Data
                     
-                    return data.base64EncodedString()
+                    let base64String = data.base64EncodedString(options: Data.Base64EncodingOptions.lineLength64Characters).replacingOccurrences(of: "\r", with: "")
+                    
+                    return "-----BEGIN RSA PRIVATE KEY-----\n" + base64String + "\n-----END RSA PRIVATE KEY-----\n"
                 }
             }
         }
@@ -182,7 +187,7 @@ class KeyChainProvider {
         }
     }
     
-    func retiveCertificate() -> String? {
+    func retriveCertificate() -> String? {
         return nil
     }
     

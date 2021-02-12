@@ -39,6 +39,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (OpenSSLKeyGenerateResult *)generateCertificate:(OpenSSLKeyGenerationParams *)generationParameters;
 
+- (NSArray *)chainsFromPemCertificate:(NSString *)certificate;
+
+- (BOOL)isSigned:(NSString *)certificate;
+
+- (BOOL)isRootCertificate:(NSString *)certificate;
+
+- (BOOL)isIntermediateCertificate:(NSString *)certificate;
+
+- (BOOL)isClientCertificate:(NSString *)certificate;
+
 @end
 
 NS_ASSUME_NONNULL_END
