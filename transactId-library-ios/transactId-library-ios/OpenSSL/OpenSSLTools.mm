@@ -78,7 +78,7 @@
                                                            csr:csr];
 }
 
-- (NSArray *)chainsFromPemCertificate:(NSString *)certificate {
+- (NSArray *)pemToCertificatesArray:(NSString *)certificate {
             
     std::vector<std::string> chains = transact_id_ssl::certificatePemToChains(std::string(certificate.UTF8String).c_str());
     
@@ -108,5 +108,34 @@
 - (BOOL)isClientCertificate:(NSString *)certificate {
     return transact_id_ssl::isClientCertificate(std::string(certificate.UTF8String).c_str());
 }
+
+- (BOOL)validateNotBeforeExpirationCertificate:(NSString *)certificate {
+    return transact_id_ssl::validateCertificateNotBeforeExpiration(std::string(certificate.UTF8String).c_str());
+}
+
+- (BOOL)validateNotAfterExpirationCertificate:(NSString *)certificate {
+    return transact_id_ssl::validateCertificateNotAfterExpiration(std::string(certificate.UTF8String).c_str());
+}
+
+- (NSArray *)getCRLDistributionPoints:(NSString *)certificate {
+    
+    std::vector<std::string> points = transact_id_ssl::getCRLDistributionPoints(std::string(certificate.UTF8String).c_str());
+    
+    NSMutableArray *crlPoints = [NSMutableArray new];
+    
+    for(int i = 0; i < points.size(); i++){
+        NSString * point = [NSString stringWithUTF8String: points[i].c_str()];
+        [crlPoints addObject:point];
+    }
+    
+    return [crlPoints copy];
+}
+
+- (BOOL)isRevoked:(NSString*)crl certificate:(NSString *)certificate {
+    
+    return NO;
+}
+
+
 
 @end

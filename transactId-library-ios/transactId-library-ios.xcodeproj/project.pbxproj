@@ -33,8 +33,6 @@
 		8B36B32425CACE1800CE14E9 /* LocalStoreProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B32325CACE1800CE14E9 /* LocalStoreProvider.swift */; };
 		8B36B37D25CADE9E00CE14E9 /* transactId_library_ios_tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B37C25CADE9E00CE14E9 /* transactId_library_ios_tests.swift */; };
 		8B36B37F25CADE9E00CE14E9 /* transactId_library_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B36B2AD25C984B400CE14E9 /* transactId_library_ios.framework */; };
-		8B3E007425D6892E00B8BE68 /* CertificateValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E007325D6892E00B8BE68 /* CertificateValidatorTests.swift */; };
-		8B3E007725D6895900B8BE68 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E007625D6895900B8BE68 /* TestData.swift */; };
 		8B3E007A25D68AE900B8BE68 /* CertificateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C5325D2A7B000C922A3 /* CertificateValidator.swift */; };
 		8B3E007D25D68B8200B8BE68 /* CertificateChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E007C25D68B8200B8BE68 /* CertificateChain.swift */; };
 		8B47532825D2B0C900383451 /* OwnerParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47532725D2B0C900383451 /* OwnerParameters.swift */; };
@@ -55,6 +53,7 @@
 		8B47536125D2BE1A00383451 /* Array<OwnerParameters>+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47536025D2BE1A00383451 /* Array<OwnerParameters>+Extension.swift */; };
 		8B5BF57625D300B30086E7AF /* Exception.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BF57525D300B30086E7AF /* Exception.swift */; };
 		8B5BF57A25D3015D0086E7AF /* ExceptionMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BF57925D3015D0086E7AF /* ExceptionMessages.swift */; };
+		8B92870A25DC0C5E005AB4B0 /* TrustStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C2F25D1CB3900C922A3 /* TrustStore.swift */; };
 		8BE3FDBA25D1736000D78B62 /* PearlApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3FDB925D1736000D78B62 /* PearlApiService.swift */; };
 		8BE3FDC325D176FE00D78B62 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3FDC225D176FE00D78B62 /* Token.swift */; };
 		8BE3FDC625D1776600D78B62 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3FDC525D1776600D78B62 /* Response.swift */; };
@@ -152,8 +151,6 @@
 		8B36B37A25CADE9E00CE14E9 /* transactId_library_ios-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "transactId_library_ios-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B36B37C25CADE9E00CE14E9 /* transactId_library_ios_tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = transactId_library_ios_tests.swift; sourceTree = "<group>"; };
 		8B36B37E25CADE9E00CE14E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B3E007325D6892E00B8BE68 /* CertificateValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateValidatorTests.swift; sourceTree = "<group>"; };
-		8B3E007625D6895900B8BE68 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		8B3E007C25D68B8200B8BE68 /* CertificateChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateChain.swift; sourceTree = "<group>"; };
 		8B47532725D2B0C900383451 /* OwnerParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerParameters.swift; sourceTree = "<group>"; };
 		8B47532B25D2B19900383451 /* PkiDataParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PkiDataParameters.swift; sourceTree = "<group>"; };
@@ -351,8 +348,6 @@
 			children = (
 				8B36B37C25CADE9E00CE14E9 /* transactId_library_ios_tests.swift */,
 				8B36B37E25CADE9E00CE14E9 /* Info.plist */,
-				8B3E007325D6892E00B8BE68 /* CertificateValidatorTests.swift */,
-				8B3E007625D6895900B8BE68 /* TestData.swift */,
 			);
 			path = "transactId_library_ios-tests";
 			sourceTree = "<group>";
@@ -782,8 +777,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B3E007725D6895900B8BE68 /* TestData.swift in Sources */,
-				8B3E007425D6892E00B8BE68 /* CertificateValidatorTests.swift in Sources */,
+				8B92870A25DC0C5E005AB4B0 /* TrustStore.swift in Sources */,
 				8B3E007A25D68AE900B8BE68 /* CertificateValidator.swift in Sources */,
 				8B36B37D25CADE9E00CE14E9 /* transactId_library_ios_tests.swift in Sources */,
 			);

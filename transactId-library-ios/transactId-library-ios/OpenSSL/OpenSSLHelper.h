@@ -73,6 +73,13 @@ bool isIntermediateCertificate(const char* cert_pem);
 
 bool isClientCertificate(const char* cert_pem);
 
+bool validateCertificateNotBeforeExpiration(const char* cert_pem);
+
+bool validateCertificateNotAfterExpiration(const char* cert_pem);
+
+std::vector<std::string> getCRLDistributionPoints(const char* cert_pem);
+
+
 } //namespace transact_id_ssl
 
 

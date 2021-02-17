@@ -22,4 +22,5 @@ enum Exception : Error {
     case KeyManagementFetchException(String)
     case KeyManagementStoreException(String)
     case ObjectNotFoundException(String)
+    
 }

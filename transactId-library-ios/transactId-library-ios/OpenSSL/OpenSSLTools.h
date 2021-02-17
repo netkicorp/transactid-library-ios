@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (OpenSSLKeyGenerateResult *)generateCertificate:(OpenSSLKeyGenerationParams *)generationParameters;
 
-- (NSArray *)chainsFromPemCertificate:(NSString *)certificate;
+- (NSArray *)pemToCertificatesArray:(NSString *)certificate;
 
 - (BOOL)isSigned:(NSString *)certificate;
 
@@ -48,6 +48,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isIntermediateCertificate:(NSString *)certificate;
 
 - (BOOL)isClientCertificate:(NSString *)certificate;
+
+- (BOOL)validateNotBeforeExpirationCertificate:(NSString *)certificate;
+
+- (BOOL)validateNotAfterExpirationCertificate:(NSString *)certificate;
+
+- (NSArray *)getCRLDistributionPoints:(NSString *)certificate;
+
+- (BOOL)isRevoked:(NSString*)crl certificate:(NSString *)certificate;
+
 
 @end
 
