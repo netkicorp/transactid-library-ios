@@ -22,24 +22,24 @@ class transactId_library_ios_tests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
-        let generationResult = CSRUtilities().generateCertRequestOpenSSL(csrInfo: [])
+//        let generationResult = CSRUtilities().generateCertRequestOpenSSL(csrInfo: [])
         
-        if let result = generationResult {
-            
-            let csr = result.csrBase64
-            print("\n CERTIFICATE REQUEST:\n\n \(csr)");
-            XCTAssertNotEqual(csr, "")
-            XCTAssertNotNil(csr)
-            let privateKey = result.privateKeyBase64
-            print("\n PRIVATE KEY:\n\n \(privateKey)");
-            XCTAssertNotEqual(privateKey, "")
-            XCTAssertNotNil(privateKey)
-            let publicKey = result.publicKeyBase64
-            print("\n PUBLIC KEY :\n\n \(publicKey)");
-            XCTAssertNotEqual(publicKey, "")
-            XCTAssertNotNil(publicKey)
-        }
-        XCTAssertNotNil(generationResult)
+//        if let result = generationResult {
+//            
+//            let csr = result.csrBase64
+//            print("\n CERTIFICATE REQUEST:\n\n \(csr)");
+//            XCTAssertNotEqual(csr, "")
+//            XCTAssertNotNil(csr)
+//            let privateKey = result.privateKeyBase64
+//            print("\n PRIVATE KEY:\n\n \(privateKey)");
+//            XCTAssertNotEqual(privateKey, "")
+//            XCTAssertNotNil(privateKey)
+//            let publicKey = result.publicKeyBase64
+//            print("\n PUBLIC KEY :\n\n \(publicKey)");
+//            XCTAssertNotEqual(publicKey, "")
+//            XCTAssertNotNil(publicKey)
+//        }
+//        XCTAssertNotNil(generationResult)
 
     }
 

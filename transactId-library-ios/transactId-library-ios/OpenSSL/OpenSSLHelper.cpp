@@ -10,8 +10,14 @@
 #include <openssl/err.h>
 #include <openssl/pem.h>
 #include <openssl/x509.h>
+#include <openssl/x509v3.h>
+#include <openssl/ssl.h>
+#include <openssl/crypto.h>
+#include <openssl/ocsp.h>
 
 namespace transact_id_ssl {
+
+using ASN1_TIME_ptr = std::unique_ptr<ASN1_TIME, decltype(&ASN1_STRING_free)>;
 
 CsrData::CsrData() : type(Rsa) { }
 
@@ -385,6 +391,79 @@ bool isClientCertificate(const char* cert_pem) {
     
     return result;
     
+}
+
+
+bool validateCertificateNotBeforeExpiration(const char* cert_pem) {
+    
+    BIO *bio = BIO_new(BIO_s_mem());
+    BIO_puts(bio, cert_pem);
+    X509 * x509 = PEM_read_bio_X509(bio, NULL, NULL, NULL);
+    
+    time_t notBefore;
+    
+    time_t now = time(0);
+    
+    bool result = X509_cmp_time(X509_get_notBefore(x509), &notBefore);
+    if (result) {
+        return difftime(now, notBefore) > 0.0;
+    } else {
+        return false;
+    }
+}
+
+bool validateCertificateNotAfterExpiration(const char* cert_pem) {
+    
+    BIO *bio = BIO_new(BIO_s_mem());
+    BIO_puts(bio, cert_pem);
+    X509 * x509 = PEM_read_bio_X509(bio, NULL, NULL, NULL);
+    
+    time_t notAfter;
+    
+    time_t now = time(0);
+    
+    bool result = X509_cmp_time(X509_get_notAfter(x509), &notAfter);
+    if (result) {
+        return difftime(notAfter, now) > 0.0;
+    } else {
+        return false;
+    }
+    return false;
+}
+
+std::vector<std::string> getCRLDistributionPoints(const char* cert_pem)
+{
+    std::vector<std::string> list;
+    
+    BIO *bio = BIO_new(BIO_s_mem());
+    BIO_puts(bio, cert_pem);
+    X509 * x509 = PEM_read_bio_X509(bio, NULL, NULL, NULL);
+    
+    STACK_OF(DIST_POINT) * dist_points =(STACK_OF(DIST_POINT) *)X509_get_ext_d2i(x509, NID_crl_distribution_points, NULL, NULL);
+    for (int j = 0; j < sk_DIST_POINT_num(dist_points); j++)
+    {
+        DIST_POINT *dp = sk_DIST_POINT_value(dist_points, j);
+        
+        DIST_POINT_NAME *distpoint = dp->distpoint;
+        
+        if (distpoint->type == 0) {
+            for (int k = 0; k < sk_GENERAL_NAME_num(distpoint->name.fullname); k++)
+            {
+                GENERAL_NAME *gen = sk_GENERAL_NAME_value(distpoint->name.fullname, k);
+                ASN1_IA5STRING *asn1_str = gen->d.uniformResourceIdentifier;
+                list.push_back(std::string((char*)ASN1_STRING_data(asn1_str), ASN1_STRING_length(asn1_str)));
+            }
+        } else if (distpoint->type == 1) {
+            STACK_OF(X509_NAME_ENTRY) *sk_relname = distpoint->name.relativename;
+            for (int k = 0; k < sk_X509_NAME_ENTRY_num(sk_relname); k++)
+            {
+                X509_NAME_ENTRY *e = sk_X509_NAME_ENTRY_value(sk_relname, k);
+                ASN1_STRING *d = X509_NAME_ENTRY_get_data(e);
+                list.push_back(std::string((char*)ASN1_STRING_data(d), ASN1_STRING_length(d)));
+            }
+        }
+    }
+    return list;
 }
 
 } //namespace transact_id_ssl
