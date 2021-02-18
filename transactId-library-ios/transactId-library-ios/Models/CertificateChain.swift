@@ -12,8 +12,9 @@ import Foundation
  */
 class CertificateChain {
     
-    private (set) var rootCertificate: String? = nil
-    private (set) var intermediateCertificates: Array<String> = []
+    let rootCertificate: String
+
+    let intermediateCertificates: Array<String>
     
     init(rootCertificate: String, intermediateCertificates: Array<String>) {
         self.rootCertificate = rootCertificate

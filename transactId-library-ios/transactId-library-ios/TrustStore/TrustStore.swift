@@ -15,6 +15,7 @@ public protocol TrustStore {
     
     func storeCertificate(certificate: String)
     
+    func retriveAllCertificates() -> Array<String>?
     
     func retrivePrivateKey() -> String?
     

@@ -7,7 +7,12 @@
 
 import Foundation
 
-class LocalStoreProvider {
+class LocalStoreProvider: TrustStore {
+    
+    func retriveAllCertificates() -> Array<String>? {
+        return []
+    }
+    
     
     private let kPublicKeyFileName = "public_key.pem"
     private let kPrivateKeyFileName = "private_key.pem"

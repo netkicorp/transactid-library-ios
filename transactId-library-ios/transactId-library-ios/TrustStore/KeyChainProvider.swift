@@ -8,6 +8,10 @@
 import Foundation
 
 class KeyChainProvider : TrustStore {
+    func retriveAllCertificates() -> Array<String>? {
+        return []
+    }
+    
     
     func storePublicKey(publicKey: String) {
         

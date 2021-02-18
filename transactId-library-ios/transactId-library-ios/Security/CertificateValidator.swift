@@ -55,19 +55,6 @@ class CertificateValidator {
     }
     
     /**
-     * Method to validate if a chain of certificates is valid.
-     *
-     * @param clientCertificatesPem certificate to validate.
-     * @return true if the chain is valid.
-     * @exception InvalidCertificateException if there is a problem with the certificates.
-     */
-    
-    func validateCertificateChain(clientCertificatesPem: String) throws -> Bool {
-        
-        return true;
-    }
-    
-    /**
      * Method to validateExpiration if a certificates is valid.
      *
      * @param clientCertificatePem certificate to validate.
@@ -116,25 +103,115 @@ class CertificateValidator {
     }
     
     /**
+     * Method to validate if a chain of certificates is valid.
+     *
+     * @param clientCertificatesPem certificate to validate.
+     * @return true if the chain is valid.
+     * @exception InvalidCertificateException if there is a problem with the certificates.
+     */
+    
+    func validateCertificateChain(clientCertificatesPem: String) throws -> Bool {
+        if let trustStore = self.trustStore {
+            if let certificates = trustStore.retriveAllCertificates() {
+                let certificateChains = self.convertToCertificateChains(certificates: certificates)
+                return try self.validateCertificateChain(clientCertificatesPem: clientCertificatesPem, certificateChains: certificateChains)
+            }
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Method to validate if a chain of certificates is valid.
+     *
+     * @param clientCertificatesPem chain of certificates to validate.
+     * @param certificateChains list of all certificate chains to use to validate the client certificate.
+     * @return true if the chain is valid.
+     * @exception InvalidCertificateException if there is a problem with the certificates.
+     */
+    
+    func validateCertificateChain(clientCertificatesPem: String, certificateChains: Array<CertificateChain>) throws -> Bool {
+        
+        if let certificates = self.pemCertificatesToArray(certificatesPem: clientCertificatesPem) {
+            if let clientCertificate = self.getClientCertificate(certificates: certificates),
+               let intermediateCertificates = self.getIntermediateCertificates(certificates: certificates) {
+                
+                try self.validateCertificatesInput(clientCertificate: clientCertificate,
+                                               intermediateCertificates: intermediateCertificates,
+                                               certificateChains: certificateChains)
+                
+                return true
+            }
+        }
+        
+        return false;
+    }
+    
+    private func validateCertificatesInput(clientCertificate: String, intermediateCertificates: Array<String>, certificateChains: Array<CertificateChain>) throws {
+        
+        if !self.isClientCertificate(certificate: clientCertificate) {
+            throw Exception.InvalidOwnersException(String(format: ExceptionMessages.CERTIFICATE_VALIDATION_NOT_CORRECT_CERTIFICATE_ERROR, clientCertificate, "Client"))
+        }
+        
+        try intermediateCertificates.forEach { (intermediateCertificate) in
+            if !self.isIntermediateCertificate(certificate: intermediateCertificate) {
+                throw Exception.InvalidOwnersException(String(format: ExceptionMessages.CERTIFICATE_VALIDATION_NOT_CORRECT_CERTIFICATE_ERROR, intermediateCertificate, "Intermediate"))
+            }
+        }
+        
+        try certificateChains.forEach { (certificateChain) in
+            let rootCertificate = certificateChain.rootCertificate
+            
+            if !self.isRootCertificate(certificate: rootCertificate) {
+                throw Exception.InvalidOwnersException(String(format: ExceptionMessages.CERTIFICATE_VALIDATION_NOT_CORRECT_CERTIFICATE_ERROR, rootCertificate, "Root"))
+            }
+            
+            try certificateChain.intermediateCertificates.forEach { (certificate) in
+                if !self.isIntermediateCertificate(certificate: certificate) {
+                    throw Exception.InvalidOwnersException(String(format: ExceptionMessages.CERTIFICATE_VALIDATION_NOT_CORRECT_CERTIFICATE_ERROR, certificate, "Intermediate"))
+                }
+            }
+        }
+    }
+    
+    /**
      * Extracts all CRL distribution point URLs from the
      * "CRL Distribution Point" extension in a X.509 certificate. If CRL
      * distribution point extension is unavailable, returns an empty list.
      */
     
-    private func getCrlDistributionPoints(clientCertificatePem: String) -> Array<String?>? {
+    func getCrlDistributionPoints(clientCertificatePem: String) -> Array<String?>? {
         if let crls = self.openSSLTools.getCRLDistributionPoints(clientCertificatePem) as NSArray as? [String] {
             return crls
         }
         return nil
     }
     
+    private func convertToCertificateChains(certificates: Array<String>) -> Array<CertificateChain> {
+        var certificateChains: Array<CertificateChain> = []
+        
+        certificates.forEach { (certificatePem) in
+            
+            if let chain = self.pemCertificatesToArray(certificatesPem: certificatePem) {
+                
+                if let rootCertificate = chain.first(where: { self.isSigned(certificate: $0) }) {
+                    let intermediateCertificates = chain.filter({ !self.isSigned(certificate: $0) })
+                    
+                    certificateChains.append(CertificateChain(rootCertificate: rootCertificate,
+                                                              intermediateCertificates: intermediateCertificates))
+                }
+            }
+        }
+        return certificateChains
+    }
+    
     /**
-     * Convert certificates in PEM format to Object.
+     * Convert certificates in PEM format to Array of PEM.
      *
      * @param certificatesPem string.
-     * @return List of certificates.
+     * @return Array of PEM certificates.
      */
-    private func pemCertificatesToArray(certificatesPem: String) -> Array<String>? {
+    func pemCertificatesToArray(certificatesPem: String) -> Array<String>? {
         if let certificates = self.openSSLTools.pem(toCertificatesArray: certificatesPem) as NSArray as? [String] {
             return certificates
         }
@@ -147,7 +224,7 @@ class CertificateValidator {
      * @param certificates including the client certificate.
      * @return Client certificate.
      */
-    private func getClientCertificate(certificates: Array<String>) -> String? {
+    func getClientCertificate(certificates: Array<String>) -> String? {
         return certificates.first(where: { self.isClientCertificate(certificate: $0) })
     }
     
@@ -157,7 +234,7 @@ class CertificateValidator {
      * @param certificates including the intermediate certificates.
      * @return array of intermediate certificates.
      */
-    private func getIntermediateCertificates(certificates: Array<String>) -> Array<String>? {
+    func getIntermediateCertificates(certificates: Array<String>) -> Array<String>? {
         return certificates.filter { self.isIntermediateCertificate(certificate: $0) }
     }
     
