@@ -10,7 +10,7 @@ import Foundation
 /**
  * Supported Pki types.
  */
-enum PkiType: String {
+public enum PkiType: String {
     
     /**
      * No Pki type defined, there won't be signature created.

@@ -10,12 +10,12 @@ import Foundation
 /**
  * Pki data to be used to create a message.
  */
-class PkiDataParameters {
+public class PkiDataParameters {
     
     /**
      * Type of certificate.
      */
-    var attestation: Attestation? = nil
+    var attestation: Attestation? = .LEGAL_PERSON_PRIMARY_NAME
     
     /**
      * PrivateKey in PEM format.
@@ -33,4 +33,11 @@ class PkiDataParameters {
      * Type of the Pki data associated.
      */
     var type: PkiType = .NONE
+    
+    public init(attestation: Attestation? = nil, privateKeyPem: String? = nil, certificatePem: String? = nil, type: PkiType = .NONE) {
+        self.attestation = attestation
+        self.privateKeyPem = privateKeyPem
+        self.certificatePem = certificatePem
+        self.type = type
+    }
 }

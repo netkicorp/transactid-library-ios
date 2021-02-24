@@ -10,7 +10,7 @@ import Foundation
 /**
  * Data of the sender of the message to be used to create a message.
  */
-class SenderParameters {
+public class SenderParameters {
     
     /**
      * PkiData associated to the sender.
@@ -27,4 +27,9 @@ class SenderParameters {
      * EV Certificate in PEM format.
      */
     var evCertificatePem: String? = nil
+    
+    public init(pkiDataParameters: PkiDataParameters? = nil, evCertificatePem: String? = nil, encryptionParameters: EncryptionParameters? = nil) {
+        self.pkiDataParameters = pkiDataParameters
+        self.evCertificatePem = evCertificatePem
+    }
 }

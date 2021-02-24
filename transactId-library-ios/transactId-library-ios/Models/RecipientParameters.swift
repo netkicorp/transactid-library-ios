@@ -10,7 +10,7 @@ import Foundation
 /**
  * Data of the recipient of the message to be used to create a message.
  */
-class RecipientParameters {
+public class RecipientParameters {
     
     /**
      * Recipient's vasp name.

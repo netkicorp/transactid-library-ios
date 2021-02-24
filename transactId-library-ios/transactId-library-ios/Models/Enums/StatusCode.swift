@@ -10,7 +10,7 @@ import Foundation
 /**
  * Message Protocol Status Code.
  */
-enum StatusCode: Int {
+public enum StatusCode: Int {
     
     case OK = 1
     case CANCEL = 2

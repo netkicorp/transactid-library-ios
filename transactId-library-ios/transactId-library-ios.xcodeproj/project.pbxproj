@@ -33,8 +33,12 @@
 		8B36B32425CACE1800CE14E9 /* LocalStoreProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B32325CACE1800CE14E9 /* LocalStoreProvider.swift */; };
 		8B36B37D25CADE9E00CE14E9 /* transactId_library_ios_tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B37C25CADE9E00CE14E9 /* transactId_library_ios_tests.swift */; };
 		8B36B37F25CADE9E00CE14E9 /* transactId_library_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B36B2AD25C984B400CE14E9 /* transactId_library_ios.framework */; };
-		8B3E007A25D68AE900B8BE68 /* CertificateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C5325D2A7B000C922A3 /* CertificateValidator.swift */; };
+		8B3B7A5725E697CC0086FC11 /* Messages.InvoiceRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3B7A5625E697CC0086FC11 /* Messages.InvoiceRequest+Extension.swift */; };
 		8B3E007D25D68B8200B8BE68 /* CertificateChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E007C25D68B8200B8BE68 /* CertificateChain.swift */; };
+		8B43C75B25E631C400ED9D56 /* InvoiceRequestParameters+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43C75A25E631C400ED9D56 /* InvoiceRequestParameters+Extension.swift */; };
+		8B43C77125E6351F00ED9D56 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43C77025E6351F00ED9D56 /* Messages.swift */; };
+		8B43C77C25E66E4000ED9D56 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43C77B25E66E4000ED9D56 /* TestData.swift */; };
+		8B43C77F25E66E6F00ED9D56 /* TransactIdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43C77E25E66E6F00ED9D56 /* TransactIdTests.swift */; };
 		8B47532825D2B0C900383451 /* OwnerParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47532725D2B0C900383451 /* OwnerParameters.swift */; };
 		8B47532C25D2B19900383451 /* PkiDataParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47532B25D2B19900383451 /* PkiDataParameters.swift */; };
 		8B47533025D2B22F00383451 /* PkiType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47532F25D2B22F00383451 /* PkiType.swift */; };
@@ -151,7 +155,12 @@
 		8B36B37A25CADE9E00CE14E9 /* transactId_library_ios-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "transactId_library_ios-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B36B37C25CADE9E00CE14E9 /* transactId_library_ios_tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = transactId_library_ios_tests.swift; sourceTree = "<group>"; };
 		8B36B37E25CADE9E00CE14E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8B3B7A5625E697CC0086FC11 /* Messages.InvoiceRequest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Messages.InvoiceRequest+Extension.swift"; sourceTree = "<group>"; };
 		8B3E007C25D68B8200B8BE68 /* CertificateChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateChain.swift; sourceTree = "<group>"; };
+		8B43C75A25E631C400ED9D56 /* InvoiceRequestParameters+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvoiceRequestParameters+Extension.swift"; sourceTree = "<group>"; };
+		8B43C77025E6351F00ED9D56 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		8B43C77B25E66E4000ED9D56 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		8B43C77E25E66E6F00ED9D56 /* TransactIdTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactIdTests.swift; sourceTree = "<group>"; };
 		8B47532725D2B0C900383451 /* OwnerParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerParameters.swift; sourceTree = "<group>"; };
 		8B47532B25D2B19900383451 /* PkiDataParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PkiDataParameters.swift; sourceTree = "<group>"; };
 		8B47532F25D2B22F00383451 /* PkiType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PkiType.swift; sourceTree = "<group>"; };
@@ -348,14 +357,23 @@
 			children = (
 				8B36B37C25CADE9E00CE14E9 /* transactId_library_ios_tests.swift */,
 				8B36B37E25CADE9E00CE14E9 /* Info.plist */,
+				8B43C77B25E66E4000ED9D56 /* TestData.swift */,
+				8B43C77E25E66E6F00ED9D56 /* TransactIdTests.swift */,
 			);
 			path = "transactId_library_ios-tests";
+			sourceTree = "<group>";
+		};
+		8B43C76F25E6350F00ED9D56 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				8B43C77025E6351F00ED9D56 /* Messages.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		8B47532625D2B0A000383451 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				8B36B2D225C98D7000CE14E9 /* Attestation.swift */,
 				8B36B2D525C98ECA00CE14E9 /* Csr.swift */,
 				8BE3FDC825D1778B00D78B62 /* Request.swift */,
 				8BE3FDC525D1776600D78B62 /* Response.swift */,
@@ -369,6 +387,7 @@
 		8B47532E25D2B21700383451 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				8B36B2D225C98D7000CE14E9 /* Attestation.swift */,
 				8B47532F25D2B22F00383451 /* PkiType.swift */,
 				8B47534125D2B7F300383451 /* AddressCurrency.swift */,
 				8B47535525D2BA8400383451 /* StatusCode.swift */,
@@ -381,6 +400,8 @@
 			isa = PBXGroup;
 			children = (
 				8B47536025D2BE1A00383451 /* Array<OwnerParameters>+Extension.swift */,
+				8B43C75A25E631C400ED9D56 /* InvoiceRequestParameters+Extension.swift */,
+				8B3B7A5625E697CC0086FC11 /* Messages.InvoiceRequest+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -416,6 +437,7 @@
 		8BF24C3425D29DE300C922A3 /* Bip75 */ = {
 			isa = PBXGroup;
 			children = (
+				8B43C76F25E6350F00ED9D56 /* Protocol */,
 				8BF24C4125D2A18E00C922A3 /* Bip75Factory.swift */,
 				8BF24C3525D29E0600C922A3 /* Bip75.swift */,
 				8BF24C4425D2A3D000C922A3 /* Bip75Netki.swift */,
@@ -731,6 +753,7 @@
 				8B290AE325CBE369006B96B3 /* KeyChainProvider.swift in Sources */,
 				8B47534225D2B7F300383451 /* AddressCurrency.swift in Sources */,
 				8B47536125D2BE1A00383451 /* Array<OwnerParameters>+Extension.swift in Sources */,
+				8B3B7A5725E697CC0086FC11 /* Messages.InvoiceRequest+Extension.swift in Sources */,
 				8BE3FDC925D1778B00D78B62 /* Request.swift in Sources */,
 				8B47533825D2B58300383451 /* SenderParameters.swift in Sources */,
 				8B3E007D25D68B8200B8BE68 /* CertificateChain.swift in Sources */,
@@ -762,12 +785,14 @@
 				8B47533F25D2B77700383451 /* Output.swift in Sources */,
 				8B36B2E625C9A68800CE14E9 /* OpenSSLTools.mm in Sources */,
 				8B47535325D2BA3300383451 /* MessageInformation.swift in Sources */,
+				8B43C75B25E631C400ED9D56 /* InvoiceRequestParameters+Extension.swift in Sources */,
 				8B47532825D2B0C900383451 /* OwnerParameters.swift in Sources */,
 				8B47534525D2B87500383451 /* AddressInformation.swift in Sources */,
 				8BF24C3925D29F4E00C922A3 /* InvoiceRequestParameters.swift in Sources */,
 				8B47535925D2BBD300383451 /* OwnerType.swift in Sources */,
 				8BF24C4525D2A3D000C922A3 /* Bip75Netki.swift in Sources */,
 				8BE3FDD825D17BD500D78B62 /* SettingsProvider.swift in Sources */,
+				8B43C77125E6351F00ED9D56 /* Messages.swift in Sources */,
 				8B36B2D125C98C9400CE14E9 /* TransactId.swift in Sources */,
 				8B36B2E825C9B3E000CE14E9 /* CSRUtilities.swift in Sources */,
 			);
@@ -778,8 +803,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B92870A25DC0C5E005AB4B0 /* TrustStore.swift in Sources */,
-				8B3E007A25D68AE900B8BE68 /* CertificateValidator.swift in Sources */,
+				8B43C77F25E66E6F00ED9D56 /* TransactIdTests.swift in Sources */,
 				8B36B37D25CADE9E00CE14E9 /* transactId_library_ios_tests.swift in Sources */,
+				8B43C77C25E66E4000ED9D56 /* TestData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

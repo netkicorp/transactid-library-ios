@@ -7,7 +7,7 @@
 
 import Foundation
 
-class InvoiceRequest {
+public class InvoiceRequest {
     
     
 }
