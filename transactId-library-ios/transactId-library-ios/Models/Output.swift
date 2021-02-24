@@ -10,7 +10,7 @@ import Foundation
 /**
  * Representation of Output message.
  */
-class Output {
+public class Output {
     
     /**
      * Number of satoshis (0.00000001 BTC) to be paid.
@@ -34,4 +34,12 @@ class Output {
      * This does not need to be filled when the object is being created.
      */
     var addressInformation: AddressInformation? = nil
+    
+    
+    public init(amount: Int, script: String? = nil, currency: AddressCurrency = .BITCOIN, addressInformation: AddressInformation? = nil) {
+        self.amount = amount
+        self.script = script
+        self.currency = currency
+        self.addressInformation = addressInformation
+    }
 }

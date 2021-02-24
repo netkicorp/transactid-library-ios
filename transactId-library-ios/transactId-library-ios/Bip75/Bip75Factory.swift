@@ -27,7 +27,7 @@ class Bip75Factory {
      * @param authorizationKey pass this parameter if address information will be required.
      * @return Bip75 instance.
      */
-    func getInstance(trustStore: TrustStore, autorizationKey: String? = nil, developmentMode: Bool = false) -> Bip75 {
+    func getInstance(trustStore: TrustStore? = nil, autorizationKey: String? = nil, developmentMode: Bool = false) -> Bip75 {
         
         let certificateValidator: CertificateValidator = CertificateValidator(trustStore: trustStore, developmentMode: developmentMode)
         let bip75Service: Bip75Service = Bip75ServiceNetki(certificateValidator: certificateValidator)

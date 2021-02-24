@@ -1,0 +1,42 @@
+//
+//  Attestation.swift
+//  transactId-library-ios
+//
+//  Created by Developer on 02.02.2021.
+//
+
+import Foundation
+
+public enum Attestation: Int {
+    
+    case LEGAL_PERSON_PRIMARY_NAME = 0
+    case LEGAL_PERSON_SECONDARY_NAME = 1
+    case ADDRESS_DEPARTMENT = 2
+    case ADDRESS_SUB_DEPARTMENT = 3
+    case ADDRESS_STREET_NAME = 4
+    case ADDRESS_BUILDING_NUMBER = 5
+    case ADDRESS_BUILDING_NAME = 6
+    case ADDRESS_FLOOR = 7
+    case ADDRESS_POSTBOX = 8
+    case ADDRESS_ROOM = 9
+    case ADDRESS_POSTCODE = 10
+    case ADDRESS_TOWN_NAME = 11
+    case ADDRESS_TOWN_LOCATION_NAME = 12
+    case ADDRESS_DISTRICT_NAME = 13
+    case ADDRESS_COUNTRY_SUB_DIVISION = 14
+    case ADDRESS_ADDRESS_LINE = 15
+    case ADDRESS_COUNTRY = 16
+    case NATURAL_PERSON_FIRST_NAME = 17
+    case NATURAL_PERSON_LAST_NAME = 18
+    case BENEFICIARY_PERSON_FIRST_NAME = 19
+    case BENEFICIARY_PERSON_LAST_NAME = 20
+    case BIRTH_DATE = 21
+    case BIRTH_PLACE = 22
+    case COUNTRY_OF_RESIDENCE = 23
+    case ISSUING_COUNTRY = 24
+    case NATIONAL_IDENTIFIER_NUMBER = 25
+    case NATIONAL_IDENTIFIER = 26
+    case ACCOUNT_NUMBER = 27
+    case CUSTOMER_IDENTIFICATION = 28
+    case REGISTRATION_AUTHORITY = 29
+}

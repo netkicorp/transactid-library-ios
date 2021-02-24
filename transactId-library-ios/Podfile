@@ -8,7 +8,7 @@ target 'transactId-library-ios' do
   # Pods for transactId-library-ios
   pod 'SwiftyJSON'
   pod 'Alamofire'
-
+  pod 'SwiftProtobuf'
 end
 
 target 'transactId_library_ios-tests' do

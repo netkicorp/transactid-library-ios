@@ -11,21 +11,21 @@ import Foundation
  *  Status code and Status message that is used for error communication
  *  such that the protocol does not rely on transport-layer error handling.
  */
-class MessageInformation {
+public class MessageInformation {
     
     /**
      * Message Protocol Status Code.
      */
-    var statusCode: StatusCode = .OK
+    public var statusCode: StatusCode = .OK
     
     /**
      * Human-readable Payment Protocol status message.
      */
-    var statusMessage: String = ""
+    public var statusMessage: String = ""
     
     /**
      * Set to true if you want to encrypt message.
      */
-    var encryptMessage: Bool = false
+    public var encryptMessage: Bool = false
     
 }

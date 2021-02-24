@@ -10,7 +10,7 @@ import Foundation
 /**
  * Detailed information about an address.
  */
-class AddressInformation {
+public class AddressInformation {
     
     /**
      * Address.

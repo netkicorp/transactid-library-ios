@@ -10,7 +10,7 @@ import Foundation
 /**
  * Type of currency for an address.
  */
-enum AddressCurrency: Int {
+public enum AddressCurrency: Int {
     
     case BITCOIN = 0
     case ETHEREUM = 1

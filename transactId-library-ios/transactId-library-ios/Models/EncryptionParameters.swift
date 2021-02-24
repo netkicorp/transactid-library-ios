@@ -10,7 +10,7 @@ import Foundation
 /**
  * Parameters to encrypt message, this is needed if you want to create the EncryptedProtocolMessage.
  */
-class EncryptionParameters {
+public class EncryptionParameters {
     
     /**
      * SEC-encoded EC Private Key in PEM format.
