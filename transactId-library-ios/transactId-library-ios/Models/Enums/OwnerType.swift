@@ -12,7 +12,7 @@ import Foundation
  */
 enum  OwnerType : String {
     
-    case BENEFICIARY = "beneficiary"
-    case ORIGINATOR = "originator"
+    case beneficiary = "beneficiary"
+    case originator = "originator"
     
 }

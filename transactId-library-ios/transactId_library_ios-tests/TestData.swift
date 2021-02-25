@@ -174,31 +174,31 @@ struct TestData {
     
     struct PkiData {
         
-        static let PKI_DATA_ONE_OWNER_X509SHA256 = PkiDataParameters(attestation: Attestation.LEGAL_PERSON_SECONDARY_NAME,
+        static let PKI_DATA_ONE_OWNER_X509SHA256 = PkiDataParameters(attestation: Attestation.legalPersonSecondaryName,
                                                                      privateKeyPem: TestData.ClientKeys.CLIENT_PRIVATE_KEY_CHAIN_ONE,
                                                                      certificatePem: TestData.Certificates.CLIENT_CERTIFICATE_CHAIN_ONE,
-                                                                     type: .X509SHA256)
+                                                                     type: .x509sha256)
         
-        static let PKI_DATA_TWO_OWNER_X509SHA256 = PkiDataParameters(attestation: Attestation.LEGAL_PERSON_PRIMARY_NAME,
+        static let PKI_DATA_TWO_OWNER_X509SHA256 = PkiDataParameters(attestation: Attestation.legalPersonPrimaryName,
                                                                      privateKeyPem: TestData.ClientKeys.CLIENT_PRIVATE_KEY_CHAIN_TWO,
                                                                      certificatePem: TestData.Certificates.CLIENT_CERTIFICATE_CHAIN_TWO,
-                                                                     type: .X509SHA256)
+                                                                     type: .x509sha256)
         
         static let PKI_DATA_OWNER_NONE = PkiDataParameters(attestation: nil,
                                                            privateKeyPem: "",
                                                            certificatePem:  "",
-                                                           type: .NONE)
+                                                           type: .none)
         
         
         static let PKI_DATA_SENDER_X509SHA256 = PkiDataParameters(attestation: nil,
                                                                   privateKeyPem: TestData.ClientKeys.CLIENT_PRIVATE_KEY_CHAIN_TWO,
                                                                   certificatePem: TestData.Certificates.CLIENT_CERTIFICATE_CHAIN_TWO,
-                                                                  type: .X509SHA256)
+                                                                  type: .x509sha256)
     }
     
     struct Outputs {
-        static let OUTPUTS = [Output(amount: 1000, script: "Script 1", currency: .BITCOIN),
-                              Output(amount: 2000, script: "Script 2", currency: .BITCOIN)]
+        static let OUTPUTS = [Output(amount: 1000, script: "Script 1", currency: .bitcoin),
+                              Output(amount: 2000, script: "Script 2", currency: .bitcoin)]
 
     }
     
@@ -213,9 +213,9 @@ struct TestData {
     }
     
     struct Attestations {
-        static let REQUESTED_ATTESTATIONS = [Attestation.LEGAL_PERSON_PRIMARY_NAME,
-                                             Attestation.LEGAL_PERSON_SECONDARY_NAME,
-                                             Attestation.ADDRESS_DEPARTMENT,
-                                             Attestation.ADDRESS_POSTBOX]
+        static let REQUESTED_ATTESTATIONS = [Attestation.legalPersonPrimaryName,
+                                             Attestation.legalPersonSecondaryName,
+                                             Attestation.addressDepartament,
+                                             Attestation.addressPostbox]
     }
 }

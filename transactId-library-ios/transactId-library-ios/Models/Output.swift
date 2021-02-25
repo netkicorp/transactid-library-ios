@@ -26,7 +26,7 @@ public class Output {
     /**
      * Currency of the address.
      */
-    var currency: AddressCurrency = .BITCOIN
+    var currency: AddressCurrency = .bitcoin
     
     /**
      * Detailed information of this address.
@@ -36,7 +36,7 @@ public class Output {
     var addressInformation: AddressInformation? = nil
     
     
-    public init(amount: Int, script: String? = nil, currency: AddressCurrency = .BITCOIN, addressInformation: AddressInformation? = nil) {
+    public init(amount: Int, script: String? = nil, currency: AddressCurrency = .bitcoin, addressInformation: AddressInformation? = nil) {
         self.amount = amount
         self.script = script
         self.currency = currency

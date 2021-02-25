@@ -16,7 +16,7 @@ public class MessageInformation {
     /**
      * Message Protocol Status Code.
      */
-    public var statusCode: StatusCode = .OK
+    public var statusCode: StatusCode = .ok
     
     /**
      * Human-readable Payment Protocol status message.
