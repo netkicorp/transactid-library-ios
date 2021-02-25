@@ -12,9 +12,9 @@ import Foundation
  */
 public enum AddressCurrency: Int {
     
-    case BITCOIN = 0
-    case ETHEREUM = 1
-    case LITECOIN = 2
-    case BITCOIN_CASH = 3
+    case bitcoin = 0
+    case ethereum = 1
+    case litecoin = 2
+    case bitcoinCash = 3
     
 }

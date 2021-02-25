@@ -33,10 +33,8 @@
 		8B36B32425CACE1800CE14E9 /* LocalStoreProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B32325CACE1800CE14E9 /* LocalStoreProvider.swift */; };
 		8B36B37D25CADE9E00CE14E9 /* transactId_library_ios_tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B37C25CADE9E00CE14E9 /* transactId_library_ios_tests.swift */; };
 		8B36B37F25CADE9E00CE14E9 /* transactId_library_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B36B2AD25C984B400CE14E9 /* transactId_library_ios.framework */; };
-		8B3B7A5725E697CC0086FC11 /* Messages.InvoiceRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3B7A5625E697CC0086FC11 /* Messages.InvoiceRequest+Extension.swift */; };
 		8B3E007D25D68B8200B8BE68 /* CertificateChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E007C25D68B8200B8BE68 /* CertificateChain.swift */; };
 		8B43C75B25E631C400ED9D56 /* InvoiceRequestParameters+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43C75A25E631C400ED9D56 /* InvoiceRequestParameters+Extension.swift */; };
-		8B43C77125E6351F00ED9D56 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43C77025E6351F00ED9D56 /* Messages.swift */; };
 		8B43C77C25E66E4000ED9D56 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43C77B25E66E4000ED9D56 /* TestData.swift */; };
 		8B43C77F25E66E6F00ED9D56 /* TransactIdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43C77E25E66E6F00ED9D56 /* TransactIdTests.swift */; };
 		8B47532825D2B0C900383451 /* OwnerParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47532725D2B0C900383451 /* OwnerParameters.swift */; };
@@ -66,6 +64,16 @@
 		8BE3FDD025D1780000D78B62 /* TokenRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3FDCF25D1780000D78B62 /* TokenRequest.swift */; };
 		8BE3FDD425D17B4400D78B62 /* PearlApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3FDD325D17B4400D78B62 /* PearlApiRouter.swift */; };
 		8BE3FDD825D17BD500D78B62 /* SettingsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3FDD725D17BD500D78B62 /* SettingsProvider.swift */; };
+		8BE916FA25E7A29900426912 /* BeneficiaryParameters+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE916F925E7A29900426912 /* BeneficiaryParameters+Extension.swift */; };
+		8BE9170325E7A83E00426912 /* MessageInvoiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE9170225E7A83E00426912 /* MessageInvoiceRequest.swift */; };
+		8BE9170625E7A8D500426912 /* MessageBeneficiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE9170525E7A8D500426912 /* MessageBeneficiary.swift */; };
+		8BE9170A25E7AAAD00426912 /* MessageAttestation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE9170925E7AAAD00426912 /* MessageAttestation.swift */; };
+		8BE9170F25E7B67E00426912 /* PkiDataParameters+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE9170E25E7B67E00426912 /* PkiDataParameters+Extension.swift */; };
+		8BE9171225E7E39600426912 /* MessageOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE9171125E7E39600426912 /* MessageOutput.swift */; };
+		8BE9171525E7E58B00426912 /* Output+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE9171425E7E58B00426912 /* Output+Extension.swift */; };
+		8BE9171825E7EDA000426912 /* MessageAttestationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE9171725E7EDA000426912 /* MessageAttestationType.swift */; };
+		8BE9171B25E7FB4A00426912 /* MessageOriginator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE9171A25E7FB4A00426912 /* MessageOriginator.swift */; };
+		8BE9172125E7FCA300426912 /* OriginatorParameters+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE9172025E7FCA300426912 /* OriginatorParameters+Extension.swift */; };
 		8BF24C3025D1CB3900C922A3 /* TrustStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C2F25D1CB3900C922A3 /* TrustStore.swift */; };
 		8BF24C3625D29E0600C922A3 /* Bip75.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C3525D29E0600C922A3 /* Bip75.swift */; };
 		8BF24C3925D29F4E00C922A3 /* InvoiceRequestParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C3825D29F4E00C922A3 /* InvoiceRequestParameters.swift */; };
@@ -155,10 +163,8 @@
 		8B36B37A25CADE9E00CE14E9 /* transactId_library_ios-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "transactId_library_ios-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B36B37C25CADE9E00CE14E9 /* transactId_library_ios_tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = transactId_library_ios_tests.swift; sourceTree = "<group>"; };
 		8B36B37E25CADE9E00CE14E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B3B7A5625E697CC0086FC11 /* Messages.InvoiceRequest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Messages.InvoiceRequest+Extension.swift"; sourceTree = "<group>"; };
 		8B3E007C25D68B8200B8BE68 /* CertificateChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateChain.swift; sourceTree = "<group>"; };
 		8B43C75A25E631C400ED9D56 /* InvoiceRequestParameters+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvoiceRequestParameters+Extension.swift"; sourceTree = "<group>"; };
-		8B43C77025E6351F00ED9D56 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		8B43C77B25E66E4000ED9D56 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		8B43C77E25E66E6F00ED9D56 /* TransactIdTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactIdTests.swift; sourceTree = "<group>"; };
 		8B47532725D2B0C900383451 /* OwnerParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerParameters.swift; sourceTree = "<group>"; };
@@ -187,6 +193,16 @@
 		8BE3FDCF25D1780000D78B62 /* TokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRequest.swift; sourceTree = "<group>"; };
 		8BE3FDD325D17B4400D78B62 /* PearlApiRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PearlApiRouter.swift; sourceTree = "<group>"; };
 		8BE3FDD725D17BD500D78B62 /* SettingsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProvider.swift; sourceTree = "<group>"; };
+		8BE916F925E7A29900426912 /* BeneficiaryParameters+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BeneficiaryParameters+Extension.swift"; sourceTree = "<group>"; };
+		8BE9170225E7A83E00426912 /* MessageInvoiceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInvoiceRequest.swift; sourceTree = "<group>"; };
+		8BE9170525E7A8D500426912 /* MessageBeneficiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBeneficiary.swift; sourceTree = "<group>"; };
+		8BE9170925E7AAAD00426912 /* MessageAttestation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAttestation.swift; sourceTree = "<group>"; };
+		8BE9170E25E7B67E00426912 /* PkiDataParameters+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PkiDataParameters+Extension.swift"; sourceTree = "<group>"; };
+		8BE9171125E7E39600426912 /* MessageOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageOutput.swift; sourceTree = "<group>"; };
+		8BE9171425E7E58B00426912 /* Output+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Output+Extension.swift"; sourceTree = "<group>"; };
+		8BE9171725E7EDA000426912 /* MessageAttestationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAttestationType.swift; sourceTree = "<group>"; };
+		8BE9171A25E7FB4A00426912 /* MessageOriginator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageOriginator.swift; sourceTree = "<group>"; };
+		8BE9172025E7FCA300426912 /* OriginatorParameters+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OriginatorParameters+Extension.swift"; sourceTree = "<group>"; };
 		8BF24C2F25D1CB3900C922A3 /* TrustStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustStore.swift; sourceTree = "<group>"; };
 		8BF24C3525D29E0600C922A3 /* Bip75.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bip75.swift; sourceTree = "<group>"; };
 		8BF24C3825D29F4E00C922A3 /* InvoiceRequestParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceRequestParameters.swift; sourceTree = "<group>"; };
@@ -366,7 +382,8 @@
 		8B43C76F25E6350F00ED9D56 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				8B43C77025E6351F00ED9D56 /* Messages.swift */,
+				8BE9171E25E7FC5400426912 /* Enums */,
+				8BE9171D25E7FC4800426912 /* Messages */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -401,7 +418,10 @@
 			children = (
 				8B47536025D2BE1A00383451 /* Array<OwnerParameters>+Extension.swift */,
 				8B43C75A25E631C400ED9D56 /* InvoiceRequestParameters+Extension.swift */,
-				8B3B7A5625E697CC0086FC11 /* Messages.InvoiceRequest+Extension.swift */,
+				8BE916F925E7A29900426912 /* BeneficiaryParameters+Extension.swift */,
+				8BE9170E25E7B67E00426912 /* PkiDataParameters+Extension.swift */,
+				8BE9171425E7E58B00426912 /* Output+Extension.swift */,
+				8BE9172025E7FCA300426912 /* OriginatorParameters+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -422,6 +442,26 @@
 				8BE3FDD325D17B4400D78B62 /* PearlApiRouter.swift */,
 			);
 			path = PearlApiService;
+			sourceTree = "<group>";
+		};
+		8BE9171D25E7FC4800426912 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				8BE9170225E7A83E00426912 /* MessageInvoiceRequest.swift */,
+				8BE9170525E7A8D500426912 /* MessageBeneficiary.swift */,
+				8BE9170925E7AAAD00426912 /* MessageAttestation.swift */,
+				8BE9171125E7E39600426912 /* MessageOutput.swift */,
+				8BE9171A25E7FB4A00426912 /* MessageOriginator.swift */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
+		8BE9171E25E7FC5400426912 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				8BE9171725E7EDA000426912 /* MessageAttestationType.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		8BF24C2E25D1CB0F00C922A3 /* TrustStore */ = {
@@ -748,13 +788,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BF24C3025D1CB3900C922A3 /* TrustStore.swift in Sources */,
+				8BE9172125E7FCA300426912 /* OriginatorParameters+Extension.swift in Sources */,
 				8B47535025D2B9DD00383451 /* BeneficiaryParameters.swift in Sources */,
 				8BF24C3C25D29F6800C922A3 /* InvoiceRequest.swift in Sources */,
 				8B290AE325CBE369006B96B3 /* KeyChainProvider.swift in Sources */,
 				8B47534225D2B7F300383451 /* AddressCurrency.swift in Sources */,
 				8B47536125D2BE1A00383451 /* Array<OwnerParameters>+Extension.swift in Sources */,
-				8B3B7A5725E697CC0086FC11 /* Messages.InvoiceRequest+Extension.swift in Sources */,
+				8BE9170325E7A83E00426912 /* MessageInvoiceRequest.swift in Sources */,
 				8BE3FDC925D1778B00D78B62 /* Request.swift in Sources */,
+				8BE9170A25E7AAAD00426912 /* MessageAttestation.swift in Sources */,
 				8B47533825D2B58300383451 /* SenderParameters.swift in Sources */,
 				8B3E007D25D68B8200B8BE68 /* CertificateChain.swift in Sources */,
 				8B47534C25D2B99700383451 /* AddressTags.swift in Sources */,
@@ -764,9 +806,12 @@
 				8BE3FDCC25D177AB00D78B62 /* TokenResponse.swift in Sources */,
 				8B36B2D325C98D7000CE14E9 /* Attestation.swift in Sources */,
 				8B36B32425CACE1800CE14E9 /* LocalStoreProvider.swift in Sources */,
+				8BE9171825E7EDA000426912 /* MessageAttestationType.swift in Sources */,
 				8B47533025D2B22F00383451 /* PkiType.swift in Sources */,
 				8BF24C4225D2A18E00C922A3 /* Bip75Factory.swift in Sources */,
 				8BE3FDD425D17B4400D78B62 /* PearlApiRouter.swift in Sources */,
+				8BE9170F25E7B67E00426912 /* PkiDataParameters+Extension.swift in Sources */,
+				8BE9170625E7A8D500426912 /* MessageBeneficiary.swift in Sources */,
 				8BE3FDBA25D1736000D78B62 /* PearlApiService.swift in Sources */,
 				8BF24C3625D29E0600C922A3 /* Bip75.swift in Sources */,
 				8BF24C5425D2A7B000C922A3 /* CertificateValidator.swift in Sources */,
@@ -776,9 +821,11 @@
 				8BE3FDD025D1780000D78B62 /* TokenRequest.swift in Sources */,
 				8B47533C25D2B5D000383451 /* EncryptionParameters.swift in Sources */,
 				8B47534925D2B96200383451 /* AddressTagInformation.swift in Sources */,
+				8BE9171225E7E39600426912 /* MessageOutput.swift in Sources */,
 				8BF24C5025D2A4EC00C922A3 /* Bip75ServiceNetki.swift in Sources */,
 				8B47535625D2BA8400383451 /* StatusCode.swift in Sources */,
 				8B5BF57A25D3015D0086E7AF /* ExceptionMessages.swift in Sources */,
+				8BE9171525E7E58B00426912 /* Output+Extension.swift in Sources */,
 				8BE3FDC625D1776600D78B62 /* Response.swift in Sources */,
 				8BF24C3F25D29F8200C922A3 /* RecipientParameters.swift in Sources */,
 				8B47532C25D2B19900383451 /* PkiDataParameters.swift in Sources */,
@@ -792,8 +839,9 @@
 				8B47535925D2BBD300383451 /* OwnerType.swift in Sources */,
 				8BF24C4525D2A3D000C922A3 /* Bip75Netki.swift in Sources */,
 				8BE3FDD825D17BD500D78B62 /* SettingsProvider.swift in Sources */,
-				8B43C77125E6351F00ED9D56 /* Messages.swift in Sources */,
+				8BE9171B25E7FB4A00426912 /* MessageOriginator.swift in Sources */,
 				8B36B2D125C98C9400CE14E9 /* TransactId.swift in Sources */,
+				8BE916FA25E7A29900426912 /* BeneficiaryParameters+Extension.swift in Sources */,
 				8B36B2E825C9B3E000CE14E9 /* CSRUtilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
