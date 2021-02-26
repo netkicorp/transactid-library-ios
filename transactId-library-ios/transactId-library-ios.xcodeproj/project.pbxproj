@@ -29,7 +29,7 @@
 		8B36B2E025C99AAE00CE14E9 /* OpenSSLHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B36B2DE25C99AAE00CE14E9 /* OpenSSLHelper.h */; };
 		8B36B2E525C9A68800CE14E9 /* OpenSSLTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B36B2E325C9A68800CE14E9 /* OpenSSLTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B36B2E625C9A68800CE14E9 /* OpenSSLTools.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B2E425C9A68800CE14E9 /* OpenSSLTools.mm */; };
-		8B36B2E825C9B3E000CE14E9 /* CSRUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B2E725C9B3E000CE14E9 /* CSRUtilities.swift */; };
+		8B36B2E825C9B3E000CE14E9 /* CryptoModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B2E725C9B3E000CE14E9 /* CryptoModule.swift */; };
 		8B36B32425CACE1800CE14E9 /* LocalStoreProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B32325CACE1800CE14E9 /* LocalStoreProvider.swift */; };
 		8B36B37D25CADE9E00CE14E9 /* transactId_library_ios_tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B37C25CADE9E00CE14E9 /* transactId_library_ios_tests.swift */; };
 		8B36B37F25CADE9E00CE14E9 /* transactId_library_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B36B2AD25C984B400CE14E9 /* transactId_library_ios.framework */; };
@@ -158,7 +158,7 @@
 		8B36B2DE25C99AAE00CE14E9 /* OpenSSLHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenSSLHelper.h; sourceTree = "<group>"; };
 		8B36B2E325C9A68800CE14E9 /* OpenSSLTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenSSLTools.h; sourceTree = "<group>"; };
 		8B36B2E425C9A68800CE14E9 /* OpenSSLTools.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenSSLTools.mm; sourceTree = "<group>"; };
-		8B36B2E725C9B3E000CE14E9 /* CSRUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSRUtilities.swift; sourceTree = "<group>"; };
+		8B36B2E725C9B3E000CE14E9 /* CryptoModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoModule.swift; sourceTree = "<group>"; };
 		8B36B32325CACE1800CE14E9 /* LocalStoreProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStoreProvider.swift; sourceTree = "<group>"; };
 		8B36B37A25CADE9E00CE14E9 /* transactId_library_ios-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "transactId_library_ios-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B36B37C25CADE9E00CE14E9 /* transactId_library_ios_tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = transactId_library_ios_tests.swift; sourceTree = "<group>"; };
@@ -331,11 +331,11 @@
 				8B47532B25D2B19900383451 /* PkiDataParameters.swift */,
 				8BF24C3E25D29F8200C922A3 /* RecipientParameters.swift */,
 				8B47533725D2B58300383451 /* SenderParameters.swift */,
-				8B47532E25D2B21700383451 /* Enums */,
-				8B47532625D2B0A000383451 /* models */,
 				8B47534F25D2B9DD00383451 /* BeneficiaryParameters.swift */,
 				8B47535225D2BA3300383451 /* MessageInformation.swift */,
 				8B3E007C25D68B8200B8BE68 /* CertificateChain.swift */,
+				8B47532E25D2B21700383451 /* Enums */,
+				8B47532625D2B0A000383451 /* models */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -343,7 +343,6 @@
 		8B36B2CF25C98C2600CE14E9 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				8B36B2E725C9B3E000CE14E9 /* CSRUtilities.swift */,
 				8BE3FDD725D17BD500D78B62 /* SettingsProvider.swift */,
 			);
 			path = Utilities;
@@ -491,6 +490,7 @@
 			isa = PBXGroup;
 			children = (
 				8BF24C5325D2A7B000C922A3 /* CertificateValidator.swift */,
+				8B36B2E725C9B3E000CE14E9 /* CryptoModule.swift */,
 			);
 			path = Security;
 			sourceTree = "<group>";
@@ -842,7 +842,7 @@
 				8BE9171B25E7FB4A00426912 /* MessageOriginator.swift in Sources */,
 				8B36B2D125C98C9400CE14E9 /* TransactId.swift in Sources */,
 				8BE916FA25E7A29900426912 /* BeneficiaryParameters+Extension.swift in Sources */,
-				8B36B2E825C9B3E000CE14E9 /* CSRUtilities.swift in Sources */,
+				8B36B2E825C9B3E000CE14E9 /* CryptoModule.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -45,7 +45,7 @@ class Bip75ServiceNetki: Bip75Service {
             messageInvoiceRequest.addOriginator(messageOriginator: messageOriginator)
             
         })
-        
+                
         return try messageInvoiceRequest.serializedData()
     }
     

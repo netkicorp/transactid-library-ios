@@ -13,7 +13,6 @@ struct MessageOutput {
     fileprivate var _script: Data? = nil
     fileprivate var _currency: UInt64? = nil
 
-
     init() { }
     
     var amount: UInt64 {

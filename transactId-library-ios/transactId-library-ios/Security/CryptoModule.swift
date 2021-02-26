@@ -1,5 +1,5 @@
 //
-//  CSRUtilities.swift
+//  CryptoModule.swift
 //  transactId-library-ios
 //
 //  Created by Developer on 02.02.2021.
@@ -9,7 +9,7 @@ import Foundation
 
 let PASSWORD = "QwErTyUi!"
 
-class CSRUtilities {
+class CryptoModule {
     
     init() { }
     
@@ -48,5 +48,9 @@ class CSRUtilities {
     
         return nil
         
+    }
+    
+    func sign(privateKeyPem: String, message: String) -> Data? {
+        return OpenSSLTools().sign(privateKeyPem, message: message)
     }
 }

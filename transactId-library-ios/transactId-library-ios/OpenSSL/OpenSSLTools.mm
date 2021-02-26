@@ -136,6 +136,20 @@
     return NO;
 }
 
+- (NSData *)sign:(NSString*)privateKey message:(NSString*)message {
 
+    transact_id_ssl::SignData signData;
+    
+    signData.base64 = true;
+    signData.message = std::string(message.UTF8String);
+    signData.privateKey = std::string(privateKey.UTF8String);
+    
+    transact_id_ssl::signMessage(signData);
+    
+    NSString * signature = [NSString stringWithUTF8String:signData.signature.c_str()];
+    
+    return [signature dataUsingEncoding:NSUTF8StringEncoding];;
+    
+}
 
 @end
