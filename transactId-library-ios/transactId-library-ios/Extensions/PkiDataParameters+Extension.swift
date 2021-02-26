@@ -9,7 +9,7 @@ import Foundation
 
 extension PkiDataParameters {
     
-    func toMessageAttestation(requireSignature: Bool) -> MessageAttestation{
+    func toMessageAttestation(requireSignature: Bool) -> MessageAttestation {
         var messageAttestationUnsigned = MessageAttestation()
         
         messageAttestationUnsigned.pkiType = self.type.rawValue
@@ -19,8 +19,24 @@ extension PkiDataParameters {
             messageAttestationUnsigned.attestation = MessageAttestationType(rawValue: attestation.rawValue) ?? MessageAttestationType()
         }
         
-//        messageAttestationUnsigned.serializedData()
-//        messageAttestationUnsigned.merge(serializedData: <#T##Data#>)
+        if (requireSignature && self.type == .x509sha256) {
+            do {
+                var messageAttestationSigned = MessageAttestation()
+                
+                let serializedData = try messageAttestationUnsigned.serializedData()
+                if let privateKey = self.privateKeyPem {
+                    if let signature = CryptoModule().sign(privateKeyPem: privateKey, message: serializedData.base64EncodedString()) {
+                        try messageAttestationSigned.merge(serializedData: serializedData)
+                        messageAttestationSigned.signature = signature
+                    }
+                }
+                return messageAttestationSigned
+                
+            } catch let exception {
+                print("Require Signature Exception: \(exception)")
+            }
+        }
+        
         return messageAttestationUnsigned
     }
 }

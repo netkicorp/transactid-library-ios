@@ -251,18 +251,16 @@ bool signEc(std::shared_ptr<EVP_PKEY> key, SignData& data, std::string& res)
 
 bool signMessage(SignData& data)
 {
-    int ret = 0;
-    
     BioString bio(data.privateKey);
-    EVP_PKEY* pk = PEM_read_bio_PrivateKey(bio.get(), nullptr, nullptr, const_cast<char*> (data.passphrase.c_str()));
+    EVP_PKEY* pk = nullptr;
+
+    PEM_read_bio_PrivateKey(bio.get(), &pk, 0, 0);
+
     if (pk == nullptr) { reportError(data); return false; }
     
     std::shared_ptr<EVP_PKEY> key(pk, &EVP_PKEY_free);
     
     bio.reset();
-    ret = PEM_write_bio_PUBKEY(bio.get(), key.get());
-    if (ret != 1) { reportError(data); return false; }
-    data.publicKey = bio.toString();
     
     std::string sig;
     
@@ -276,7 +274,7 @@ bool signMessage(SignData& data)
     if (data.base64)
     {
         std::shared_ptr<BIO> b64(BIO_new(BIO_f_base64()), &BIO_free);
-        //BIO_set_flags(b64.get(), BIO_FLAGS_BASE64_NO_NL);
+        BIO_set_flags(b64.get(), BIO_FLAGS_BASE64_NO_NL);
         BIO_push(b64.get(), bio.get());
         BIO_write(b64.get(), sig.data(), static_cast<int> (sig.size()));
         BIO_flush(b64.get());
@@ -392,7 +390,6 @@ bool isClientCertificate(const char* cert_pem) {
     return result;
     
 }
-
 
 bool validateCertificateNotBeforeExpiration(const char* cert_pem) {
     
