@@ -152,4 +152,15 @@
     
 }
 
+- (NSString *)generateHash256:(NSString *)message {
+    transact_id_ssl::SignData signData;
+
+    signData.message = std::string(message.UTF8String);
+    
+    transact_id_ssl::generateHash256(signData);
+    
+    return [NSString stringWithUTF8String:signData.signature.c_str()];;
+}
+
+
 @end

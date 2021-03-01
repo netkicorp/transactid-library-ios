@@ -79,6 +79,7 @@ bool validateCertificateNotAfterExpiration(const char* cert_pem);
 
 std::vector<std::string> getCRLDistributionPoints(const char* cert_pem);
 
+bool generateHash256(SignData& data);
 
 } //namespace transact_id_ssl
 

@@ -59,6 +59,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSData *)sign:(NSString*)privateKey message:(NSString*)message;
 
+- (NSString *)generateHash256:(NSString *)message;
+
 @end
 
 NS_ASSUME_NONNULL_END
