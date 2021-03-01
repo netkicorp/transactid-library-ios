@@ -14,6 +14,10 @@
 #include <openssl/ssl.h>
 #include <openssl/crypto.h>
 #include <openssl/ocsp.h>
+#include <iostream>
+#include <sstream>
+#include <openssl/evp.h>
+#include <iomanip>
 
 namespace transact_id_ssl {
 
@@ -462,5 +466,52 @@ std::vector<std::string> getCRLDistributionPoints(const char* cert_pem)
     }
     return list;
 }
+
+bool generateHash256(SignData& data) {
+
+    int ret = 0;
+    
+    std::string sig;
+    
+    std::shared_ptr<EVP_MD_CTX> md(EVP_MD_CTX_create(), &EVP_MD_CTX_destroy);
+
+    ret = EVP_DigestInit(md.get(), EVP_sha256());
+    if (ret != 1) { reportError(data); return false; }
+
+    ret = EVP_DigestUpdate(md.get(), data.message.c_str(), data.message.size());
+    if (ret != 1) { reportError(data); return false; }
+
+    unsigned int sz = 0;
+    
+    unsigned char hash[EVP_MAX_MD_SIZE];
+
+    ret = EVP_DigestFinal(md.get(), hash, &sz);
+    if (ret != 1) { reportError(data); return false; }
+
+    std::stringstream stream;
+    for(unsigned int i = 0; i < sz; ++i)
+    {
+        stream << std::hex << std::setw(2) << std::setfill('0') << (int)hash[i];
+    }
+    
+    sig = stream.str();
+    
+    BioString bio;
+    
+    if (data.base64)
+    {
+        std::shared_ptr<BIO> b64(BIO_new(BIO_f_base64()), &BIO_free);
+        BIO_set_flags(b64.get(), BIO_FLAGS_BASE64_NO_NL);
+        BIO_push(b64.get(), bio.get());
+        BIO_write(b64.get(), sig.data(), static_cast<int> (sig.size()));
+        BIO_flush(b64.get());
+        BIO_pop(b64.get());
+        data.signature = bio.toString();
+    } else
+        data.signature = sig;
+    
+    return true;
+}
+
 
 } //namespace transact_id_ssl

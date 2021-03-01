@@ -50,7 +50,18 @@ class CryptoModule {
         
     }
     
+   
     func sign(privateKeyPem: String, message: String) -> Data? {
         return OpenSSLTools().sign(privateKeyPem, message: message)
+    }
+    
+    /**
+     * Generate identifier for an specific message in ByteArray format
+     */
+    func generateIdentifier(message: Data) -> Data {
+        let hash = OpenSSLTools().generateHash256(message.base64EncodedString())
+        let epochTime = Int(Date().timeIntervalSince1970)
+        return "\(hash)\(epochTime)".data(using: .utf8)!
+        
     }
 }

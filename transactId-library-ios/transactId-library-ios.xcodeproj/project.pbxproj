@@ -56,6 +56,10 @@
 		8B5BF57625D300B30086E7AF /* Exception.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BF57525D300B30086E7AF /* Exception.swift */; };
 		8B5BF57A25D3015D0086E7AF /* ExceptionMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BF57925D3015D0086E7AF /* ExceptionMessages.swift */; };
 		8B92870A25DC0C5E005AB4B0 /* TrustStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C2F25D1CB3900C922A3 /* TrustStore.swift */; };
+		8BDEFBAC25ECFBF300577BAF /* ProtocolMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDEFBAB25ECFBF300577BAF /* ProtocolMessage.swift */; };
+		8BDEFBAF25ECFCA700577BAF /* ProtocolMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDEFBAE25ECFCA700577BAF /* ProtocolMessageType.swift */; };
+		8BDEFBB225ED061700577BAF /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDEFBB125ED061700577BAF /* Data+Extension.swift */; };
+		8BDEFBB525ED082300577BAF /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDEFBB425ED082300577BAF /* MessageType.swift */; };
 		8BE3FDBA25D1736000D78B62 /* PearlApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3FDB925D1736000D78B62 /* PearlApiService.swift */; };
 		8BE3FDC325D176FE00D78B62 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3FDC225D176FE00D78B62 /* Token.swift */; };
 		8BE3FDC625D1776600D78B62 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3FDC525D1776600D78B62 /* Response.swift */; };
@@ -185,6 +189,10 @@
 		8B47536025D2BE1A00383451 /* Array<OwnerParameters>+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array<OwnerParameters>+Extension.swift"; sourceTree = "<group>"; };
 		8B5BF57525D300B30086E7AF /* Exception.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exception.swift; sourceTree = "<group>"; };
 		8B5BF57925D3015D0086E7AF /* ExceptionMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionMessages.swift; sourceTree = "<group>"; };
+		8BDEFBAB25ECFBF300577BAF /* ProtocolMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMessage.swift; sourceTree = "<group>"; };
+		8BDEFBAE25ECFCA700577BAF /* ProtocolMessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMessageType.swift; sourceTree = "<group>"; };
+		8BDEFBB125ED061700577BAF /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
+		8BDEFBB425ED082300577BAF /* MessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
 		8BE3FDB925D1736000D78B62 /* PearlApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PearlApiService.swift; sourceTree = "<group>"; };
 		8BE3FDC225D176FE00D78B62 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		8BE3FDC525D1776600D78B62 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
@@ -408,6 +416,7 @@
 				8B47534125D2B7F300383451 /* AddressCurrency.swift */,
 				8B47535525D2BA8400383451 /* StatusCode.swift */,
 				8B47535825D2BBD300383451 /* OwnerType.swift */,
+				8BDEFBB425ED082300577BAF /* MessageType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -421,6 +430,7 @@
 				8BE9170E25E7B67E00426912 /* PkiDataParameters+Extension.swift */,
 				8BE9171425E7E58B00426912 /* Output+Extension.swift */,
 				8BE9172025E7FCA300426912 /* OriginatorParameters+Extension.swift */,
+				8BDEFBB125ED061700577BAF /* Data+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -451,6 +461,7 @@
 				8BE9170925E7AAAD00426912 /* MessageAttestation.swift */,
 				8BE9171125E7E39600426912 /* MessageOutput.swift */,
 				8BE9171A25E7FB4A00426912 /* MessageOriginator.swift */,
+				8BDEFBAB25ECFBF300577BAF /* ProtocolMessage.swift */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -459,6 +470,7 @@
 			isa = PBXGroup;
 			children = (
 				8BE9171725E7EDA000426912 /* MessageAttestationType.swift */,
+				8BDEFBAE25ECFCA700577BAF /* ProtocolMessageType.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -790,8 +802,10 @@
 				8BF24C3025D1CB3900C922A3 /* TrustStore.swift in Sources */,
 				8BE9172125E7FCA300426912 /* OriginatorParameters+Extension.swift in Sources */,
 				8B47535025D2B9DD00383451 /* BeneficiaryParameters.swift in Sources */,
+				8BDEFBB525ED082300577BAF /* MessageType.swift in Sources */,
 				8BF24C3C25D29F6800C922A3 /* InvoiceRequest.swift in Sources */,
 				8B290AE325CBE369006B96B3 /* KeyChainProvider.swift in Sources */,
+				8BDEFBB225ED061700577BAF /* Data+Extension.swift in Sources */,
 				8B47534225D2B7F300383451 /* AddressCurrency.swift in Sources */,
 				8B47536125D2BE1A00383451 /* Array<OwnerParameters>+Extension.swift in Sources */,
 				8BE9170325E7A83E00426912 /* MessageInvoiceRequest.swift in Sources */,
@@ -820,11 +834,13 @@
 				8B36B2DF25C99AAE00CE14E9 /* OpenSSLHelper.cpp in Sources */,
 				8BE3FDD025D1780000D78B62 /* TokenRequest.swift in Sources */,
 				8B47533C25D2B5D000383451 /* EncryptionParameters.swift in Sources */,
+				8BDEFBAC25ECFBF300577BAF /* ProtocolMessage.swift in Sources */,
 				8B47534925D2B96200383451 /* AddressTagInformation.swift in Sources */,
 				8BE9171225E7E39600426912 /* MessageOutput.swift in Sources */,
 				8BF24C5025D2A4EC00C922A3 /* Bip75ServiceNetki.swift in Sources */,
 				8B47535625D2BA8400383451 /* StatusCode.swift in Sources */,
 				8B5BF57A25D3015D0086E7AF /* ExceptionMessages.swift in Sources */,
+				8BDEFBAF25ECFCA700577BAF /* ProtocolMessageType.swift in Sources */,
 				8BE9171525E7E58B00426912 /* Output+Extension.swift in Sources */,
 				8BE3FDC625D1776600D78B62 /* Response.swift in Sources */,
 				8BF24C3F25D29F8200C922A3 /* RecipientParameters.swift in Sources */,

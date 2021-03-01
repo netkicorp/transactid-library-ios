@@ -193,5 +193,41 @@ extension MessageInvoiceRequest : SwiftProtobuf.Message, SwiftProtobuf._MessageI
         12: .same(proto: "recipient_vasp_name"),
         13: .same(proto: "originators")
     ]
+    
+    func getMessagePkiType() -> PkiType? {
+        return PkiType(rawValue: self.pkiType)
+    }
+    
+    func signMessage(senderParameters: SenderParameters?) -> MessageInvoiceRequest? {
+        if let pkiType = self.getMessagePkiType() {
+            switch pkiType {
+            case .none:
+                return self
+            case .x509sha256:
+                return self.signWithSender(senderParameters: senderParameters)
+            }
+        } else {
+            print("PkiType not supported")
+            return nil
+        }
+    }
+    
+    func signWithSender(senderParameters: SenderParameters?) -> MessageInvoiceRequest? {
+        do {
+            var messageInvoiceRequestSigned = MessageInvoiceRequest()
+            let serializedData = try self.serializedData()
+            if let privateKey = senderParameters?.pkiDataParameters?.privateKeyPem {
+                if let signature = CryptoModule().sign(privateKeyPem: privateKey, message: serializedData.base64EncodedString()) {
+                    try messageInvoiceRequestSigned.merge(serializedData: serializedData)
+                    messageInvoiceRequestSigned.signature = signature
+                }
+            }
+            return messageInvoiceRequestSigned
+            
+        } catch let exception {
+            print("Require Signature Exception: \(exception)")
+            return nil
+        }
+    }
 }
 
