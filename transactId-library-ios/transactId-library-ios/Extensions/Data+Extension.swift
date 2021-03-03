@@ -12,18 +12,18 @@ extension Data {
     /**
      * Transform a message in ByteArray to ProtocolMessage
      */
-    func toProtocolMessage(messageType: ProtocolMessageType,
+    func toProtocolMessageData(messageType: ProtocolMessageType,
                            messageInformation: MessageInformation,
                            senderParameters: SenderParameters? = nil,
-                           recipientParameters: RecipientParameters? = nil) -> ProtocolMessage {
+                           recipientParameters: RecipientParameters? = nil) throws -> Data {
         if messageInformation.encryptMessage {
-            return self.toProtocolMessageEncrypted(messageType: messageType,
-                                                   messageInformation: messageInformation,
-                                                   senderParameters: senderParameters,
-                                                   recipientParameters: recipientParameters)
+            return try self.toProtocolMessageEncrypted(messageType: messageType,
+                                                       messageInformation: messageInformation,
+                                                       senderParameters: senderParameters,
+                                                       recipientParameters: recipientParameters).serializedData()
         } else {
-            return self.toProtocolMessageUnencrypted(messageType: messageType,
-                                                     messageInformation: messageInformation)
+            return try self.toProtocolMessageUnencrypted(messageType: messageType,
+                                                         messageInformation: messageInformation).serializedData()
         }
     }
     
@@ -34,13 +34,30 @@ extension Data {
     func toProtocolMessageEncrypted(messageType: ProtocolMessageType,
                                     messageInformation: MessageInformation,
                                     senderParameters: SenderParameters? = nil,
-                                    recipientParameters: RecipientParameters? = nil) -> ProtocolMessage{
+                                    recipientParameters: RecipientParameters? = nil) throws -> EncryptedProtocolMessage{
         
-        var protocolMessage = ProtocolMessage()
+        guard let recipientPublicKey = recipientParameters?.encryptionParameters?.publicKeyPem else {
+            throw Exception.EncryptionException(ExceptionMessages.encryptionMissingRecipientKeysError)
+        }
+        
+        guard let senderPublicKey = senderParameters?.encryptionParameters?.publicKeyPem,
+              let senderPrivateKey = senderParameters?.encryptionParameters?.privateKeyPem else {
+            throw Exception.EncryptionException(ExceptionMessages.encryptionMissingSenderKeysError)
+        }
+        
+    
+        let message = self.base64EncodedString()
+        
+        let encryptedMessage = try CryptoModule().encrypt(message: message,
+                                                          receiverPublicKeyPem: recipientPublicKey,
+                                                          senderPublicKeyPem: senderPublicKey,
+                                                          senderPrivateKeyPem: senderPrivateKey)
+        
+        var protocolMessage = EncryptedProtocolMessage()
         protocolMessage.version = 1
         protocolMessage.statusCode = UInt64(messageInformation.statusCode.rawValue)
         protocolMessage.protocolMessageType = messageType
-        protocolMessage.serializedMessage = self
+//        protocolMessage.serializedMessage = self
         protocolMessage.statusMessage = messageInformation.statusMessage
         protocolMessage.identifier = CryptoModule().generateIdentifier(message: self)
         return protocolMessage

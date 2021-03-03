@@ -31,5 +31,6 @@ public class SenderParameters {
     public init(pkiDataParameters: PkiDataParameters? = nil, evCertificatePem: String? = nil, encryptionParameters: EncryptionParameters? = nil) {
         self.pkiDataParameters = pkiDataParameters
         self.evCertificatePem = evCertificatePem
+        self.encryptionParameters = encryptionParameters
     }
 }

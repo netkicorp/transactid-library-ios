@@ -27,4 +27,10 @@ public class RecipientParameters {
      * If you add the parameters here, the encryption of the message will happen automatically.
      */
     var encryptionParameters: EncryptionParameters? = nil
+    
+    public init(vaspName: String? = nil, chainAddress: String? = nil, encryptionParameters: EncryptionParameters? = nil) {
+        self.vaspName = vaspName
+        self.chainAddress = chainAddress
+        self.encryptionParameters = encryptionParameters
+    }
 }

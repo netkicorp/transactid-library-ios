@@ -16,5 +16,7 @@ struct ExceptionMessages {
     static let CERTIFICATE_VALIDATION_CERTIFICATE_NOT_YET_VALID = "The certificate is not yet valid"
     static let CERTIFICATE_VALIDATION_CERTIFICATE_REVOKED = "The certificate is revoked by CRL"
     static let CERTIFICATE_VALIDATION_NOT_CORRECT_CERTIFICATE_ERROR = "Certificate: %@, is not a valid %@ certificate"
+    static let encryptionMissingRecipientKeysError = "To encrypt the message you need to have the recipient's public key in your RecipientParameters.EncryptionParameters object."
+    static let encryptionMissingSenderKeysError = "To encrypt the message you need to have the sender's public/private keys in your SenderParameters.EncryptionParameters object."
 
 }

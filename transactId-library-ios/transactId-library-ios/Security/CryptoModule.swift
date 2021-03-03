@@ -62,6 +62,14 @@ class CryptoModule {
         let hash = OpenSSLTools().generateHash256(message.base64EncodedString())
         let epochTime = Int(Date().timeIntervalSince1970)
         return "\(hash)\(epochTime)".data(using: .utf8)!
+    }
+    
+    func encrypt(message: String,
+                 receiverPublicKeyPem: String,
+                 senderPublicKeyPem: String,
+                 senderPrivateKeyPem: String) throws -> String {
         
+        
+        return OpenSSLTools().encrypt(message, receiverPublicKey: receiverPublicKeyPem, senderPublicKey: senderPublicKeyPem, senderPrivateKey: senderPrivateKeyPem)
     }
 }

@@ -162,5 +162,22 @@
     return [NSString stringWithUTF8String:signData.signature.c_str()];;
 }
 
+- (NSString *)encrypt:(NSString *)message
+    receiverPublicKey:(NSString *)receiverPublicKey
+      senderPublicKey:(NSString *)senderPublicKey
+     senderPrivateKey:(NSString *)senderPrivateKey {
+    
+    transact_id_ssl::SignData signData;
+
+    signData.message = std::string(message.UTF8String);
+    signData.publicKeyReceiver = std::string(receiverPublicKey.UTF8String);
+    signData.publicKeySender = std::string(senderPublicKey.UTF8String);
+    signData.privateKeySender = std::string(senderPrivateKey.UTF8String);
+    signData.privateKey = std::string(senderPrivateKey.UTF8String);
+    
+    transact_id_ssl::encrypt(signData);
+    
+    return @"";
+}
 
 @end

@@ -196,6 +196,40 @@ struct TestData {
                                                                   type: .x509sha256)
     }
     
+    struct Encryption {
+        
+        static let senderPrivateKeyPem =
+            "-----BEGIN PRIVATE KEY-----\n" +
+            "MD4CAQAwEAYHKoZIzj0CAQYFK4EEAAoEJzAlAgEBBCDmzegt2/QGTfn0M+BL398D\n" +
+            "RwzaPGd2F04yfFqXxRPJKg==\n" +
+            "-----END PRIVATE KEY-----"
+        
+        static let senderPublicKeyPem =
+            "-----BEGIN PUBLIC KEY-----\n" +
+            "MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEKK1shlRCVNixhwWMpLSP3e0vPy/yHMZg\n" +
+            "+DnZFAQF1v2KEnNqCJjIux8x1JQV8T5zbHysaTJHT1B7ylNI4UpHYA==\n" +
+            "-----END PUBLIC KEY-----"
+
+        
+        static let senderEncryptionParameters = EncryptionParameters(privateKeyPem: senderPrivateKeyPem, publicKeyPem: senderPublicKeyPem)
+        
+        static let recipientPrivateKeyPem =
+            "-----BEGIN PRIVATE KEY-----\n" +
+            "MD4CAQAwEAYHKoZIzj0CAQYFK4EEAAoEJzAlAgEBBCCvwcD4YayXhwOfHRZmNksy\n" +
+            "x+ZTDLDIxYIaTFo9Xvb/fA==\n" +
+            "-----END PRIVATE KEY-----"
+
+        
+        static let recipientPublicKeyPem =
+            "-----BEGIN PUBLIC KEY-----\n" +
+            "MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEylgwe/hPFvwbe5esXnjDjhxQgbTRO8P/\n" +
+            "WTePbk3Mhqr9SH8xKkXc2E8JJCabbNjAuN4fnMDr6se6IgwSZ5r5Ow==\n" +
+            "-----END PUBLIC KEY-----"
+        
+        static let recipientEncryptionParameters = EncryptionParameters(privateKeyPem: recipientPrivateKeyPem, publicKeyPem: recipientPublicKeyPem)
+        
+    }
+    
     struct Outputs {
         static let OUTPUTS = [Output(amount: 1000, script: "Script 1", currency: .bitcoin),
                               Output(amount: 2000, script: "Script 2", currency: .bitcoin)]
@@ -208,8 +242,19 @@ struct TestData {
     }
     
     struct Senders {
+        
         static let SENDER_PKI_X509SHA256 = SenderParameters(pkiDataParameters: TestData.PkiData.PKI_DATA_SENDER_X509SHA256,
                                                             evCertificatePem: TestData.Certificates.EV_CERT)
+        
+        static let SENDER_PKI_X509SHA256_WITH_ENCRYPTION = SenderParameters(pkiDataParameters: TestData.PkiData.PKI_DATA_SENDER_X509SHA256,
+                                                                            evCertificatePem: nil,
+                                                                            encryptionParameters: TestData.Encryption.senderEncryptionParameters)
+    }
+    
+    struct Recipients {
+        static let RECIPIENTS_PARAMETERS_WITH_ENCRYPTION = RecipientParameters(vaspName: "VASP_1",
+                                                                               chainAddress: "1234567890ABCD",
+                                                                               encryptionParameters: TestData.Encryption.recipientEncryptionParameters)
     }
     
     struct Attestations {

@@ -40,7 +40,6 @@ struct CsrData : public Operation
     std::string request;
     std::string publicKey;
     std::string privateKey;
-    std::string privateKey1;
 
 };
 
@@ -59,6 +58,9 @@ struct SignData : public Operation
     std::string signature;
     std::string publicKey;
     std::string errorInfo;
+    std::string publicKeyReceiver;
+    std::string publicKeySender;
+    std::string privateKeySender;
 };
 
 bool signMessage(SignData& data);
@@ -80,6 +82,9 @@ bool validateCertificateNotAfterExpiration(const char* cert_pem);
 std::vector<std::string> getCRLDistributionPoints(const char* cert_pem);
 
 bool generateHash256(SignData& data);
+
+bool encrypt(SignData& data);
+
 
 } //namespace transact_id_ssl
 

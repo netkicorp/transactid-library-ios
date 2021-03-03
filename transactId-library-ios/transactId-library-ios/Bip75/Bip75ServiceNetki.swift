@@ -42,10 +42,10 @@ class Bip75ServiceNetki: Bip75Service {
         
         let invoiceRequest = try messageInvoiceRequest.signMessage(senderParameters: invoiceRequestParameters.senderParameters)?.serializedData()
         
-        return try invoiceRequest?.toProtocolMessage(messageType: .invoiceRequest,
+        return try invoiceRequest?.toProtocolMessageData(messageType: .invoiceRequest,
                                                      messageInformation: invoiceRequestParameters.messageInformation,
                                                      senderParameters: invoiceRequestParameters.senderParameters,
-                                                     recipientParameters: invoiceRequestParameters.recipientParameters).serializedData()
+                                                     recipientParameters: invoiceRequestParameters.recipientParameters)
     }
     
     func isInvoiceRequestValid(invoiceRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> Bool {
