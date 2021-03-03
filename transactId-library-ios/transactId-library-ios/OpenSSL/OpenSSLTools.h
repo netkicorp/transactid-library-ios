@@ -61,6 +61,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)generateHash256:(NSString *)message;
 
+- (NSString *)encrypt:(NSString *)message
+    receiverPublicKey:(NSString *)receiverPublicKey
+      senderPublicKey:(NSString *)senderPublicKey
+     senderPrivateKey:(NSString *)senderPrivateKey;
+
 @end
 
 NS_ASSUME_NONNULL_END

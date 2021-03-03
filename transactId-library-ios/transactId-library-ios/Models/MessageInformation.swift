@@ -28,4 +28,6 @@ public class MessageInformation {
      */
     public var encryptMessage: Bool = false
     
+    public init() {}
+    
 }

@@ -18,6 +18,7 @@
 #include <sstream>
 #include <openssl/evp.h>
 #include <iomanip>
+#include <openssl/ec.h>
 
 namespace transact_id_ssl {
 
@@ -513,5 +514,75 @@ bool generateHash256(SignData& data) {
     return true;
 }
 
+bool pemKeyToECPublicKey(std::string publicKeyPem, EC_KEY*& eck) {
+    BioString bio(publicKeyPem);
+    EVP_PKEY* key = nullptr;
+    PEM_read_bio_PUBKEY(bio.get(), &key, 0, 0);
+    if (key == nullptr) {  return false; }
+
+    std::shared_ptr<EVP_PKEY> evpKey(key, &EVP_PKEY_free);
+    bio.reset();
+    
+    if (EVP_PKEY_base_id(evpKey.get()) == EVP_PKEY_EC) {
+        eck = EVP_PKEY_get1_EC_KEY(evpKey.get());
+    } else {
+        return false;
+    }
+    
+    return true;
+}
+
+bool pemKeyToECPrivateKey(std::string privateKeyPem, EC_KEY*& eck) {
+    BioString bio(privateKeyPem);
+    EVP_PKEY* key = nullptr;
+    PEM_read_bio_PrivateKey(bio.get(), &key, 0, 0);
+    if (key == nullptr) {  return false; }
+
+    std::shared_ptr<EVP_PKEY> evpKey(key, &EVP_PKEY_free);
+    bio.reset();
+    
+    if (EVP_PKEY_base_id(evpKey.get()) == EVP_PKEY_EC) {
+        eck = EVP_PKEY_get1_EC_KEY(evpKey.get());
+    } else {
+        return false;
+    }
+    
+    return true;
+}
+
+std::string leftPadWithZeroes(char * original) {
+    std::string padded = original;
+    while (padded.length() < 64) {
+        padded = "0" + padded;
+    }
+    return padded;
+}
+
+bool encrypt(SignData& data) {
+        
+    EC_KEY* publicKeySender;
+    EC_KEY* publicKeyReceiver;
+    EC_KEY *privateKeySender;
+    
+    bool res = pemKeyToECPublicKey(data.publicKeySender, publicKeySender);
+    if (!res) return false;
+
+    res = pemKeyToECPublicKey(data.publicKeyReceiver, publicKeyReceiver);
+    if (!res) return false;
+                
+    BIGNUM *x = BN_new();
+    BIGNUM *y = BN_new();
+    
+    int ret = EC_POINT_get_affine_coordinates_GFp(EC_KEY_get0_group(publicKeySender), EC_KEY_get0_public_key(publicKeySender), x, y, nullptr);
+    if (ret != 1) return false;
+
+    std::string publicKey = "04" + leftPadWithZeroes(BN_bn2hex(x)) + leftPadWithZeroes(BN_bn2hex(y));
+    
+    pemKeyToECPrivateKey(data.privateKeySender, privateKeySender);
+        
+
+    
+    return true;
+}
 
 } //namespace transact_id_ssl

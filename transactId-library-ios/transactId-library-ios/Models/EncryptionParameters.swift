@@ -21,4 +21,9 @@ public class EncryptionParameters {
      * SEC-encoded EC Public Key in PEM format.
      */
     var publicKeyPem: String? = nil
+    
+    public init(privateKeyPem: String? = nil, publicKeyPem: String? = nil) {
+        self.privateKeyPem = privateKeyPem
+        self.publicKeyPem = publicKeyPem
+    }
 }

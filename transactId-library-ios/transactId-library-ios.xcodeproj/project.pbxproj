@@ -55,6 +55,7 @@
 		8B47536125D2BE1A00383451 /* Array<OwnerParameters>+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47536025D2BE1A00383451 /* Array<OwnerParameters>+Extension.swift */; };
 		8B5BF57625D300B30086E7AF /* Exception.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BF57525D300B30086E7AF /* Exception.swift */; };
 		8B5BF57A25D3015D0086E7AF /* ExceptionMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BF57925D3015D0086E7AF /* ExceptionMessages.swift */; };
+		8B7A60B525EFAC4A00C293F1 /* EncryptedProtocolMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A60B425EFAC4A00C293F1 /* EncryptedProtocolMessage.swift */; };
 		8B92870A25DC0C5E005AB4B0 /* TrustStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C2F25D1CB3900C922A3 /* TrustStore.swift */; };
 		8BDEFBAC25ECFBF300577BAF /* ProtocolMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDEFBAB25ECFBF300577BAF /* ProtocolMessage.swift */; };
 		8BDEFBAF25ECFCA700577BAF /* ProtocolMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDEFBAE25ECFCA700577BAF /* ProtocolMessageType.swift */; };
@@ -189,6 +190,7 @@
 		8B47536025D2BE1A00383451 /* Array<OwnerParameters>+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array<OwnerParameters>+Extension.swift"; sourceTree = "<group>"; };
 		8B5BF57525D300B30086E7AF /* Exception.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exception.swift; sourceTree = "<group>"; };
 		8B5BF57925D3015D0086E7AF /* ExceptionMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionMessages.swift; sourceTree = "<group>"; };
+		8B7A60B425EFAC4A00C293F1 /* EncryptedProtocolMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedProtocolMessage.swift; sourceTree = "<group>"; };
 		8BDEFBAB25ECFBF300577BAF /* ProtocolMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMessage.swift; sourceTree = "<group>"; };
 		8BDEFBAE25ECFCA700577BAF /* ProtocolMessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMessageType.swift; sourceTree = "<group>"; };
 		8BDEFBB125ED061700577BAF /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 				8BE9171125E7E39600426912 /* MessageOutput.swift */,
 				8BE9171A25E7FB4A00426912 /* MessageOriginator.swift */,
 				8BDEFBAB25ECFBF300577BAF /* ProtocolMessage.swift */,
+				8B7A60B425EFAC4A00C293F1 /* EncryptedProtocolMessage.swift */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -816,6 +819,7 @@
 				8B47534C25D2B99700383451 /* AddressTags.swift in Sources */,
 				8B5BF57625D300B30086E7AF /* Exception.swift in Sources */,
 				8BE3FDC325D176FE00D78B62 /* Token.swift in Sources */,
+				8B7A60B525EFAC4A00C293F1 /* EncryptedProtocolMessage.swift in Sources */,
 				8B47533525D2B38800383451 /* OriginatorParameters.swift in Sources */,
 				8BE3FDCC25D177AB00D78B62 /* TokenResponse.swift in Sources */,
 				8B36B2D325C98D7000CE14E9 /* Attestation.swift in Sources */,
