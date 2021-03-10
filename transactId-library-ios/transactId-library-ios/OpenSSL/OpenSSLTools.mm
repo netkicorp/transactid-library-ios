@@ -148,7 +148,7 @@
     
     NSString * signature = [NSString stringWithUTF8String:signData.signature.c_str()];
     
-    return [signature dataUsingEncoding:NSUTF8StringEncoding];;
+    return [signature dataUsingEncoding:NSUTF8StringEncoding];
     
 }
 
@@ -159,7 +159,7 @@
     
     transact_id_ssl::generateHash256(signData);
     
-    return [NSString stringWithUTF8String:signData.signature.c_str()];;
+    return [NSString stringWithUTF8String:signData.signature.c_str()];
 }
 
 - (NSString *)encrypt:(NSString *)message
@@ -167,17 +167,16 @@
       senderPublicKey:(NSString *)senderPublicKey
      senderPrivateKey:(NSString *)senderPrivateKey {
     
-    transact_id_ssl::SignData signData;
+    transact_id_ssl::EncryptionData encryptionData;
 
-    signData.message = std::string(message.UTF8String);
-    signData.publicKeyReceiver = std::string(receiverPublicKey.UTF8String);
-    signData.publicKeySender = std::string(senderPublicKey.UTF8String);
-    signData.privateKeySender = std::string(senderPrivateKey.UTF8String);
-    signData.privateKey = std::string(senderPrivateKey.UTF8String);
+    encryptionData.message = std::string(@"Test".UTF8String);
+    encryptionData.publicKeyReceiver = std::string(receiverPublicKey.UTF8String);
+    encryptionData.publicKeySender = std::string(senderPublicKey.UTF8String);
+    encryptionData.privateKeySender = std::string(senderPrivateKey.UTF8String);
     
-    transact_id_ssl::encrypt(signData);
+    transact_id_ssl::encrypt(encryptionData);
     
-    return @"";
+    return [NSString stringWithUTF8String:encryptionData.encryptedMessage.c_str()];
 }
 
 @end

@@ -58,10 +58,23 @@ struct SignData : public Operation
     std::string signature;
     std::string publicKey;
     std::string errorInfo;
+};
+
+struct EncryptionData : public Operation
+{
+    EncryptionData();
+    
+    bool base64;
+
+    std::string encryptedMessage;
+    std::string message;
     std::string publicKeyReceiver;
     std::string publicKeySender;
     std::string privateKeySender;
+    
+    ~EncryptionData();
 };
+
 
 bool signMessage(SignData& data);
 
@@ -83,8 +96,7 @@ std::vector<std::string> getCRLDistributionPoints(const char* cert_pem);
 
 bool generateHash256(SignData& data);
 
-bool encrypt(SignData& data);
-
+bool encrypt(EncryptionData& data);
 
 } //namespace transact_id_ssl
 

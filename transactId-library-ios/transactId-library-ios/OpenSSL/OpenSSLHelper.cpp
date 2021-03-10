@@ -19,14 +19,25 @@
 #include <openssl/evp.h>
 #include <iomanip>
 #include <openssl/ec.h>
+#include <openssl/ecdh.h>
+#include <openssl/aes.h>
 
 namespace transact_id_ssl {
+
+#define AES_KEYLENGTH 256
 
 using ASN1_TIME_ptr = std::unique_ptr<ASN1_TIME, decltype(&ASN1_STRING_free)>;
 
 CsrData::CsrData() : type(Rsa) { }
 
 SignData::SignData(): base64(false) { }
+
+EncryptionData::EncryptionData(): base64(false) { }
+
+EncryptionData:: ~EncryptionData()
+{
+    std::cout << "Destructing EncryptionData " << message << '\n';
+}
 
 class BioString
 {
@@ -514,28 +525,14 @@ bool generateHash256(SignData& data) {
     return true;
 }
 
-bool pemKeyToECPublicKey(std::string publicKeyPem, EC_KEY*& eck) {
+bool pemKeyToECKey(std::string publicKeyPem, EC_KEY*& eck, bool isPrivate) {
     BioString bio(publicKeyPem);
     EVP_PKEY* key = nullptr;
-    PEM_read_bio_PUBKEY(bio.get(), &key, 0, 0);
-    if (key == nullptr) {  return false; }
-
-    std::shared_ptr<EVP_PKEY> evpKey(key, &EVP_PKEY_free);
-    bio.reset();
-    
-    if (EVP_PKEY_base_id(evpKey.get()) == EVP_PKEY_EC) {
-        eck = EVP_PKEY_get1_EC_KEY(evpKey.get());
+    if (isPrivate) {
+        PEM_read_bio_PrivateKey(bio.get(), &key, 0, 0);
     } else {
-        return false;
+        PEM_read_bio_PUBKEY(bio.get(), &key, 0, 0);
     }
-    
-    return true;
-}
-
-bool pemKeyToECPrivateKey(std::string privateKeyPem, EC_KEY*& eck) {
-    BioString bio(privateKeyPem);
-    EVP_PKEY* key = nullptr;
-    PEM_read_bio_PrivateKey(bio.get(), &key, 0, 0);
     if (key == nullptr) {  return false; }
 
     std::shared_ptr<EVP_PKEY> evpKey(key, &EVP_PKEY_free);
@@ -558,31 +555,226 @@ std::string leftPadWithZeroes(char * original) {
     return padded;
 }
 
-bool encrypt(SignData& data) {
+std::string ecdh(EC_KEY* publicKey, EC_KEY* privateKey) {
         
+    int fieldSize = EC_GROUP_get_degree(EC_KEY_get0_group(privateKey));
+    int ecdhSize = (fieldSize + 7) / 8;
+    
+    unsigned char ecdh[ecdhSize];
+
+    ecdhSize = ECDH_compute_key(ecdh, ecdhSize, EC_KEY_get0_public_key(publicKey), privateKey, nullptr);
+    
+    if (ecdhSize <= 0) return nullptr;
+    
+//    std::stringstream stream;
+//    for(unsigned int i = 0; i < ecdhSize; ++i)
+//    {
+//        stream << std::hex << std::setw(2) << std::setfill('0') << (int)ecdh[i];
+//    }
+    std::string str(reinterpret_cast<char*>(ecdh), ecdhSize);
+
+    return str;
+}
+
+bool encrypt(unsigned char *plaintext,
+             int plaintextLength,
+             unsigned char *key,
+             unsigned char *iv,
+             unsigned char *ciphertext,
+             int &chipperTextLength)
+{
+    EVP_CIPHER_CTX *ctx;
+    
+    int len;
+    
+    if(!(ctx = EVP_CIPHER_CTX_new())) return false;
+    if(1 != EVP_EncryptInit(ctx, EVP_aes_128_cbc(), key, iv)) return false;
+    
+    if(1 != EVP_EncryptUpdate(ctx, ciphertext, &len, plaintext, plaintextLength))return false;
+    chipperTextLength = len;
+    
+    if(1 != EVP_EncryptFinal(ctx, ciphertext + len, &len)) return false;
+    chipperTextLength += len;
+    
+    EVP_CIPHER_CTX_free(ctx);
+    
+    return true;
+}
+
+std::string generateHash512(std::string data) {
+
+    int ret = 0;
+    
+    std::string sig;
+    
+    std::shared_ptr<EVP_MD_CTX> md(EVP_MD_CTX_create(), &EVP_MD_CTX_destroy);
+
+    ret = EVP_DigestInit(md.get(), EVP_sha512());
+    if (ret != 1) { return nullptr; }
+
+    ret = EVP_DigestUpdate(md.get(), data.c_str(), data.size());
+    if (ret != 1) { return nullptr; }
+
+    unsigned int sz = 0;
+    
+    unsigned char hash[EVP_MAX_MD_SIZE];
+
+    ret = EVP_DigestFinal(md.get(), hash, &sz);
+    if (ret != 1) { return nullptr; }
+
+    std::stringstream stream;
+    for(unsigned int i = 0; i < sz; ++i)
+    {
+        stream << std::hex << std::setw(2) << std::setfill('0') << (int)hash[i];
+    }
+    
+    sig = stream.str();
+    
+    return sig;
+}
+
+std::string hmac(unsigned char *hashKey,
+                 int hashKeyLen,
+                 unsigned char * iv,
+                 unsigned char *publicKeyData,
+                 size_t publicKeyDataLen,
+                 unsigned char *chiperData,
+                 size_t chiperDataLen)
+{
+    HMAC_CTX ctx;
+    HMAC_CTX_init(&ctx);
+    
+    unsigned char hmacResult [20];
+    unsigned int hmacResultLen = 20;
+
+    HMAC_Init(&ctx, &hashKey, hashKeyLen, EVP_sha1());
+    
+    HMAC_Update(&ctx, iv, sizeof(iv));
+    HMAC_Update(&ctx, publicKeyData, publicKeyDataLen);
+    HMAC_Update(&ctx, chiperData, chiperDataLen);
+    HMAC_Final(&ctx, hmacResult, &hmacResultLen);
+//    HMAC_CTX_cleanup(&ctx);
+    
+    std::stringstream stream1;
+    std::string hmacResultString;
+
+    for(unsigned int i = 0; i < hmacResultLen; ++i)
+    {
+        stream1 << std::hex << std::setw(2) << std::setfill('0') << (int)hmacResult[i];
+    }
+    return stream1.str();
+}
+
+int hex2bin( const char *s )
+{
+    int ret=0;
+    int i;
+    for( i=0; i<2; i++ )
+    {
+        char c = *s++;
+        int n=0;
+        if( '0'<=c && c<='9' )
+            n = c-'0';
+        else if( 'a'<=c && c<='f' )
+            n = 10 + c-'a';
+        else if( 'A'<=c && c<='F' )
+            n = 10 + c-'A';
+        ret = n + ret*16;
+    }
+    return ret;
+}
+
+
+bool encrypt(EncryptionData& data) {
+    
     EC_KEY* publicKeySender;
     EC_KEY* publicKeyReceiver;
-    EC_KEY *privateKeySender;
+    EC_KEY* privateKeySender;
     
-    bool res = pemKeyToECPublicKey(data.publicKeySender, publicKeySender);
+    bool res = pemKeyToECKey(data.publicKeySender, publicKeySender, false);
     if (!res) return false;
 
-    res = pemKeyToECPublicKey(data.publicKeyReceiver, publicKeyReceiver);
+    res = pemKeyToECKey(data.publicKeyReceiver, publicKeyReceiver, false);
     if (!res) return false;
-                
+    
+    res = pemKeyToECKey(data.privateKeySender, privateKeySender, true);
+    if (!res) return false;
+    
     BIGNUM *x = BN_new();
     BIGNUM *y = BN_new();
     
     int ret = EC_POINT_get_affine_coordinates_GFp(EC_KEY_get0_group(publicKeySender), EC_KEY_get0_public_key(publicKeySender), x, y, nullptr);
     if (ret != 1) return false;
+    
+    std::string message = data.message;
 
     std::string publicKey = "04" + leftPadWithZeroes(BN_bn2hex(x)) + leftPadWithZeroes(BN_bn2hex(y));
+
+    std::string sharedSecret = ecdh(publicKeyReceiver, privateKeySender);
     
-    pemKeyToECPrivateKey(data.privateKeySender, privateKeySender);
-        
+    std::string derivedKey = generateHash512(sharedSecret);
+    if (!res) return false;
+
+    std::string encryptKey(derivedKey.c_str(), derivedKey.length()/2);
+    std::string macKey = derivedKey.substr(derivedKey.length()/2, derivedKey.length());
+
+    unsigned char iv[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     
+    //TODO : Encrypt AES/CBC/PKCS5Padding
+    
+    
+    int chipherTextLength = (int)message.length() + 128 - (int)message.length() % 128;
+    
+    unsigned char chipherText[chipherTextLength];
+
+    res = encrypt((unsigned char*)message.data(), static_cast<int>(message.length()), (unsigned char*)encryptKey.data(), iv, chipherText, chipherTextLength);
+    
+    if (!res) return false;
+
+    std::stringstream stream;
+    for(unsigned int i = 0; i < chipherTextLength; ++i)
+    {
+        stream << std::hex << std::setw(2) << std::setfill('0') << (int)chipherText[i];
+    }
+        
+    std::string chipherTextStr = "58cab2559431932ba979f611dd5d367a";//stream.str(); //"8c106505d0c144ee7e1dedd65921d513"
+    
+    unsigned char chiperData[chipherTextStr.length()];
+    std::copy(chipherTextStr.begin(), chipherTextStr.end(), chiperData );
+    
+    unsigned char publicKeyData[publicKey.length()];
+    std::copy(publicKey.begin(), publicKey.end(), publicKeyData);
+
+    
+    unsigned char hmacKey[macKey.length()];
+    std::copy(macKey.begin(), macKey.end(), hmacKey);
+        
+    char out[publicKey.length()/2];
+    char * in = (char *)publicKey.data();
+    
+    int i;
+    for( i=0; i<publicKey.length()/2; i++ )
+        {
+            out[i] = hex2bin( in );
+            in += 2;
+        }
+    
+    std::string hmacResult = hmac(hmacKey,
+                                  static_cast<int>(macKey.length()),
+                                  iv,
+                                  (unsigned char *)out,
+                                  publicKey.length()/2,
+                                  chiperData,
+                                  chipherTextLength);      //"cd955ede0c5920e5574f455cb4ba9b00d446048c" //3c271e123b6bc8114af4631677127206f634dd90 // "6c9a8b21795335ead935e1cc1db2c8eac44ed836"
+    
+    data.encryptedMessage = publicKey + hmacResult + chipherTextStr;
     return true;
+    
+    //macHex = 34181312fbd6343669ef6160369a6b19b38fac23
+    //chipherText = 58cab2559431932ba979f611dd5d367a
+    
+    //result = 0428ad6c86544254d8b187058ca4b48fdded2f3f2ff21cc660f839d9140405d6fd8a12736a0898c8bb1f31d49415f13e736c7cac6932474f507bca5348e14a4760 34181312FBD6343669EF6160369A6B19B38FAC23 58CAB2559431932BA979F611DD5D367A
 }
 
 } //namespace transact_id_ssl
