@@ -10,6 +10,12 @@
 		39F581BA249890FCFE356855 /* Pods_transactId_library_ios_tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA608D1A49C134C66850E0DE /* Pods_transactId_library_ios_tests.framework */; };
 		64C7EE10077813EDA34B2AA9 /* Pods_transactId_demo_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A2F49221D2BD1F4605E148 /* Pods_transactId_demo_app.framework */; };
 		86AAE378AF7573791DA7E5E3 /* Pods_transactId_library_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD5C9EA943F8C0323878031 /* Pods_transactId_library_ios.framework */; };
+		8B0A46D025FF4CDF00B879F4 /* OpenSSLSigningHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A46CE25FF4CDF00B879F4 /* OpenSSLSigningHelper.cpp */; };
+		8B0A46D125FF4CDF00B879F4 /* OpenSSLSigningHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B0A46CF25FF4CDF00B879F4 /* OpenSSLSigningHelper.h */; };
+		8B0A46D625FF4D0100B879F4 /* OpenSSLEncryptionHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A46D425FF4D0100B879F4 /* OpenSSLEncryptionHelper.cpp */; };
+		8B0A46D725FF4D0100B879F4 /* OpenSSLEncryptionHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B0A46D525FF4D0100B879F4 /* OpenSSLEncryptionHelper.h */; };
+		8B0A46DE25FF54B400B879F4 /* OpenSSLCommonHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B0A46DD25FF54AE00B879F4 /* OpenSSLCommonHelper.h */; };
+		8B0A46E125FF54C000B879F4 /* OpenSSLCommonHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A46E025FF54C000B879F4 /* OpenSSLCommonHelper.cpp */; };
 		8B290AE325CBE369006B96B3 /* KeyChainProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B290AE225CBE369006B96B3 /* KeyChainProvider.swift */; };
 		8B290B9825CC3C75006B96B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B290B9725CC3C75006B96B3 /* AppDelegate.swift */; };
 		8B290B9A25CC3C75006B96B3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B290B9925CC3C75006B96B3 /* SceneDelegate.swift */; };
@@ -25,8 +31,8 @@
 		8B36B2D125C98C9400CE14E9 /* TransactId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B2D025C98C9400CE14E9 /* TransactId.swift */; };
 		8B36B2D325C98D7000CE14E9 /* Attestation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B2D225C98D7000CE14E9 /* Attestation.swift */; };
 		8B36B2D625C98ECA00CE14E9 /* Csr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B2D525C98ECA00CE14E9 /* Csr.swift */; };
-		8B36B2DF25C99AAE00CE14E9 /* OpenSSLHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B2DD25C99AAE00CE14E9 /* OpenSSLHelper.cpp */; };
-		8B36B2E025C99AAE00CE14E9 /* OpenSSLHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B36B2DE25C99AAE00CE14E9 /* OpenSSLHelper.h */; };
+		8B36B2DF25C99AAE00CE14E9 /* OpenSSLCSRHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B2DD25C99AAE00CE14E9 /* OpenSSLCSRHelper.cpp */; };
+		8B36B2E025C99AAE00CE14E9 /* OpenSSLCSRHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B36B2DE25C99AAE00CE14E9 /* OpenSSLCSRHelper.h */; };
 		8B36B2E525C9A68800CE14E9 /* OpenSSLTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B36B2E325C9A68800CE14E9 /* OpenSSLTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8B36B2E625C9A68800CE14E9 /* OpenSSLTools.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B2E425C9A68800CE14E9 /* OpenSSLTools.mm */; };
 		8B36B2E825C9B3E000CE14E9 /* CryptoModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B2E725C9B3E000CE14E9 /* CryptoModule.swift */; };
@@ -142,6 +148,12 @@
 		52A6C2E563E68D47ABA8BE1F /* Pods-transactId-demo-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-transactId-demo-app.release.xcconfig"; path = "Target Support Files/Pods-transactId-demo-app/Pods-transactId-demo-app.release.xcconfig"; sourceTree = "<group>"; };
 		5B0FC61304BCAD777F627973 /* Pods-transactId-library-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-transactId-library-ios.release.xcconfig"; path = "Target Support Files/Pods-transactId-library-ios/Pods-transactId-library-ios.release.xcconfig"; sourceTree = "<group>"; };
 		89A2F49221D2BD1F4605E148 /* Pods_transactId_demo_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_transactId_demo_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B0A46CE25FF4CDF00B879F4 /* OpenSSLSigningHelper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenSSLSigningHelper.cpp; sourceTree = "<group>"; };
+		8B0A46CF25FF4CDF00B879F4 /* OpenSSLSigningHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenSSLSigningHelper.h; sourceTree = "<group>"; };
+		8B0A46D425FF4D0100B879F4 /* OpenSSLEncryptionHelper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenSSLEncryptionHelper.cpp; sourceTree = "<group>"; };
+		8B0A46D525FF4D0100B879F4 /* OpenSSLEncryptionHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenSSLEncryptionHelper.h; sourceTree = "<group>"; };
+		8B0A46DD25FF54AE00B879F4 /* OpenSSLCommonHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenSSLCommonHelper.h; sourceTree = "<group>"; };
+		8B0A46E025FF54C000B879F4 /* OpenSSLCommonHelper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenSSLCommonHelper.cpp; sourceTree = "<group>"; };
 		8B290AE225CBE369006B96B3 /* KeyChainProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainProvider.swift; sourceTree = "<group>"; };
 		8B290B9525CC3C75006B96B3 /* transactId-demo-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "transactId-demo-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B290B9725CC3C75006B96B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -159,8 +171,8 @@
 		8B36B2D025C98C9400CE14E9 /* TransactId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactId.swift; sourceTree = "<group>"; };
 		8B36B2D225C98D7000CE14E9 /* Attestation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attestation.swift; sourceTree = "<group>"; };
 		8B36B2D525C98ECA00CE14E9 /* Csr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Csr.swift; sourceTree = "<group>"; };
-		8B36B2DD25C99AAE00CE14E9 /* OpenSSLHelper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenSSLHelper.cpp; sourceTree = "<group>"; };
-		8B36B2DE25C99AAE00CE14E9 /* OpenSSLHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenSSLHelper.h; sourceTree = "<group>"; };
+		8B36B2DD25C99AAE00CE14E9 /* OpenSSLCSRHelper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenSSLCSRHelper.cpp; sourceTree = "<group>"; };
+		8B36B2DE25C99AAE00CE14E9 /* OpenSSLCSRHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenSSLCSRHelper.h; sourceTree = "<group>"; };
 		8B36B2E325C9A68800CE14E9 /* OpenSSLTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenSSLTools.h; sourceTree = "<group>"; };
 		8B36B2E425C9A68800CE14E9 /* OpenSSLTools.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenSSLTools.mm; sourceTree = "<group>"; };
 		8B36B2E725C9B3E000CE14E9 /* CryptoModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoModule.swift; sourceTree = "<group>"; };
@@ -321,7 +333,6 @@
 				8BF24C5225D2A79600C922A3 /* Security */,
 				8B36B2D425C98D8700CE14E9 /* Services */,
 				8BF24C2E25D1CB0F00C922A3 /* TrustStore */,
-				8B36B2CF25C98C2600CE14E9 /* Utilities */,
 			);
 			path = "transactId-library-ios";
 			sourceTree = "<group>";
@@ -369,8 +380,14 @@
 		8B36B2DB25C99A1700CE14E9 /* OpenSSL */ = {
 			isa = PBXGroup;
 			children = (
-				8B36B2DD25C99AAE00CE14E9 /* OpenSSLHelper.cpp */,
-				8B36B2DE25C99AAE00CE14E9 /* OpenSSLHelper.h */,
+				8B0A46DD25FF54AE00B879F4 /* OpenSSLCommonHelper.h */,
+				8B0A46E025FF54C000B879F4 /* OpenSSLCommonHelper.cpp */,
+				8B0A46CE25FF4CDF00B879F4 /* OpenSSLSigningHelper.cpp */,
+				8B0A46CF25FF4CDF00B879F4 /* OpenSSLSigningHelper.h */,
+				8B0A46D525FF4D0100B879F4 /* OpenSSLEncryptionHelper.h */,
+				8B0A46D425FF4D0100B879F4 /* OpenSSLEncryptionHelper.cpp */,
+				8B36B2DD25C99AAE00CE14E9 /* OpenSSLCSRHelper.cpp */,
+				8B36B2DE25C99AAE00CE14E9 /* OpenSSLCSRHelper.h */,
 				8B36B2E325C9A68800CE14E9 /* OpenSSLTools.h */,
 				8B36B2E425C9A68800CE14E9 /* OpenSSLTools.mm */,
 			);
@@ -382,6 +399,7 @@
 			children = (
 				8B36B37C25CADE9E00CE14E9 /* transactId_library_ios_tests.swift */,
 				8B36B37E25CADE9E00CE14E9 /* Info.plist */,
+				8B36B2CF25C98C2600CE14E9 /* Utilities */,
 				8B43C77B25E66E4000ED9D56 /* TestData.swift */,
 				8B43C77E25E66E6F00ED9D56 /* TransactIdTests.swift */,
 			);
@@ -463,8 +481,8 @@
 				8BE9170925E7AAAD00426912 /* MessageAttestation.swift */,
 				8BE9171125E7E39600426912 /* MessageOutput.swift */,
 				8BE9171A25E7FB4A00426912 /* MessageOriginator.swift */,
-				8BDEFBAB25ECFBF300577BAF /* ProtocolMessage.swift */,
 				8B7A60B425EFAC4A00C293F1 /* EncryptedProtocolMessage.swift */,
+				8BDEFBAB25ECFBF300577BAF /* ProtocolMessage.swift */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -547,8 +565,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B36B2B225C984B400CE14E9 /* transactId_library_ios.h in Headers */,
+				8B0A46D725FF4D0100B879F4 /* OpenSSLEncryptionHelper.h in Headers */,
+				8B0A46D125FF4CDF00B879F4 /* OpenSSLSigningHelper.h in Headers */,
 				8B36B2E525C9A68800CE14E9 /* OpenSSLTools.h in Headers */,
-				8B36B2E025C99AAE00CE14E9 /* OpenSSLHelper.h in Headers */,
+				8B0A46DE25FF54B400B879F4 /* OpenSSLCommonHelper.h in Headers */,
+				8B36B2E025C99AAE00CE14E9 /* OpenSSLCSRHelper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -822,6 +843,8 @@
 				8B7A60B525EFAC4A00C293F1 /* EncryptedProtocolMessage.swift in Sources */,
 				8B47533525D2B38800383451 /* OriginatorParameters.swift in Sources */,
 				8BE3FDCC25D177AB00D78B62 /* TokenResponse.swift in Sources */,
+				8B0A46D625FF4D0100B879F4 /* OpenSSLEncryptionHelper.cpp in Sources */,
+				8B0A46E125FF54C000B879F4 /* OpenSSLCommonHelper.cpp in Sources */,
 				8B36B2D325C98D7000CE14E9 /* Attestation.swift in Sources */,
 				8B36B32425CACE1800CE14E9 /* LocalStoreProvider.swift in Sources */,
 				8BE9171825E7EDA000426912 /* MessageAttestationType.swift in Sources */,
@@ -835,11 +858,12 @@
 				8BF24C5425D2A7B000C922A3 /* CertificateValidator.swift in Sources */,
 				8B36B2D625C98ECA00CE14E9 /* Csr.swift in Sources */,
 				8BF24C4B25D2A45900C922A3 /* Bip75Service.swift in Sources */,
-				8B36B2DF25C99AAE00CE14E9 /* OpenSSLHelper.cpp in Sources */,
+				8B36B2DF25C99AAE00CE14E9 /* OpenSSLCSRHelper.cpp in Sources */,
 				8BE3FDD025D1780000D78B62 /* TokenRequest.swift in Sources */,
 				8B47533C25D2B5D000383451 /* EncryptionParameters.swift in Sources */,
 				8BDEFBAC25ECFBF300577BAF /* ProtocolMessage.swift in Sources */,
 				8B47534925D2B96200383451 /* AddressTagInformation.swift in Sources */,
+				8B0A46D025FF4CDF00B879F4 /* OpenSSLSigningHelper.cpp in Sources */,
 				8BE9171225E7E39600426912 /* MessageOutput.swift in Sources */,
 				8BF24C5025D2A4EC00C922A3 /* Bip75ServiceNetki.swift in Sources */,
 				8B47535625D2BA8400383451 /* StatusCode.swift in Sources */,

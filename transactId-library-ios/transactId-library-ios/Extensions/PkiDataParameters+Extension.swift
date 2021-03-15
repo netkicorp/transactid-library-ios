@@ -25,7 +25,7 @@ extension PkiDataParameters {
                 
                 let serializedData = try messageAttestationUnsigned.serializedData()
                 if let privateKey = self.privateKeyPem {
-                    if let signature = CryptoModule().sign(privateKeyPem: privateKey, message: serializedData.base64EncodedString()) {
+                    if let signature = CryptoModule().sign(privateKeyPem: privateKey, messageData: serializedData) {
                         try messageAttestationSigned.merge(serializedData: serializedData)
                         messageAttestationSigned.signature = signature
                     }
@@ -39,4 +39,6 @@ extension PkiDataParameters {
         
         return messageAttestationUnsigned
     }
+    
+    
 }

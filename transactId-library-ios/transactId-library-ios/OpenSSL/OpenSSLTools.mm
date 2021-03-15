@@ -7,7 +7,9 @@
 
 #import "OpenSSLTools.h"
 #include <OpenSSL/OpenSSL.h>
-#import "OpenSSLHelper.h"
+#include "OpenSSLCSRHelper.h"
+#include "OpenSSLSigningHelper.h"
+#include "OpenSSLEncryptionHelper.h"
 
 @implementation OpenSSLKeyGenerateResult
     
@@ -132,7 +134,6 @@
 }
 
 - (BOOL)isRevoked:(NSString*)crl certificate:(NSString *)certificate {
-    
     return NO;
 }
 
@@ -152,16 +153,6 @@
     
 }
 
-- (NSString *)generateHash256:(NSString *)message {
-    transact_id_ssl::SignData signData;
-
-    signData.message = std::string(message.UTF8String);
-    
-    transact_id_ssl::generateHash256(signData);
-    
-    return [NSString stringWithUTF8String:signData.signature.c_str()];
-}
-
 - (NSString *)encrypt:(NSString *)message
     receiverPublicKey:(NSString *)receiverPublicKey
       senderPublicKey:(NSString *)senderPublicKey
@@ -169,14 +160,21 @@
     
     transact_id_ssl::EncryptionData encryptionData;
 
-    encryptionData.message = std::string(@"Test".UTF8String);
+    encryptionData.message = std::string(message.UTF8String);
     encryptionData.publicKeyReceiver = std::string(receiverPublicKey.UTF8String);
     encryptionData.publicKeySender = std::string(senderPublicKey.UTF8String);
     encryptionData.privateKeySender = std::string(senderPrivateKey.UTF8String);
     
     transact_id_ssl::encrypt(encryptionData);
-    
+        
     return [NSString stringWithUTF8String:encryptionData.encryptedMessage.c_str()];
 }
+
+- (NSString *)hash256:(NSData *)messageData {
+    NSUInteger size = [messageData length] / sizeof(unsigned char);
+    unsigned char* array = (unsigned char*) [messageData bytes];
+    return [NSString stringWithUTF8String:transact_id_ssl::hash256(array, size).c_str()];
+}
+
 
 @end

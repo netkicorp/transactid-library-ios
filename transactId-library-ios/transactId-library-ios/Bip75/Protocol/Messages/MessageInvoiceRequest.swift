@@ -117,18 +117,18 @@ extension MessageInvoiceRequest : SwiftProtobuf.Message, SwiftProtobuf._MessageI
         while let fieldNumber = try decoder.nextFieldNumber() {
             switch fieldNumber {
             case 1: try decoder.decodeSingularUInt64Field(value: &self._amount)
-            case 2: try decoder.decodeSingularStringField(value: &self._pkiType)
-            case 3: try decoder.decodeSingularBytesField(value: &self._pkiData)
-            case 4: try decoder.decodeSingularStringField(value: &self._memo)
-            case 5: try decoder.decodeSingularStringField(value: &self._notificationURL)
-            case 6: try decoder.decodeSingularBytesField(value: &self._signature)
-            case 7: try decoder.decodeSingularBytesField(value: &self._evCert)
-            case 8: try decoder.decodeRepeatedMessageField(value: &self._beneficiaries)
-            case 9: try decoder.decodeRepeatedMessageField(value: &self._outputs)
-            case 10: try decoder.decodeRepeatedEnumField(value: &self._attestations)
-            case 11: try decoder.decodeSingularStringField(value: &self._recipientChainAddress)
+            case 2: try decoder.decodeSingularStringField(value: &self._memo)
+            case 3: try decoder.decodeSingularStringField(value: &self._notificationURL)
+            case 4: try decoder.decodeRepeatedMessageField(value: &self._originators)
+            case 5: try decoder.decodeRepeatedMessageField(value: &self._beneficiaries)
+            case 6: try decoder.decodeRepeatedMessageField(value: &self._outputs)
+            case 7: try decoder.decodeRepeatedEnumField(value: &self._attestations)
+            case 8: try decoder.decodeSingularStringField(value: &self._pkiType)
+            case 9: try decoder.decodeSingularBytesField(value: &self._pkiData)
+            case 10: try decoder.decodeSingularBytesField(value: &self._signature)
+            case 11: try decoder.decodeSingularBytesField(value: &self._evCert)
             case 12: try decoder.decodeSingularStringField(value: &self._recipientVaspName)
-            case 13: try decoder.decodeRepeatedMessageField(value: &self._originators)
+            case 13: try decoder.decodeSingularStringField(value: &self._recipientChainAddress)
             default: break
             }
         }
@@ -139,59 +139,61 @@ extension MessageInvoiceRequest : SwiftProtobuf.Message, SwiftProtobuf._MessageI
         if let v = self._amount {
             try visitor.visitSingularUInt64Field(value: v, fieldNumber: 1)
         }
-        if let v = self._pkiType {
+        if let v = self._memo {
             try visitor.visitSingularStringField(value: v, fieldNumber: 2)
         }
-        if let v = self._pkiData {
-            try visitor.visitSingularBytesField(value: v, fieldNumber: 3)
-        }
-        if let v = self._memo {
-            try visitor.visitSingularStringField(value: v, fieldNumber: 4)
-        }
         if let v = self._notificationURL {
-            try visitor.visitSingularStringField(value: v, fieldNumber: 5)
+            try visitor.visitSingularStringField(value: v, fieldNumber: 3)
         }
-        if let v = self._signature {
-            try visitor.visitSingularBytesField(value: v, fieldNumber: 6)
-        }
-        if let v = self._evCert {
-            try visitor.visitSingularBytesField(value: v, fieldNumber: 7)
+        if !self._originators.isEmpty {
+            try visitor.visitRepeatedMessageField(value: self._originators, fieldNumber: 4)
         }
         if !self._beneficiaries.isEmpty {
-            try visitor.visitRepeatedMessageField(value: self._beneficiaries, fieldNumber: 8)
+            try visitor.visitRepeatedMessageField(value: self._beneficiaries, fieldNumber: 5)
         }
         if !self._outputs.isEmpty {
-            try visitor.visitRepeatedMessageField(value: self._outputs, fieldNumber: 9)
+            try visitor.visitRepeatedMessageField(value: self._outputs, fieldNumber: 6)
         }
         if !self._attestations.isEmpty {
-            try visitor.visitRepeatedEnumField(value: self._attestations, fieldNumber: 10)
+            try visitor.visitRepeatedEnumField(value: self._attestations, fieldNumber: 7)
         }
-        if let v = self._recipientChainAddress {
-            try visitor.visitSingularStringField(value: v, fieldNumber: 11)
+        if let v = self._pkiType {
+            try visitor.visitSingularStringField(value: v, fieldNumber: 8)
+        }
+        if let v = self._pkiData {
+            try visitor.visitSingularBytesField(value: v, fieldNumber: 9)
+        }
+        if let v = self._signature {
+            try visitor.visitSingularBytesField(value: v, fieldNumber: 10)
+        }
+        if let v = self._evCert {
+            try visitor.visitSingularBytesField(value: v, fieldNumber: 11)
         }
         if let v = self._recipientVaspName {
             try visitor.visitSingularStringField(value: v, fieldNumber: 12)
         }
-        if !self._originators.isEmpty {
-            try visitor.visitRepeatedMessageField(value: self._originators, fieldNumber: 13)
+        if let v = self._recipientChainAddress {
+            try visitor.visitSingularStringField(value: v, fieldNumber: 13)
         }
+        
+       
         try unknownFields.traverse(visitor: &visitor)
     }
     
     static var _protobuf_nameMap: _NameMap = [
         1: .same(proto: "amount"),
-        2: .standard(proto: "sender_pki_type"),
-        3: .standard(proto: "sender_pki_data"),
-        4: .same(proto: "memo"),
-        5: .standard(proto: "notification_url"),
-        6: .same(proto: "signature"),
-        7: .same(proto: "sender_ev_cert"),
-        8: .same(proto: "beneficiaries"),
-        9: .same(proto: "originatorsAddresses"),
-        10: .same(proto: "attestationsRequested"),
-        11: .same(proto: "recipient_chain_address"),
+        2: .same(proto: "memo"),
+        3: .standard(proto: "notification_url"),
+        4: .same(proto: "originators"),
+        5: .same(proto: "beneficiaries"),
+        6: .same(proto: "originatorsAddresses"),
+        7: .same(proto: "attestationsRequested"),
+        8: .standard(proto: "sender_pki_type"),
+        9: .standard(proto: "sender_pki_data"),
+        10: .same(proto: "signature"),
+        11: .same(proto: "sender_ev_cert"),
         12: .same(proto: "recipient_vasp_name"),
-        13: .same(proto: "originators")
+        13: .same(proto: "recipient_chain_address")
     ]
     
     func getMessagePkiType() -> PkiType? {
@@ -217,7 +219,7 @@ extension MessageInvoiceRequest : SwiftProtobuf.Message, SwiftProtobuf._MessageI
             var messageInvoiceRequestSigned = MessageInvoiceRequest()
             let serializedData = try self.serializedData()
             if let privateKey = senderParameters?.pkiDataParameters?.privateKeyPem {
-                if let signature = CryptoModule().sign(privateKeyPem: privateKey, message: serializedData.base64EncodedString()) {
+                if let signature = CryptoModule().sign(privateKeyPem: privateKey, messageData: serializedData) {
                     try messageInvoiceRequestSigned.merge(serializedData: serializedData)
                     messageInvoiceRequestSigned.signature = signature
                 }

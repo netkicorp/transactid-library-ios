@@ -33,15 +33,17 @@ class Bip75ServiceNetki: Bip75Service {
         
         invoiceRequestParameters.originatorParameters?.forEach({ (originator) in
             var messageOriginator = originator.toMessageOriginatorWithoutAttestations()
+            
             originator.pkiDataParametersSets?.forEach({ (pkiData) in
                 let attestation = pkiData.toMessageAttestation(requireSignature: originator.isPrimaryForTransaction)
+                
                 messageOriginator.addAttestation(attestation: attestation)
             })
             messageInvoiceRequest.addOriginator(messageOriginator: messageOriginator)
         })
         
         let invoiceRequest = try messageInvoiceRequest.signMessage(senderParameters: invoiceRequestParameters.senderParameters)?.serializedData()
-        
+                
         return try invoiceRequest?.toProtocolMessageData(messageType: .invoiceRequest,
                                                      messageInformation: invoiceRequestParameters.messageInformation,
                                                      senderParameters: invoiceRequestParameters.senderParameters,
