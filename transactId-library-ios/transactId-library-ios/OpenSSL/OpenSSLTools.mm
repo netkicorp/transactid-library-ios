@@ -167,7 +167,7 @@
     
     transact_id_ssl::encrypt(encryptionData);
         
-    return [NSString stringWithUTF8String:encryptionData.encryptedMessage.c_str()];
+    return [NSString stringWithUTF8String:encryptionData.encryptedMessage.data()];
 }
 
 - (NSString *)hash256:(NSData *)messageData {

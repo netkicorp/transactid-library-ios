@@ -22,6 +22,7 @@
 #include <openssl/ecdh.h>
 #include <openssl/aes.h>
 #include <vector>
+#include <array>
 
 namespace transact_id_ssl {
 
@@ -68,34 +69,40 @@ std::string ecdh(EC_KEY* publicKey, EC_KEY* privateKey)
     return str;
 }
 
-std::string hmac(unsigned char *hashKey,
-                 int hashKeyLen,
+std::string hmac(unsigned char *key,
+                 int keySize,
                  unsigned char * iv,
-                 unsigned char *publicKeyData,
-                 size_t publicKeyDataLen,
-                 unsigned char *chiperData,
-                 size_t chiperDataLen)
+                 int ivSize,
+                 unsigned char *publicKey,
+                 int publicKeySize,
+                 unsigned char *cipherText,
+                 int cipherTextSize)
 {
-    HMAC_CTX ctx;
-    HMAC_CTX_init(&ctx);
+
+    OpenSSL_add_all_digests();
+
+    EVP_MD_CTX*ctx = EVP_MD_CTX_create();
+
+    EVP_PKEY *pkey = EVP_PKEY_new_mac_key(EVP_PKEY_HMAC, NULL, key, keySize);
+
+    EVP_DigestSignInit(ctx, NULL, EVP_sha1(), NULL, pkey);
+
+    EVP_DigestSignUpdate(ctx, iv, ivSize);
+    EVP_DigestSignUpdate(ctx, publicKey, publicKeySize);
+    EVP_DigestSignUpdate(ctx, cipherText, cipherTextSize);
     
-    unsigned char hmacResult [20];
-    unsigned int hmacResultLen = 20;
+    size_t hmacSize;
+    unsigned char hmacResult[EVP_MAX_MD_SIZE];
+
+    EVP_DigestSignFinal(ctx, hmacResult, &hmacSize);
     
-    HMAC_Init(&ctx, &hashKey, hashKeyLen, EVP_sha1());
-    HMAC_Update(&ctx, iv, sizeof(iv));
-    HMAC_Update(&ctx, publicKeyData, publicKeyDataLen);
-    HMAC_Update(&ctx, chiperData, chiperDataLen);
-    HMAC_Final(&ctx, hmacResult, &hmacResultLen);
-    HMAC_CTX_cleanup(&ctx);
-    
-    std::stringstream stream1;
-    
-    for(unsigned int i = 0; i < hmacResultLen; ++i)
+    std::stringstream stream;
+
+    for(unsigned int i = 0; i < hmacSize; ++i)
     {
-        stream1 << std::hex << std::setw(2) << std::setfill('0') << (int)hmacResult[i];
+        stream << std::hex << std::setw(2) << std::setfill('0') << (int)hmacResult[i];
     }
-    return stream1.str();
+    return stream.str();
 }
 
 std::vector<char> hexToBytes(const std::string& hex)
@@ -132,7 +139,7 @@ bool encrypt(unsigned char *plaintext,
     if(1 != EVP_EncryptUpdate(ctx, ciphertext, &len, plaintext, plaintextLength)) return false;
     chipperTextLength = len;
     
-    if(1 != EVP_EncryptFinal(ctx, ciphertext, &len)) return false;
+    if(1 != EVP_EncryptFinal(ctx, ciphertext+len, &len)) return false;
     
     chipperTextLength += len;
     
@@ -185,35 +192,34 @@ bool encrypt(EncryptionData& data)
     
     unsigned char iv[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     
-    int chipherTextLength = (int)data.message.length() + 16 - (int)data.message.length() % 16;
+    int cipherTextSize = (int)data.message.length() + 16 - (int)data.message.length() % 16;
     
-    unsigned char chipherText[chipherTextLength];
-    
-    if (!encrypt((unsigned char *)data.message.c_str(), static_cast<int>(data.message.length()), (unsigned char *)encryptKey, iv, chipherText, chipherTextLength)) return false;
+    unsigned char cipherText[cipherTextSize];
+        
+    if (!encrypt((unsigned char *)data.message.c_str(), static_cast<int>(data.message.length()), (unsigned char *)encryptKey, iv, cipherText, cipherTextSize)) return false;
     
     std::stringstream stream;
-    
-    for(unsigned int i = 0; i < chipherTextLength; ++i)
+
+    for(unsigned int i = 0; i < cipherTextSize; ++i)
     {
-        stream << std::hex << std::setw(2) << std::setfill('0') << (int)chipherText[i];
+        stream << std::uppercase << std::hex << std::setw(2) << std::setfill('0') << (int)cipherText[i];
     }
+
+    std::string hexCipherText = stream.str();
     
-    std::string cipherText = stream.str();
+    std::vector<char> hexPublicKey = hexToBytes(publicKey);
     
-    std::vector<char> decodedPublicKey = hexToBytes(publicKey);
+    std::string hexHmac = hmac((unsigned char *)macKey,
+                               (int)sizeof(macKey),
+                               (unsigned char *)iv,
+                               (int)sizeof(iv),
+                               (unsigned char *)hexPublicKey.data(),
+                               (int)hexPublicKey.size(),
+                               (unsigned char *)cipherText,
+                               cipherTextSize);
     
-    
-    std::string hmacResult = hmac((unsigned char *)macKey,
-                                  (int)sizeof(macKey),
-                                  iv,
-                                  reinterpret_cast<unsigned char*>(decodedPublicKey.data()),
-                                  (int)sizeof(decodedPublicKey),
-                                  chipherText,
-                                  chipherTextLength);
-    
-    
-    data.encryptedMessage = publicKey + hmacResult + cipherText;
-    
+    data.encryptedMessage = publicKey + hexHmac + hexCipherText;
+        
     return true;
 }
 
