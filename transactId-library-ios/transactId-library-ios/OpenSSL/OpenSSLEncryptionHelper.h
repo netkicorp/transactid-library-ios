@@ -20,13 +20,19 @@ struct EncryptionData : public Operation
 
     std::string encryptedMessage;
     std::string message;
+    
     std::string publicKeyReceiver;
+    std::string privateKeyReceiver;
+    
     std::string publicKeySender;
     std::string privateKeySender;
 };
 
 
 bool encrypt(EncryptionData& data);
+
+bool decrypt(EncryptionData& data);
+
 
 }
 

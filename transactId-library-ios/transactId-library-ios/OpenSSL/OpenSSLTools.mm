@@ -137,7 +137,7 @@
     return NO;
 }
 
-- (NSData *)sign:(NSString*)privateKey message:(NSString*)message {
+- (NSData *)sign:(NSString*)privateKey message:(NSString*)message newLine:(BOOL)newLine {
 
     transact_id_ssl::SignData signData;
     
@@ -170,10 +170,26 @@
     return [NSString stringWithUTF8String:encryptionData.encryptedMessage.data()];
 }
 
+- (NSString *)decrypt:(NSString *)encryptedMessage
+   receiverPrivateKey:(NSString *)receiverPrivateKey
+      senderPublicKey:(NSString *)senderPublicKey {
+    
+    transact_id_ssl::EncryptionData encryptionData;
+    
+    encryptionData.encryptedMessage = std::string(encryptedMessage.UTF8String);
+    encryptionData.privateKeyReceiver = std::string(receiverPrivateKey.UTF8String);
+    encryptionData.publicKeySender = std::string(senderPublicKey.UTF8String);
+
+    transact_id_ssl::decrypt(encryptionData);
+
+    return [NSString stringWithUTF8String:encryptionData.message.data()];
+
+}
+
 - (NSString *)hash256:(NSData *)messageData {
     NSUInteger size = [messageData length] / sizeof(unsigned char);
     unsigned char* array = (unsigned char*) [messageData bytes];
-    return [NSString stringWithUTF8String:transact_id_ssl::hash256(array, size).c_str()];
+    return [NSString stringWithUTF8String:transact_id_ssl::hash256(array, size).data()];
 }
 
 

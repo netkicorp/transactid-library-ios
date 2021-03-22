@@ -20,6 +20,7 @@ struct SignData : public Operation
     SignData();
     
     bool base64;
+    bool newLine;
     
     std::string passphrase;
     std::string privateKey;

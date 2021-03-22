@@ -100,7 +100,7 @@ std::string hmac(unsigned char *key,
 
     for(unsigned int i = 0; i < hmacSize; ++i)
     {
-        stream << std::hex << std::setw(2) << std::setfill('0') << (int)hmacResult[i];
+        stream << std::uppercase << std::hex << std::setw(2) << std::setfill('0') << (int)hmacResult[i];
     }
     return stream.str();
 }
@@ -218,8 +218,111 @@ bool encrypt(EncryptionData& data)
                                (unsigned char *)cipherText,
                                cipherTextSize);
     
+    std::transform(publicKey.begin(), publicKey.end(), publicKey.begin(), [](unsigned char c){ return std::tolower(c); });
+    
     data.encryptedMessage = publicKey + hexHmac + hexCipherText;
         
+    return true;
+}
+
+bool decrypt(unsigned char *cipherText,
+             int cipherTextLength,
+             unsigned char *key,
+             unsigned char *iv,
+             unsigned char *plaintext,
+             int &plaintextLength)
+{
+    EVP_CIPHER_CTX *ctx;
+    
+    int len;
+    
+    if (!(ctx = EVP_CIPHER_CTX_new())) return false;
+    
+    if (1 != EVP_DecryptInit(ctx, EVP_aes_256_cbc(), key, iv)) return false;
+    
+    if (1 != EVP_DecryptUpdate(ctx, plaintext, &len, cipherText, cipherTextLength)) return false;
+    
+    plaintextLength = len;
+    
+    if (1 != EVP_DecryptFinal(ctx, plaintext-len, &len)) return false;
+    
+    plaintextLength += len;
+    
+    EVP_CIPHER_CTX_free(ctx);
+    
+    return true;
+}
+
+bool decrypt(EncryptionData& data) {
+    
+    EC_KEY* publicKeySender;
+    EC_KEY* privateKeyReceiver;
+    
+    bool res = pemKeyToECKey(data.privateKeyReceiver, privateKeyReceiver, true);
+    if (!res) return false;
+    
+    res = pemKeyToECKey(data.publicKeySender, publicKeySender, false);
+    if (!res) return false;
+    
+    unsigned char iv[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+    std::string ephemX = data.encryptedMessage.substr(2, 64);
+    std::string ephemY = data.encryptedMessage.substr(66, 64);
+    
+    std::string macResult = data.encryptedMessage.substr(130, 40);
+    
+    std::transform(macResult.begin(), macResult.end(), macResult.begin(), [](unsigned char c){ return std::toupper(c); });
+
+    std::string cipherText = data.encryptedMessage.substr(130 + 40, data.encryptedMessage.length());
+    
+    std::string sharedSecret = ecdh(publicKeySender, privateKeyReceiver);
+
+    std::shared_ptr<EVP_MD_CTX> md(EVP_MD_CTX_create(), &EVP_MD_CTX_destroy);
+    
+    if (1 != EVP_DigestInit(md.get(), EVP_sha512())) return false;
+    
+    if (1 != EVP_DigestUpdate(md.get(), sharedSecret.c_str(), sharedSecret.size())) return false;
+    
+    unsigned int derivedKeySize = 0;
+    char derivedKey[EVP_MAX_MD_SIZE];
+    
+    if (1 != EVP_DigestFinal(md.get(), (unsigned char *)derivedKey, &derivedKeySize)) return false;
+    
+    char decryptKey [derivedKeySize/2];
+    char macKey [derivedKeySize/2];
+    
+    memcpy(decryptKey, &derivedKey[0], derivedKeySize/2);
+    memcpy(macKey, &derivedKey[derivedKeySize/2], derivedKeySize/2);
+    
+    std::string ephemPublicKey = "04" + ephemX + ephemY;
+    
+    std::vector<char> decodedPublicKey = hexToBytes(ephemPublicKey);
+
+    std::vector<char> decodedCipherText = hexToBytes(cipherText);
+
+    std::string hexHmac = hmac((unsigned char *)macKey,
+                               (int)sizeof(macKey),
+                               (unsigned char *)iv,
+                               (int)sizeof(iv),
+                               (unsigned char *)decodedPublicKey.data(),
+                               (int)decodedPublicKey.size(),
+                               (unsigned char *)decodedCipherText.data(),
+                               (int)decodedCipherText.size());
+    
+    if (macResult != hexHmac) {
+        return false;
+    }
+    
+    int plaintextSize = (int)data.encryptedMessage.length() + 16 - (int)data.encryptedMessage.length() % 16;
+    
+    unsigned char plaintext[plaintextSize];
+    
+    if (! decrypt((unsigned char *)decodedCipherText.data(), static_cast<int>(decodedCipherText.size()),  (unsigned char *)decryptKey, iv, plaintext, plaintextSize)) return false;
+
+    std::string message(reinterpret_cast<char*>(plaintext), plaintextSize);
+
+    data.message = message;
+    
     return true;
 }
 

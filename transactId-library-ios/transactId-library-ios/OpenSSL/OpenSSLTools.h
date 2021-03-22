@@ -57,15 +57,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)isRevoked:(NSString*)crl certificate:(NSString *)certificate;
 
-- (NSData *)sign:(NSString*)privateKey message:(NSString*)message;
+- (NSData *)sign:(NSString*)privateKey message:(NSString*)message newLine:(BOOL)newLine;
 
 - (NSString *)encrypt:(NSString *)message
     receiverPublicKey:(NSString *)receiverPublicKey
       senderPublicKey:(NSString *)senderPublicKey
      senderPrivateKey:(NSString *)senderPrivateKey;
 
-- (NSString *)hash256:(NSData *)messageData;
+- (NSString *)decrypt:(NSString *)encryptedMessage
+   receiverPrivateKey:(NSString *)receiverPrivateKey
+      senderPublicKey:(NSString *)senderPublicKey;
 
+- (NSString *)hash256:(NSData *)messageData;
 
 @end
 
