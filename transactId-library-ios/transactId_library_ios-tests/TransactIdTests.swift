@@ -41,6 +41,10 @@ class TransactIdTests: XCTestCase {
         invoiceRequestParameters.attestationsRequested = attestationsRequested
         
         let invoiceRequestBinary = try self.transactId.createInvoiceRequest(invoiceRequestParameters: invoiceRequestParameters)
+        
+        if invoiceRequestBinary != nil {
+            let invoiceRequest = try self.transactId.parseInvoiceRequest(invoiceRequestBinary: invoiceRequestBinary!)
+        }
     
     }
     
@@ -74,7 +78,10 @@ class TransactIdTests: XCTestCase {
         invoiceRequestParameters.messageInformation = messageInformation
         
         let invoiceRequestBinary = try self.transactId.createInvoiceRequest(invoiceRequestParameters: invoiceRequestParameters)
-    
+        
+        if invoiceRequestBinary != nil {
+            try self.transactId.parseInvoiceRequest(invoiceRequestBinary: invoiceRequestBinary!, recipientParameters: recipientParameters)
+        }
     }
 
     func testPerformanceExample() throws {

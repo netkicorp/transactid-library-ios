@@ -64,6 +64,11 @@
 		8B7A60B525EFAC4A00C293F1 /* EncryptedProtocolMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A60B425EFAC4A00C293F1 /* EncryptedProtocolMessage.swift */; };
 		8B8E20FF2604AC6B00139EC0 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E20FE2604AC6B00139EC0 /* String+Extension.swift */; };
 		8B8E21042608809900139EC0 /* TransactIdEncryptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E21032608809900139EC0 /* TransactIdEncryptionTests.swift */; };
+		8B8E210826090EC200139EC0 /* ProtocolMessageMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E210726090EC200139EC0 /* ProtocolMessageMetadata.swift */; };
+		8B8E21172609BE9F00139EC0 /* Originator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E21162609BE9F00139EC0 /* Originator.swift */; };
+		8B8E211A2609BEC200139EC0 /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E21192609BEC200139EC0 /* Owner.swift */; };
+		8B8E211D2609BF0400139EC0 /* PkiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E211C2609BF0400139EC0 /* PkiData.swift */; };
+		8B8E21202609C8E200139EC0 /* Beneficiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E211F2609C8E200139EC0 /* Beneficiary.swift */; };
 		8B92870A25DC0C5E005AB4B0 /* TrustStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C2F25D1CB3900C922A3 /* TrustStore.swift */; };
 		8BDEFBAC25ECFBF300577BAF /* ProtocolMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDEFBAB25ECFBF300577BAF /* ProtocolMessage.swift */; };
 		8BDEFBAF25ECFCA700577BAF /* ProtocolMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDEFBAE25ECFCA700577BAF /* ProtocolMessageType.swift */; };
@@ -207,6 +212,11 @@
 		8B7A60B425EFAC4A00C293F1 /* EncryptedProtocolMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedProtocolMessage.swift; sourceTree = "<group>"; };
 		8B8E20FE2604AC6B00139EC0 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		8B8E21032608809900139EC0 /* TransactIdEncryptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactIdEncryptionTests.swift; sourceTree = "<group>"; };
+		8B8E210726090EC200139EC0 /* ProtocolMessageMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMessageMetadata.swift; sourceTree = "<group>"; };
+		8B8E21162609BE9F00139EC0 /* Originator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Originator.swift; sourceTree = "<group>"; };
+		8B8E21192609BEC200139EC0 /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
+		8B8E211C2609BF0400139EC0 /* PkiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PkiData.swift; sourceTree = "<group>"; };
+		8B8E211F2609C8E200139EC0 /* Beneficiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beneficiary.swift; sourceTree = "<group>"; };
 		8BDEFBAB25ECFBF300577BAF /* ProtocolMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMessage.swift; sourceTree = "<group>"; };
 		8BDEFBAE25ECFCA700577BAF /* ProtocolMessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMessageType.swift; sourceTree = "<group>"; };
 		8BDEFBB125ED061700577BAF /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
@@ -359,9 +369,14 @@
 				8B47533725D2B58300383451 /* SenderParameters.swift */,
 				8B47534F25D2B9DD00383451 /* BeneficiaryParameters.swift */,
 				8B47535225D2BA3300383451 /* MessageInformation.swift */,
+				8B8E210726090EC200139EC0 /* ProtocolMessageMetadata.swift */,
 				8B3E007C25D68B8200B8BE68 /* CertificateChain.swift */,
 				8B47532E25D2B21700383451 /* Enums */,
 				8B47532625D2B0A000383451 /* models */,
+				8B8E21162609BE9F00139EC0 /* Originator.swift */,
+				8B8E21192609BEC200139EC0 /* Owner.swift */,
+				8B8E211C2609BF0400139EC0 /* PkiData.swift */,
+				8B8E211F2609C8E200139EC0 /* Beneficiary.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -840,12 +855,15 @@
 				8B47534225D2B7F300383451 /* AddressCurrency.swift in Sources */,
 				8B47536125D2BE1A00383451 /* Array<OwnerParameters>+Extension.swift in Sources */,
 				8BE9170325E7A83E00426912 /* MessageInvoiceRequest.swift in Sources */,
+				8B8E210826090EC200139EC0 /* ProtocolMessageMetadata.swift in Sources */,
+				8B8E21172609BE9F00139EC0 /* Originator.swift in Sources */,
 				8BE3FDC925D1778B00D78B62 /* Request.swift in Sources */,
 				8BE9170A25E7AAAD00426912 /* MessageAttestation.swift in Sources */,
 				8B47533825D2B58300383451 /* SenderParameters.swift in Sources */,
 				8B3E007D25D68B8200B8BE68 /* CertificateChain.swift in Sources */,
 				8B47534C25D2B99700383451 /* AddressTags.swift in Sources */,
 				8B5BF57625D300B30086E7AF /* Exception.swift in Sources */,
+				8B8E211D2609BF0400139EC0 /* PkiData.swift in Sources */,
 				8BE3FDC325D176FE00D78B62 /* Token.swift in Sources */,
 				8B7A60B525EFAC4A00C293F1 /* EncryptedProtocolMessage.swift in Sources */,
 				8B47533525D2B38800383451 /* OriginatorParameters.swift in Sources */,
@@ -854,6 +872,7 @@
 				8B0A46E125FF54C000B879F4 /* OpenSSLCommonHelper.cpp in Sources */,
 				8B36B2D325C98D7000CE14E9 /* Attestation.swift in Sources */,
 				8B36B32425CACE1800CE14E9 /* LocalStoreProvider.swift in Sources */,
+				8B8E21202609C8E200139EC0 /* Beneficiary.swift in Sources */,
 				8BE9171825E7EDA000426912 /* MessageAttestationType.swift in Sources */,
 				8B47533025D2B22F00383451 /* PkiType.swift in Sources */,
 				8BF24C4225D2A18E00C922A3 /* Bip75Factory.swift in Sources */,
@@ -893,6 +912,7 @@
 				8BE3FDD825D17BD500D78B62 /* SettingsProvider.swift in Sources */,
 				8BE9171B25E7FB4A00426912 /* MessageOriginator.swift in Sources */,
 				8B36B2D125C98C9400CE14E9 /* TransactId.swift in Sources */,
+				8B8E211A2609BEC200139EC0 /* Owner.swift in Sources */,
 				8BE916FA25E7A29900426912 /* BeneficiaryParameters+Extension.swift in Sources */,
 				8B36B2E825C9B3E000CE14E9 /* CryptoModule.swift in Sources */,
 			);

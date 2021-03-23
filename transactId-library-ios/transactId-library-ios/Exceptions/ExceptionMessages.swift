@@ -18,5 +18,8 @@ struct ExceptionMessages {
     static let CERTIFICATE_VALIDATION_NOT_CORRECT_CERTIFICATE_ERROR = "Certificate: %@, is not a valid %@ certificate"
     static let encryptionMissingRecipientKeysError = "To encrypt the message you need to have the recipient's public key in your RecipientParameters.EncryptionParameters object."
     static let encryptionMissingSenderKeysError = "To encrypt the message you need to have the sender's public/private keys in your SenderParameters.EncryptionParameters object."
+    static let parseBinaryMessageInvalidInput = "Invalid object for message, error: %@"
+    static let decryptionMissingRecipientKeysError = "To decrypt the message you need to have the recipient's private key in your RecipientParameters.EncryptionParameters object."
+    static let encryptionInvalidError = "Unable to decrypt the message with the given keys"
 
 }

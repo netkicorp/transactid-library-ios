@@ -71,4 +71,10 @@ extension MessageOutput : SwiftProtobuf.Message, SwiftProtobuf._MessageImplement
         2: .standard(proto: "script"),
         3: .standard(proto: "currency"),
     ]
+    
+    func toOutput() -> Output {
+        return Output(amount: Int(self.amount),
+                      script: self.script.toString(),
+                      currency: AddressCurrency(rawValue: Int(self.currency)) ?? .bitcoin)
+    }
 }

@@ -7,3 +7,12 @@
 
 import Foundation
 
+enum  MessageType : Int {
+
+    case unknownMessageType
+    case invoiceRequest
+    case paymentRequest
+    case payment
+    case paymentACK
+    
+}

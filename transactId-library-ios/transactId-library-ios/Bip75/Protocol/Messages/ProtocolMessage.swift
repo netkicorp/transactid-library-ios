@@ -8,7 +8,7 @@
 import Foundation
 import SwiftProtobuf
 
-struct ProtocolMessage {
+struct ProtocolMessage : SwiftProtobuf.Message {
     
     fileprivate var _version: UInt64? = nil
     fileprivate var _statusCode: UInt64? = nil
@@ -18,6 +18,15 @@ struct ProtocolMessage {
     fileprivate var _identifier: Data? = nil
     
     init() { }
+    
+    var isInitialized: Bool {
+        return self._version != nil &&
+            self._statusCode != nil &&
+            self._protocolMessageType != nil &&
+            self._serializedMessage != nil &&
+            self._identifier != nil
+        
+    }
     
     var version: UInt64 {
         get { return self._version ?? 1}
@@ -52,7 +61,7 @@ struct ProtocolMessage {
     var unknownFields = SwiftProtobuf.UnknownStorage()
 }
 
-extension ProtocolMessage: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension ProtocolMessage : SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
     
     static var protoMessageName: String {
         return "Message.ProtocolMessage"

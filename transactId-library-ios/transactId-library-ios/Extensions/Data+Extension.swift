@@ -106,4 +106,116 @@ extension Data {
         
         return Data(byteArray)
     }
+    
+    func toString() -> String? {
+        return String(data: self, encoding: .utf8)
+    }
+    
+    /**
+     * Method to extract the ProtocolMessageMetadata from a Messages.ProtocolMessage
+     */
+    
+    func extractProtocolMessageMetadata() throws -> ProtocolMessageMetadata? {
+
+        do {
+            let protocolMessage = try EncryptedProtocolMessage(serializedData: self)
+            
+            let protocolMessageMetadata = ProtocolMessageMetadata()
+            protocolMessageMetadata.version = Int(protocolMessage.version)
+            protocolMessageMetadata.statusCode = StatusCode(rawValue: Int(protocolMessage.statusCode))
+            protocolMessageMetadata.messageType = MessageType(rawValue: protocolMessage.protocolMessageType.rawValue)
+            protocolMessageMetadata.statusMessage = protocolMessage.statusMessage
+            protocolMessageMetadata.identifier = protocolMessage.identifier.toString()
+            protocolMessageMetadata.encrypted = true
+            protocolMessageMetadata.encryptedMessage = protocolMessage.encryptedMessage.toString()
+            protocolMessageMetadata.recipientPublicKeyPem = protocolMessage.receiverPublicKey.toString()
+            protocolMessageMetadata.senderPublicKeyPem = protocolMessage.senderPublicKey.toString()
+            protocolMessageMetadata.nonce = Int(protocolMessage.nonce)
+            protocolMessageMetadata.signature = protocolMessage.signature.toString()
+            
+            return protocolMessageMetadata
+            
+        } catch {
+            // nothing to do here
+        }
+        
+        do {
+            let protocolMessage = try ProtocolMessage(serializedData: self)
+            
+            let protocolMessageMetadata = ProtocolMessageMetadata()
+            protocolMessageMetadata.version = Int(protocolMessage.version)
+            protocolMessageMetadata.statusCode = StatusCode(rawValue: Int(protocolMessage.statusCode))
+            protocolMessageMetadata.messageType = MessageType(rawValue: protocolMessage.protocolMessageType.rawValue)
+            protocolMessageMetadata.statusMessage = protocolMessage.statusMessage
+            protocolMessageMetadata.identifier = protocolMessage.identifier.toString()
+            protocolMessageMetadata.encrypted = false
+            
+            return protocolMessageMetadata
+            
+        } catch let exception {
+            throw Exception.InvalidObjectException(String(format: ExceptionMessages.parseBinaryMessageInvalidInput, exception.localizedDescription))
+        }
+    }
+    
+    /**
+     * Method to extract serialized message from Messages.ProtocolMessage
+     */
+    func getSerializedMessage(encrypted: Bool, recipientParameters: RecipientParameters? = nil) throws -> Data? {
+        if encrypted {
+            return try self.getSerializedMessageEncryptedProtocolMessage(recipientParameters: recipientParameters)
+        } else {
+            return try self.getSerializedMessageProtocolMessage()
+        }
+    }
+    
+    /**
+     * Method to extract serialized message from Messages.ProtocolMessage
+     */
+    func getSerializedMessageProtocolMessage() throws -> Data? {
+        do {
+            let protocolMessage = try ProtocolMessage(serializedData: self)
+            return protocolMessage.serializedMessage.toByteArray()
+        } catch let exception {
+            throw Exception.InvalidObjectException(String(format: ExceptionMessages.parseBinaryMessageInvalidInput, exception.localizedDescription))
+        }
+    }
+    
+    /**
+     * Method to extract serialized message from Messages.EncryptedProtocolMessage
+     */
+    
+    func getSerializedMessageEncryptedProtocolMessage(recipientParameters: RecipientParameters?) throws -> Data? {
+        
+        guard let recipientPrivateKey = recipientParameters?.encryptionParameters?.privateKeyPem else {
+            throw Exception.EncryptionException(ExceptionMessages.decryptionMissingRecipientKeysError)
+        }
+        
+        do {
+            let protocolMessage = try EncryptedProtocolMessage(serializedData: self)
+            
+            if let encryptedMessage = protocolMessage.encryptedMessage.toString(), let senderPublicKey = protocolMessage.senderPublicKey.toString() {
+                let decryptedMessage = OpenSSLTools().decrypt(encryptedMessage, receiverPrivateKey: recipientPrivateKey, senderPublicKey: senderPublicKey)
+                return Data(base64Encoded: decryptedMessage)
+            } else {
+                throw Exception.InvalidObjectException(ExceptionMessages.encryptionInvalidError)
+            }
+        } catch let exception {
+            throw Exception.InvalidObjectException(String(format: ExceptionMessages.parseBinaryMessageInvalidInput, exception.localizedDescription))
+        }
+    }
+    
+    /**
+     * Transform binary InvoiceRequest to MessagesInvoiceRequest.
+     *
+     * @return Messages.InvoiceRequest
+     * @throws InvalidObjectException if there is an error parsing the object.
+     */
+    
+    func toMessageInvoiceRequest() throws -> MessageInvoiceRequest? {
+        do {
+            return try MessageInvoiceRequest(serializedData: self)
+        } catch let exception {
+            throw Exception.InvalidObjectException(String(format: ExceptionMessages.parseBinaryMessageInvalidInput, exception.localizedDescription))
+        }
+    }
 }

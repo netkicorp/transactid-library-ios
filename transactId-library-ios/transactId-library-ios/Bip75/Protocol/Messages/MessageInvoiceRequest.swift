@@ -231,5 +231,53 @@ extension MessageInvoiceRequest : SwiftProtobuf.Message, SwiftProtobuf._MessageI
             return nil
         }
     }
+    
+    func toInvoiceRequest(protocolMessageMetadata: ProtocolMessageMetadata) -> InvoiceRequest {
+        
+        var beneficiaries: Array<Beneficiary> = []
+        
+        self.beneficiaries.forEach({ (messageBeneficiary) in
+            beneficiaries.append(messageBeneficiary.toBeneficiary())
+        })
+        
+        var originators: Array<Originator> = []
+        
+        self.originators.forEach { (messageOriginator) in
+            originators.append(messageOriginator.toOriginator())
+        }
+        
+        var originatorsAddresses: Array<Output> = []
+        
+        self.outputs.forEach { (messageOutput) in
+            originatorsAddresses.append(messageOutput.toOutput())
+        }
+
+        var attestationsRequested: Array<Attestation> = []
+        
+        self.attestations.forEach { (messageAttestationType) in
+            if let attestation = Attestation(rawValue: messageAttestationType.rawValue) {
+                attestationsRequested.append(attestation)
+            }
+        }
+        
+        let invoiceRequest = InvoiceRequest()
+        
+        invoiceRequest.amount = Int(self.amount)
+        invoiceRequest.memo = self.memo
+        invoiceRequest.notificationUrl = self.notificationURL
+        invoiceRequest.originators = originators
+        invoiceRequest.beneficiaries = beneficiaries
+        invoiceRequest.originatorsAddresses = originatorsAddresses
+        invoiceRequest.attestationsRequested = attestationsRequested
+        invoiceRequest.senderPkiType = PkiType(rawValue: self.pkiType)
+        invoiceRequest.senderPkiData = self.pkiData.toString()
+        invoiceRequest.senderSignature = self.signature.toString()
+        invoiceRequest.senderEvCert = self.evCert.toString()
+        invoiceRequest.recipientVaspName = self.recipientVaspName
+        invoiceRequest.recipientChainAddress = self.recipientChainAddress
+        invoiceRequest.protocolMessageMetadata = protocolMessageMetadata
+        
+        return invoiceRequest
+    }
 }
 

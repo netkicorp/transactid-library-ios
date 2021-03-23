@@ -55,6 +55,20 @@ class Bip75ServiceNetki: Bip75Service {
     }
     
     func parseInvoiceRequest(invoiceRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> InvoiceRequest? {
+        return try self.parseInvoiceRequestBinary(invoiceRequestBinary: invoiceRequestBinary, recipientParameters: recipientParameters)
+    }
+    
+    private func parseInvoiceRequestBinary(invoiceRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> InvoiceRequest?  {
+        if let protocolMessageMetadata = try invoiceRequestBinary.extractProtocolMessageMetadata() {
+        
+            if let messageInvoiceRequestData = try invoiceRequestBinary.getSerializedMessage(encrypted: protocolMessageMetadata.encrypted, recipientParameters: recipientParameters){
+                
+                let messageInvoiceRequest = try messageInvoiceRequestData.toMessageInvoiceRequest()
+                
+                return messageInvoiceRequest?.toInvoiceRequest(protocolMessageMetadata: protocolMessageMetadata)
+            }
+        }
+
         return nil
     }
     

@@ -38,6 +38,7 @@ class TransactIdEncryptionTests: XCTestCase {
             "-----END PUBLIC KEY-----"
         
         let message = OpenSSLTools().decrypt(encryptedMessage, receiverPrivateKey: receiverPrivateKeyPem, senderPublicKey: senderPublicKeyPem)
+                
     }
     
     func testPerformanceExample() throws {

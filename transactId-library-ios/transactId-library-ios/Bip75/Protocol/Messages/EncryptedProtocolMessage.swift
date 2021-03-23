@@ -8,7 +8,7 @@
 import Foundation
 import SwiftProtobuf
 
-struct EncryptedProtocolMessage {
+struct EncryptedProtocolMessage : SwiftProtobuf.Message {
     
     fileprivate var _version: UInt64? = nil
     fileprivate var _statusCode: UInt64? = nil
@@ -22,6 +22,17 @@ struct EncryptedProtocolMessage {
     fileprivate var _signature: Data? = nil
 
     init() { }
+    
+    var isInitialized: Bool {
+        return self._version != nil &&
+            self._statusCode != nil &&
+            self._protocolMessageType != nil &&
+            self._encryptedMessage != nil &&
+            self._nonce != nil &&
+            self._identifier != nil &&
+            self._receiverPublicKey != nil &&
+            self._senderPublicKey != nil
+    }
     
     var version: UInt64 {
         get { return self._version ?? 1}
@@ -77,7 +88,7 @@ struct EncryptedProtocolMessage {
     
 }
 
-extension EncryptedProtocolMessage : SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension EncryptedProtocolMessage :  SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
     
     static var protoMessageName: String {
         return "Message.EncryptedProtocolMessage"

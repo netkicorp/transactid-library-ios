@@ -61,5 +61,19 @@ extension MessageBeneficiary : SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
         1: .same(proto: "primary_for_transaction"),
         2: .same(proto: "attestations")
     ]
+    
+    func toBeneficiary() -> Beneficiary {
+        let beneficiary = Beneficiary()
+    
+        var pkiDataSets : Array<PkiData> = []
+        
+        self.attestations.forEach({(messageAttestation) in
+            pkiDataSets.append(messageAttestation.toPkiData())
+        })
+        
+        beneficiary.isPrimaryForTransaction = self.isPrimaryForTransaction
+        beneficiary.pkiDataSets = pkiDataSets
+        return beneficiary
+    }
 }
 

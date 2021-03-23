@@ -83,4 +83,14 @@ extension MessageAttestation : SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
         3: .standard(proto: "pki_data"),
         4: .same(proto: "signature"),
     ]
+    
+    func toPkiData() -> PkiData {
+        let pkiData = PkiData()
+        pkiData.attestation = Attestation(rawValue: self.attestation.rawValue)
+        pkiData.pkiType = PkiType(rawValue: self.pkiType)
+        pkiData.certificate = self.pkiData.toString() ?? ""
+        pkiData.signature = self.signature.toString() ?? ""
+        
+        return pkiData
+    }
 }

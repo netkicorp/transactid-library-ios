@@ -61,5 +61,19 @@ extension MessageOriginator : SwiftProtobuf.Message, SwiftProtobuf._MessageImple
         1: .same(proto: "primary_for_transaction"),
         2: .same(proto: "attestations")
     ]
+    
+    func toOriginator() -> Originator {
+        let originator = Originator()
+        var pkiDataSets: Array<PkiData> = []
+        
+        self.attestations.forEach({(messageAttestation) in
+            pkiDataSets.append(messageAttestation.toPkiData())
+        })
+        
+        originator.isPrimaryForTransaction = self.isPrimaryForTransaction
+        originator.pkiDataSets = pkiDataSets
+        
+        return originator
+    }
 }
 
