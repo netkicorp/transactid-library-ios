@@ -196,22 +196,23 @@ extension MessageInvoiceRequest : SwiftProtobuf.Message, SwiftProtobuf._MessageI
         13: .same(proto: "recipient_chain_address")
     ]
     
-    func getMessagePkiType() -> PkiType? {
-        return PkiType(rawValue: self.pkiType)
+    func getMessagePkiType() throws -> PkiType {
+        if let pkiType = PkiType(rawValue: self.pkiType) {
+            return pkiType
+        } else {
+            throw Exception.ObjectNotFoundException("Pki type not supported")
+        }
     }
     
-    func signMessage(senderParameters: SenderParameters?) -> MessageInvoiceRequest? {
-        if let pkiType = self.getMessagePkiType() {
-            switch pkiType {
-            case .none:
-                return self
-            case .x509sha256:
-                return self.signWithSender(senderParameters: senderParameters)
-            }
-        } else {
-            print("PkiType not supported")
-            return nil
+    func signMessage(senderParameters: SenderParameters?) throws -> MessageInvoiceRequest? {
+        let pkiType =  try self.getMessagePkiType()
+        switch pkiType {
+        case .none:
+            return self
+        case .x509sha256:
+            return self.signWithSender(senderParameters: senderParameters)
         }
+        
     }
     
     func signWithSender(senderParameters: SenderParameters?) -> MessageInvoiceRequest? {
@@ -278,6 +279,40 @@ extension MessageInvoiceRequest : SwiftProtobuf.Message, SwiftProtobuf._MessageI
         invoiceRequest.protocolMessageMetadata = protocolMessageMetadata
         
         return invoiceRequest
+    }
+    
+    func removeMessageSenderSignature() throws -> MessageInvoiceRequest? {
+        let pkiType = try self.getMessagePkiType()
+        switch pkiType {
+        case .none:
+            return self
+        case .x509sha256:
+            return try self.removeSenderSignature()
+        }
+    }
+    
+    private func removeSenderSignature() throws -> MessageInvoiceRequest {
+        var messageInvoiceRequestUnsingned = MessageInvoiceRequest()
+        let serializedData = try self.serializedData()
+        
+        try messageInvoiceRequestUnsingned.merge(serializedData: serializedData)
+        messageInvoiceRequestUnsingned.signature = "".toByteString()
+        
+        return messageInvoiceRequestUnsingned
+        
+    }
+    
+    func validateMessageSignature(signature: String?) throws -> Bool {
+        guard let signature = signature else {
+            return false
+        }
+        let pkiType = try self.getMessagePkiType()
+        switch pkiType {
+        case .none:
+            return true
+        case .x509sha256:
+            return CryptoModule().validateSignature(signature: signature, data: try self.serializedData().toByteArray(), certificate: self.pkiData.toString())
+        }
     }
 }
 

@@ -13,4 +13,8 @@ extension String {
         let byteArray = [UInt8](self.utf8)
         return Data(byteArray)
     }
+    
+    func base64() -> String? {
+        return self.data(using: .utf8)?.base64EncodedString()
+    }
 }

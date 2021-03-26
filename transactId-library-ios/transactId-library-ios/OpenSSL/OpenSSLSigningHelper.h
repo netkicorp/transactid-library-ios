@@ -51,6 +51,11 @@ bool validateCertificateNotAfterExpiration(const char* cert_pem);
 
 std::vector<std::string> getCRLDistributionPoints(const char* cert_pem);
 
+bool validateSignatureECDSA(unsigned char * original, size_t originalSize, std::string publicKey, std::string data);
+
+bool validateSignature(unsigned char * original, size_t originalSize, const char* certificate, std::string data);
+
+
 }
 
 #endif /* OpenSSLSigningHelper_hpp */

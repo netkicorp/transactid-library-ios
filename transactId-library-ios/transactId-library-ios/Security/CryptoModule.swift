@@ -19,6 +19,7 @@ class CryptoModule {
     /**
      * Generate identifier for an specific message in ByteArray format
      */
+    
     func generateIdentifier(message: Data) -> String {
         let hash = OpenSSLTools().hash256(message)
         let epochTime = Int(Date().timeIntervalSince1970)
@@ -42,4 +43,37 @@ class CryptoModule {
         
         return OpenSSLTools().decrypt(encryptedMessage, receiverPrivateKey: receiverPrivateKeyPem, senderPublicKey: senderPublicKeyPem)
     }
+    
+    /**
+     * Validate if a signature is valid with ECDSA public key.
+     *
+     * @param signature to validate.
+     * @param data that was signed.
+     * @param publicKey to validate the signature.
+     * @return true if is valid, false otherwise.
+     */
+    
+    func validateSignatureECDSA(signature: String, data: Data, publicKeyPem: String) -> Bool {
+        let hash = OpenSSLTools().hash256(data)
+        return OpenSSLTools().validateSignatureECDSA(signature, publicKey: publicKeyPem, data: hash)
+    }
+    
+    /**
+     * Validate if a signature is valid.
+     *
+     * @param signature to validate.
+     * @param data that was signed.
+     * @param certificatePem in PEM format to validate the signature.
+     * @return true if is valid, false otherwise.
+     */
+    
+    func validateSignature(signature: String, data: Data, certificate: String?) -> Bool {
+        guard let certificate = certificate else {
+            return false
+        }
+        let hash = OpenSSLTools().hash256(data)
+        return OpenSSLTools().validateSignature(signature, certificate: certificate, data: hash)
+    }
+    
+    
 }

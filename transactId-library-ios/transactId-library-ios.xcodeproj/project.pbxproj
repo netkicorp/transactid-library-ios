@@ -70,6 +70,9 @@
 		8B8E211D2609BF0400139EC0 /* PkiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E211C2609BF0400139EC0 /* PkiData.swift */; };
 		8B8E21202609C8E200139EC0 /* Beneficiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E211F2609C8E200139EC0 /* Beneficiary.swift */; };
 		8B92870A25DC0C5E005AB4B0 /* TrustStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C2F25D1CB3900C922A3 /* TrustStore.swift */; };
+		8BAAE2D9260B2B3000187722 /* AddressInformationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAE2D8260B2B3000187722 /* AddressInformationService.swift */; };
+		8BAAE2DE260B2B6500187722 /* AddressInformaionServiceNetki.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAE2DD260B2B6500187722 /* AddressInformaionServiceNetki.swift */; };
+		8BAAE2E1260B326E00187722 /* AddressInformationRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAE2E0260B326E00187722 /* AddressInformationRepo.swift */; };
 		8BDEFBAC25ECFBF300577BAF /* ProtocolMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDEFBAB25ECFBF300577BAF /* ProtocolMessage.swift */; };
 		8BDEFBAF25ECFCA700577BAF /* ProtocolMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDEFBAE25ECFCA700577BAF /* ProtocolMessageType.swift */; };
 		8BDEFBB225ED061700577BAF /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDEFBB125ED061700577BAF /* Data+Extension.swift */; };
@@ -217,6 +220,9 @@
 		8B8E21192609BEC200139EC0 /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
 		8B8E211C2609BF0400139EC0 /* PkiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PkiData.swift; sourceTree = "<group>"; };
 		8B8E211F2609C8E200139EC0 /* Beneficiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beneficiary.swift; sourceTree = "<group>"; };
+		8BAAE2D8260B2B3000187722 /* AddressInformationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInformationService.swift; sourceTree = "<group>"; };
+		8BAAE2DD260B2B6500187722 /* AddressInformaionServiceNetki.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInformaionServiceNetki.swift; sourceTree = "<group>"; };
+		8BAAE2E0260B326E00187722 /* AddressInformationRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInformationRepo.swift; sourceTree = "<group>"; };
 		8BDEFBAB25ECFBF300577BAF /* ProtocolMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMessage.swift; sourceTree = "<group>"; };
 		8BDEFBAE25ECFCA700577BAF /* ProtocolMessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMessageType.swift; sourceTree = "<group>"; };
 		8BDEFBB125ED061700577BAF /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
@@ -336,6 +342,7 @@
 		8B36B2AF25C984B400CE14E9 /* transactId-library-ios */ = {
 			isa = PBXGroup;
 			children = (
+				8BAAE2D5260B2A6D00187722 /* AddressInformation */,
 				8B36B2CF25C98C2600CE14E9 /* Utilities */,
 				8B5BF57425D300980086E7AF /* Exceptions */,
 				8B47535F25D2BE0200383451 /* Extensions */,
@@ -484,6 +491,16 @@
 				8B5BF57925D3015D0086E7AF /* ExceptionMessages.swift */,
 			);
 			path = Exceptions;
+			sourceTree = "<group>";
+		};
+		8BAAE2D5260B2A6D00187722 /* AddressInformation */ = {
+			isa = PBXGroup;
+			children = (
+				8BAAE2D8260B2B3000187722 /* AddressInformationService.swift */,
+				8BAAE2DD260B2B6500187722 /* AddressInformaionServiceNetki.swift */,
+				8BAAE2E0260B326E00187722 /* AddressInformationRepo.swift */,
+			);
+			path = AddressInformation;
 			sourceTree = "<group>";
 		};
 		8BE3FDD225D17B1300D78B62 /* PearlApiService */ = {
@@ -868,6 +885,7 @@
 				8B7A60B525EFAC4A00C293F1 /* EncryptedProtocolMessage.swift in Sources */,
 				8B47533525D2B38800383451 /* OriginatorParameters.swift in Sources */,
 				8BE3FDCC25D177AB00D78B62 /* TokenResponse.swift in Sources */,
+				8BAAE2E1260B326E00187722 /* AddressInformationRepo.swift in Sources */,
 				8B0A46D625FF4D0100B879F4 /* OpenSSLEncryptionHelper.cpp in Sources */,
 				8B0A46E125FF54C000B879F4 /* OpenSSLCommonHelper.cpp in Sources */,
 				8B36B2D325C98D7000CE14E9 /* Attestation.swift in Sources */,
@@ -881,6 +899,7 @@
 				8BE9170625E7A8D500426912 /* MessageBeneficiary.swift in Sources */,
 				8BE3FDBA25D1736000D78B62 /* PearlApiService.swift in Sources */,
 				8BF24C3625D29E0600C922A3 /* Bip75.swift in Sources */,
+				8BAAE2D9260B2B3000187722 /* AddressInformationService.swift in Sources */,
 				8BF24C5425D2A7B000C922A3 /* CertificateValidator.swift in Sources */,
 				8B36B2D625C98ECA00CE14E9 /* Csr.swift in Sources */,
 				8BF24C4B25D2A45900C922A3 /* Bip75Service.swift in Sources */,
@@ -894,6 +913,7 @@
 				8BE9171225E7E39600426912 /* MessageOutput.swift in Sources */,
 				8BF24C5025D2A4EC00C922A3 /* Bip75ServiceNetki.swift in Sources */,
 				8B47535625D2BA8400383451 /* StatusCode.swift in Sources */,
+				8BAAE2DE260B2B6500187722 /* AddressInformaionServiceNetki.swift in Sources */,
 				8B5BF57A25D3015D0086E7AF /* ExceptionMessages.swift in Sources */,
 				8BDEFBAF25ECFCA700577BAF /* ProtocolMessageType.swift in Sources */,
 				8BE9171525E7E58B00426912 /* Output+Extension.swift in Sources */,

@@ -21,5 +21,9 @@ struct ExceptionMessages {
     static let parseBinaryMessageInvalidInput = "Invalid object for message, error: %@"
     static let decryptionMissingRecipientKeysError = "To decrypt the message you need to have the recipient's private key in your RecipientParameters.EncryptionParameters object."
     static let encryptionInvalidError = "Unable to decrypt the message with the given keys"
+    static let signatureValidationInvalidSenderSignature = "Sender signature is not valid"
+    
+    static let certificateValidationInvalidSenderCertificateCA = "Sender certificate does not belong to any trusted CA"
+
 
 }

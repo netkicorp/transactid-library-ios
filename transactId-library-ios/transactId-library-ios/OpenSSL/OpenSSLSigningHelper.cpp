@@ -54,17 +54,17 @@ bool signRsa(std::shared_ptr<EVP_PKEY> key, SignData& data, std::string& res)
     return true;
 }
 
-bool signEc(std::shared_ptr<EVP_PKEY> key, SignData& data, std::string& res)
+bool signEc(std::shared_ptr<EVP_PKEY> key, SignData& data)
 {
     int ret = 0;
     
     SHA256_CTX context;
     ret = SHA256_Init(&context);
     if (ret != 1) { reportError(data); return false; }
-    
+
     ret = SHA256_Update(&context, data.message.c_str(), data.message.size());
     if (ret != 1) { reportError(data); return false; }
-    
+
     unsigned char hash[SHA256_DIGEST_LENGTH];
     ret = SHA256_Final(hash, &context);
     if (ret != 1) { reportError(data); return false; }
@@ -74,10 +74,23 @@ bool signEc(std::shared_ptr<EVP_PKEY> key, SignData& data, std::string& res)
     
     unsigned int sz = static_cast<unsigned int> (ECDSA_size(eck));
     if (sz == 0) { reportError(data); return false; }
-    res.resize(static_cast<size_t> (sz));
     
-    ret = ECDSA_sign(0, hash, SHA256_DIGEST_LENGTH, reinterpret_cast<unsigned char*> (const_cast<char*> (res.data())),
+    
+    unsigned char result [sz];
+    ret = ECDSA_sign(0, hash, SHA256_DIGEST_LENGTH, reinterpret_cast<unsigned char*> (result),
                      &sz, eck);
+        
+    BioString bio(data.privateKey);
+    bio.reset();
+
+    std::shared_ptr<BIO> b64(BIO_new(BIO_f_base64()), &BIO_free);
+    BIO_set_flags(b64.get(), BIO_FLAGS_BASE64_NO_NL);
+    BIO_push(b64.get(), bio.get());
+    BIO_write(b64.get(), result, sz);
+    BIO_flush(b64.get());
+    BIO_pop(b64.get());
+    data.signature = bio.toString();
+    
     if (ret != 1) { reportError(data); return false; }
     
     return true;
@@ -100,23 +113,31 @@ bool signMessage(SignData& data)
     
     switch (EVP_PKEY_base_id(key.get()))
     {
-        case EVP_PKEY_RSA: if (!signRsa(key, data, sig)) return false; break;
-        case EVP_PKEY_EC: if (!signEc(key, data, sig)) return false; break;
+        case EVP_PKEY_RSA:
+            if (!signRsa(key, data, sig)) {
+                return false;
+                break;
+            } else {
+                if (data.base64)
+                {
+                    std::shared_ptr<BIO> b64(BIO_new(BIO_f_base64()), &BIO_free);
+                    BIO_set_flags(b64.get(), BIO_FLAGS_BASE64_NO_NL);
+                    BIO_push(b64.get(), bio.get());
+                    BIO_write(b64.get(), sig.data(), static_cast<int> (sig.size()));
+                    BIO_flush(b64.get());
+                    BIO_pop(b64.get());
+                    data.signature = bio.toString();
+                } else {
+                    data.signature = sig;
+                }
+            }
+        case EVP_PKEY_EC:
+            if (!signEc(key, data)) {
+                return false;
+                break;
+            }
         default: data.errorInfo = "Invalid public key format"; return false;
     }
-    
-    if (data.base64)
-    {
-        std::shared_ptr<BIO> b64(BIO_new(BIO_f_base64()), &BIO_free);
-        BIO_set_flags(b64.get(), BIO_FLAGS_BASE64_NO_NL);
-        BIO_push(b64.get(), bio.get());
-        BIO_write(b64.get(), sig.data(), static_cast<int> (sig.size()));
-        BIO_flush(b64.get());
-        BIO_pop(b64.get());
-        data.signature = bio.toString();
-    } else
-        data.signature = sig;
-    
     return true;
 }
 
@@ -328,5 +349,52 @@ std::vector<std::string> getCRLDistributionPoints(const char* cert_pem)
     }
     return list;
 }
+
+bool validateSignatureECDSA(unsigned char * original, size_t originalSize, std::string publicKey, std::string data) {
+    
+    BioString bio(publicKey);
+    EVP_PKEY* key = nullptr;
+    
+    PEM_read_bio_PUBKEY(bio.get(), &key, 0, 0);
+    
+    if (key == nullptr) {  return false; }
+
+    std::shared_ptr<EVP_PKEY> evpKey(key, &EVP_PKEY_free);
+    bio.reset();
+
+    EVP_MD_CTX*ctx = EVP_MD_CTX_create();
+
+    EVP_VerifyInit(ctx, EVP_sha256());
+    EVP_VerifyUpdate(ctx, (unsigned char *)data.c_str(), data.length());
+    if (1 != EVP_VerifyFinal(ctx, original , (int)originalSize, evpKey.get())) {
+        return false;
+    }
+    
+    return true;
+}
+
+bool validateSignature(unsigned char * original, size_t originalSize, const char* certificate, std::string data) {
+    
+    BIO *bio = BIO_new(BIO_s_mem());
+    BIO_puts(bio, certificate);
+    X509 * x509 = PEM_read_bio_X509(bio, NULL, NULL, NULL);
+    
+    EVP_PKEY *pkey = X509_get_pubkey(x509);
+
+    EVP_MD_CTX*ctx = EVP_MD_CTX_create();
+
+    EVP_VerifyInit(ctx, EVP_sha256());
+    EVP_VerifyUpdate(ctx, (unsigned char *)data.c_str(), data.length());
+    if (1 != EVP_VerifyFinal(ctx, original , (int)originalSize, pkey)) {
+        return false;
+    }
+    
+    EVP_PKEY_free(pkey);
+    BIO_free(bio);
+    X509_free(x509);
+    
+    return true;
+}
+
 
 }

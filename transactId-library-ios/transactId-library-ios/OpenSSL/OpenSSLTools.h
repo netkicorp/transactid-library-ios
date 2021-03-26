@@ -70,6 +70,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)hash256:(NSData *)messageData;
 
+- (BOOL)validateSignatureECDSA:(NSString *)originalSignature publicKey:(NSString *)publicKey data:(NSString *)data;
+
+- (BOOL)validateSignature:(NSString *)originalSignature certificate:(NSString *)certificate data:(NSString *)data;
+
 @end
 
 NS_ASSUME_NONNULL_END

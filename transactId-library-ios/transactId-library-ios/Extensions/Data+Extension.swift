@@ -218,4 +218,29 @@ extension Data {
             throw Exception.InvalidObjectException(String(format: ExceptionMessages.parseBinaryMessageInvalidInput, exception.localizedDescription))
         }
     }
+    
+    /**
+     * Validate if sender signature of a EncryptedProtocolMessage is valid.
+     *
+     * @return true if yes, false otherwise.
+     */
+    
+    func validateMessageEncryptionSignature() throws -> Bool {
+        
+        let protocolMessage = try EncryptedProtocolMessage(serializedData: self)
+
+        if let signature = protocolMessage.signature.toString() {
+            var encryptedProtocolMessage = EncryptedProtocolMessage()
+            try encryptedProtocolMessage.merge(serializedData: self)
+            encryptedProtocolMessage.signature = "".toByteString()
+            
+            let serializedData = try encryptedProtocolMessage.serializedData()
+            
+            if let publicKey = encryptedProtocolMessage.senderPublicKey.toString() {
+                return CryptoModule().validateSignatureECDSA(signature: signature, data: serializedData, publicKeyPem: publicKey)
+            }
+        }
+        
+        return false
+    }
 }

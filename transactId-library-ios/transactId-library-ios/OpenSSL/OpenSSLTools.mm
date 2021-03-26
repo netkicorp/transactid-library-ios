@@ -192,5 +192,23 @@
     return [NSString stringWithUTF8String:transact_id_ssl::hash256(array, size).data()];
 }
 
+- (BOOL)validateSignatureECDSA:(NSString *)originalSignature publicKey:(NSString *)publicKey data:(NSString *)data {
+    NSData *decodedSignatureData = [[NSData alloc] initWithBase64EncodedString:originalSignature options:0];
+    NSUInteger signatureSize = [decodedSignatureData length] / sizeof(unsigned char);
+    unsigned char* signature = (unsigned char*) [decodedSignatureData bytes];
+        
+    return transact_id_ssl::validateSignatureECDSA(signature, signatureSize, std::string(publicKey.UTF8String), std::string(data.UTF8String));
+}
+
+- (BOOL)validateSignature:(NSString *)originalSignature certificate:(NSString *)certificate data:(NSString *)data {
+    NSData *decodedSignatureData = [[NSData alloc] initWithBase64EncodedString:originalSignature options:0];
+    NSUInteger signatureSize = [decodedSignatureData length] / sizeof(unsigned char);
+    unsigned char* signature = (unsigned char*) [decodedSignatureData bytes];
+    
+    return transact_id_ssl::validateSignature(signature, signatureSize, std::string(certificate.UTF8String).c_str(), std::string(data.UTF8String));
+}
+
+
+
 
 @end

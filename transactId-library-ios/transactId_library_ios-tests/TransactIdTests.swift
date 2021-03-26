@@ -43,6 +43,7 @@ class TransactIdTests: XCTestCase {
         let invoiceRequestBinary = try self.transactId.createInvoiceRequest(invoiceRequestParameters: invoiceRequestParameters)
         
         if invoiceRequestBinary != nil {
+            let result = try self.transactId.isInvoiceRequestValid(invoiceRequestBinary: invoiceRequestBinary!)
             let invoiceRequest = try self.transactId.parseInvoiceRequest(invoiceRequestBinary: invoiceRequestBinary!)
         }
     
@@ -80,6 +81,8 @@ class TransactIdTests: XCTestCase {
         let invoiceRequestBinary = try self.transactId.createInvoiceRequest(invoiceRequestParameters: invoiceRequestParameters)
         
         if invoiceRequestBinary != nil {
+            let result = try self.transactId.isInvoiceRequestValid(invoiceRequestBinary: invoiceRequestBinary!, recipientParameters: recipientParameters)
+
             try self.transactId.parseInvoiceRequest(invoiceRequestBinary: invoiceRequestBinary!, recipientParameters: recipientParameters)
         }
     }
