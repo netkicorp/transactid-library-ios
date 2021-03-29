@@ -24,6 +24,8 @@ struct ExceptionMessages {
     static let signatureValidationInvalidSenderSignature = "Sender signature is not valid"
     
     static let certificateValidationInvalidSenderCertificateCA = "Sender certificate does not belong to any trusted CA"
+    static let certificateValidationInvalidSenderCertificateEV = "The certificate is not a valid EV certificate."
+
 
 
 }

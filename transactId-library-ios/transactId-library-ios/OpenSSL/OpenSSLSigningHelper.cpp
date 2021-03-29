@@ -25,6 +25,26 @@ namespace transact_id_ssl {
 
 SignData::SignData(): base64(false) { }
 
+std::vector<std::string> policies = {
+    "2.16.840.1.114171.500.9",
+    "1.2.392.200091.100.721.1",
+    "1.3.6.1.4.1.6334.1.100.1",
+    "2.16.528.1.1001.1.1.1.12.6.1.1.1",
+    "2.16.756.1.89.1.2.1.1",
+    "1.3.6.1.4.1.23223.2",
+    "2.16.840.1.113733.1.7.23.6",
+    "1.3.6.1.4.1.14370.1.6",
+    "2.16.840.1.113733.1.7.48.1",
+    "2.16.840.1.114404.1.1.2.4.1",
+    "1.3.6.1.4.1.6449.1.2.1.5.1",
+    "2.16.840.1.114413.1.7.23.3",
+    "2.16.840.1.114412.2.1",
+    "1.3.6.1.4.1.8024.0.2.100.1.2",
+    "1.3.6.1.4.1.782.1.2.1.8.1",
+    "2.16.840.1.114028.10.1.2",
+    "1.3.6.1.4.1.4146.1.1"
+};
+
 bool signRsa(std::shared_ptr<EVP_PKEY> key, SignData& data, std::string& res)
 {
     int ret = 0;
@@ -224,9 +244,9 @@ bool isRootCertificate(const char* cert_pem) {
     ASN1_BIT_STRING *keyUsage = (ASN1_BIT_STRING *)X509_get_ext_d2i(x509, NID_key_usage, 0, 0);
     
     ASN1_BIT_STRING *basicConstraints = (ASN1_BIT_STRING *)X509_get_ext_d2i(x509, NID_basic_constraints, 0, 0);
-    
-    bool result = X509_verify(x509, pkey) && keyUsage != NULL && basicConstraints != NULL;
-    
+        
+    bool result = X509_verify(x509, pkey) && (keyUsage->data != NULL && ASN1_BIT_STRING_get_bit(keyUsage, 5) != 0) && basicConstraints->data != NULL;
+
     EVP_PKEY_free(pkey);
     BIO_free(bio);
     X509_free(x509);
@@ -245,9 +265,9 @@ bool isIntermediateCertificate(const char* cert_pem) {
     ASN1_BIT_STRING *keyUsage = (ASN1_BIT_STRING *)X509_get_ext_d2i(x509, NID_key_usage, 0, 0);
     
     ASN1_BIT_STRING *basicConstraints = (ASN1_BIT_STRING *)X509_get_ext_d2i(x509, NID_basic_constraints, 0, 0);
-    
-    bool result = !X509_verify(x509, pkey) && keyUsage != NULL && basicConstraints != NULL;
-    
+        
+    bool result = !X509_verify(x509, pkey) && (keyUsage->data != NULL && ASN1_BIT_STRING_get_bit(keyUsage, 5) != 0) && basicConstraints->data != NULL;
+
     EVP_PKEY_free(pkey);
     BIO_free(bio);
     X509_free(x509);
@@ -268,7 +288,7 @@ bool isClientCertificate(const char* cert_pem) {
     
     ASN1_BIT_STRING *basicConstraints = (ASN1_BIT_STRING *)X509_get_ext_d2i(x509, NID_basic_constraints, 0, 0);
     
-    bool result = !X509_verify(x509, pkey) && keyUsage == NULL && basicConstraints == NULL;
+    bool result = !X509_verify(x509, pkey) && (keyUsage == NULL || ASN1_BIT_STRING_get_bit(keyUsage, 5) == 0) && basicConstraints->data == NULL;
     
     EVP_PKEY_free(pkey);
     BIO_free(bio);
@@ -350,6 +370,33 @@ std::vector<std::string> getCRLDistributionPoints(const char* cert_pem)
     return list;
 }
 
+bool isEvCertificate(const char* cert_pem) {
+    BIO *bio = BIO_new(BIO_s_mem());
+    BIO_puts(bio, cert_pem);
+    X509* x509 = PEM_read_bio_X509(bio, NULL, 0, NULL);
+    
+    STACK_OF(POLICYINFO) * infos =(STACK_OF(POLICYINFO) *)X509_get_ext_d2i(x509, NID_certificate_policies, NULL, NULL);
+
+    for (int i = 0; i < sk_POLICYINFO_num(infos); i++)
+    {
+        POLICYINFO *policyInfo = sk_POLICYINFO_value(infos, i);
+
+        ASN1_OBJECT *policyid = policyInfo->policyid;
+        
+        std::string oid(80, 0);
+        oid.resize(size_t(OBJ_obj2txt(&oid[0], int(oid.size()), policyid, 1)));
+        
+        for (int j = 0; j < policies.size(); j++) {
+            if (oid == policies[j]) {
+                return true;
+            }
+        }
+    }
+    
+    return false;
+}
+
+
 bool validateSignatureECDSA(unsigned char * original, size_t originalSize, std::string publicKey, std::string data) {
     
     BioString bio(publicKey);
@@ -377,7 +424,8 @@ bool validateSignature(unsigned char * original, size_t originalSize, const char
     
     BIO *bio = BIO_new(BIO_s_mem());
     BIO_puts(bio, certificate);
-    X509 * x509 = PEM_read_bio_X509(bio, NULL, NULL, NULL);
+    X509* x509 = X509_new();
+    PEM_read_bio_X509(bio, &x509, NULL, NULL);
     
     EVP_PKEY *pkey = X509_get_pubkey(x509);
 

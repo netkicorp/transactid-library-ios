@@ -57,6 +57,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)isRevoked:(NSString*)crl certificate:(NSString *)certificate;
 
+- (BOOL)isEvCertificate:(NSString *)certificate;
+
+
 - (NSData *)sign:(NSString*)privateKey message:(NSString*)message newLine:(BOOL)newLine;
 
 - (NSString *)encrypt:(NSString *)message

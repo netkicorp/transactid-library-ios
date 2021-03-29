@@ -67,11 +67,11 @@ class Bip75ServiceNetki: Bip75Service {
                     
                     let messageInvoiceRequestUnsigned = try messageInvoiceRequest.removeMessageSenderSignature()
                 
-//                    let isCertificateChainValid = try self.validateCertificate(pkiType: messageInvoiceRequest.getMessagePkiType(), certificate: messageInvoiceRequest.pkiData.toString())
-//
-//                    if (!isCertificateChainValid) {
-//                        throw Exception.InvalidCertificateChainException(ExceptionMessages.certificateValidationInvalidSenderCertificateCA)
-//                    }
+                    let isCertificateChainValid = try self.validateCertificate(pkiType: messageInvoiceRequest.getMessagePkiType(), certificate: messageInvoiceRequest.pkiData.toString())
+
+                    if (!isCertificateChainValid) {
+                        throw Exception.InvalidCertificateChainException(ExceptionMessages.certificateValidationInvalidSenderCertificateCA)
+                    }
                     
                     if let isSenderSignatureValid  = try messageInvoiceRequestUnsigned?.validateMessageSignature(signature: messageInvoiceRequest.signature.toString()) {
                         if (!isSenderSignatureValid) {
@@ -79,6 +79,14 @@ class Bip75ServiceNetki: Bip75Service {
                         }
                     }
                     
+                    if let senderEvCertificate = messageInvoiceRequest.evCert.toString() {
+                        if (!senderEvCertificate.isEmpty) {
+                            let isEvCertificate = self.certificateValidator.isEvCertificate(clientCertificatesPem: senderEvCertificate)
+                            if (!isEvCertificate) {
+                                throw Exception.InvalidCertificateException(ExceptionMessages.certificateValidationInvalidSenderCertificateEV)
+                            }
+                        }
+                    }
                 }
             }
         }

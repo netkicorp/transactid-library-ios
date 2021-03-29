@@ -274,4 +274,20 @@ class CertificateValidator {
         return self.openSSLTools.isRevoked(crl, certificate: certificate)
     }
     
+    /**
+     * Method to validate if a certificates is an EV cert.
+     *
+     * @param clientCertificatesPem certificate to validate.
+     * @return true if the certificate is EV.
+     */
+    
+    func isEvCertificate(clientCertificatesPem: String) -> Bool {
+        if let certificates = self.pemCertificatesToArray(certificatesPem: clientCertificatesPem) {
+            if let clientCertificate = self.getClientCertificate(certificates: certificates) {
+                return openSSLTools.isEvCertificate(clientCertificate)
+            }
+        }
+        return false
+    }
+    
 }

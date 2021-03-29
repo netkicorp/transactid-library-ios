@@ -137,6 +137,11 @@
     return NO;
 }
 
+- (BOOL)isEvCertificate:(NSString *)certificate {
+    return transact_id_ssl::isEvCertificate(std::string(certificate.UTF8String).c_str());
+}
+
+
 - (NSData *)sign:(NSString*)privateKey message:(NSString*)message newLine:(BOOL)newLine {
 
     transact_id_ssl::SignData signData;
