@@ -22,9 +22,11 @@ struct ExceptionMessages {
     static let decryptionMissingRecipientKeysError = "To decrypt the message you need to have the recipient's private key in your RecipientParameters.EncryptionParameters object."
     static let encryptionInvalidError = "Unable to decrypt the message with the given keys"
     static let signatureValidationInvalidSenderSignature = "Sender signature is not valid"
-    
     static let certificateValidationInvalidSenderCertificateCA = "Sender certificate does not belong to any trusted CA"
     static let certificateValidationInvalidSenderCertificateEV = "The certificate is not a valid EV certificate."
+    static let certificateValidationInvalidOwnerCertificateCA = "Owner certificate for attestation %s does not belong to any trusted CA"
+    static let signatureValidationInvalidOwnerSignature = "Owner signature is not valid for attestation"
+
 
 
 

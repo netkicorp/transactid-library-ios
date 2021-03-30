@@ -87,6 +87,48 @@ class Bip75ServiceNetki: Bip75Service {
                             }
                         }
                     }
+                    
+                    try messageInvoiceRequestUnsigned?.originators.forEach({ (messageOriginator) in
+                        try messageOriginator.attestations.forEach { (messageAttestation) in
+                            let isCertificateOwnerChainValid = try validateCertificate(pkiType: messageAttestation.getMessagePkiType(), certificate: messageAttestation.pkiData.toString())
+                            
+                            if (!isCertificateOwnerChainValid) {
+                                throw Exception.InvalidCertificateChainException(ExceptionMessages.certificateValidationInvalidOwnerCertificateCA)
+                            }
+                            
+                            let isSignatureValid = try messageAttestation.validateMessageSignature(requireSignature: messageOriginator.isPrimaryForTransaction)
+                            
+                            if (!isSignatureValid) {
+                                throw Exception.InvalidSignatureException(ExceptionMessages.signatureValidationInvalidOwnerSignature)
+                            }
+                        }
+                    })
+                    
+                    try messageInvoiceRequestUnsigned?.originators.forEach({ (messageOriginator) in
+                        try messageOriginator.attestations.forEach { (messageAttestation) in
+                            let isCertificateOwnerChainValid = try validateCertificate(pkiType: messageAttestation.getMessagePkiType(), certificate: messageAttestation.pkiData.toString())
+                            
+                            if (!isCertificateOwnerChainValid) {
+                                throw Exception.InvalidCertificateChainException(ExceptionMessages.certificateValidationInvalidOwnerCertificateCA)
+                            }
+                            
+                            let isSignatureValid = try messageAttestation.validateMessageSignature(requireSignature: messageOriginator.isPrimaryForTransaction)
+                            
+                            if (!isSignatureValid) {
+                                throw Exception.InvalidSignatureException(ExceptionMessages.signatureValidationInvalidOwnerSignature)
+                            }
+                        }
+                    })
+                    
+                    try messageInvoiceRequestUnsigned?.beneficiaries.forEach({ (messageBeneficiary) in
+                        try messageBeneficiary.attestations.forEach { (messageAttestation) in
+                            let isCertificateOwnerChainValid = try validateCertificate(pkiType: messageAttestation.getMessagePkiType(), certificate: messageAttestation.pkiData.toString())
+                            
+                            if (!isCertificateOwnerChainValid) {
+                                throw Exception.InvalidCertificateChainException(ExceptionMessages.certificateValidationInvalidOwnerCertificateCA)
+                            }
+                        }
+                    })
                 }
             }
         }

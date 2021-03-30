@@ -75,5 +75,44 @@ class CryptoModule {
         return OpenSSLTools().validateSignature(signature, certificate: certificate, data: hash)
     }
     
+    /**
+     * Extract client certificate from Certificates in PEM format.
+     *
+     * @param certificatesPem string.
+     * @return Client certificate in PEM format.
+     */
+    
+    func certificatePemToClientCertificate(certificatesPem: String?) -> String? {
+        if let certificatesPem = certificatesPem {
+            if let certificates = self.pemCertificatesToArray(certificatesPem: certificatesPem) {
+                return self.getClientCertificate(certificates: certificates)
+            }
+        }
+        return nil
+    }
+    
+    /**
+     * Convert certificates in PEM format to Array of PEM.
+     *
+     * @param certificatesPem string.
+     * @return Array of PEM certificates.
+     */
+    private func pemCertificatesToArray(certificatesPem: String) -> Array<String>? {
+        if let certificates = OpenSSLTools().pem(toCertificatesArray: certificatesPem) as NSArray as? [String] {
+            return certificates
+        }
+        return nil
+    }
+    
+    /**
+     * Extract client certificate from a array of certificates.
+     *
+     * @param certificates including the client certificate.
+     * @return Client certificate.
+     */
+    func getClientCertificate(certificates: Array<String>) -> String? {
+        return certificates.first(where: { OpenSSLTools().isClientCertificate($0) })
+    }
+    
     
 }

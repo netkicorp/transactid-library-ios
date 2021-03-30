@@ -263,7 +263,7 @@ class CertificateValidator {
     }
     
     /**
-     * Determine if a X509Certificate is client certificate.
+     * Determine is client certificate.
      */
     
     func isClientCertificate(certificate: String) -> Bool {

@@ -287,11 +287,11 @@ extension MessageInvoiceRequest : SwiftProtobuf.Message, SwiftProtobuf._MessageI
         case .none:
             return self
         case .x509sha256:
-            return try self.removeSenderSignature()
+            return try self.removeSignature()
         }
     }
     
-    private func removeSenderSignature() throws -> MessageInvoiceRequest {
+    private func removeSignature() throws -> MessageInvoiceRequest {
         var messageInvoiceRequestUnsingned = MessageInvoiceRequest()
         let serializedData = try self.serializedData()
         

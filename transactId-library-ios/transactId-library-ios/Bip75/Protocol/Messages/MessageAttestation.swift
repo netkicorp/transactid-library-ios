@@ -93,4 +93,51 @@ extension MessageAttestation : SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
         
         return pkiData
     }
+    
+    func getMessagePkiType() throws -> PkiType {
+        if let pkiType = PkiType(rawValue: self.pkiType) {
+            return pkiType
+        } else {
+            throw Exception.ObjectNotFoundException("Pki type not supported")
+        }
+    }
+    
+    private func removeSignature() throws -> MessageAttestation {
+        var messageAttestationUnsigned = MessageAttestation()
+        let serializedData = try self.serializedData()
+        
+        try messageAttestationUnsigned.merge(serializedData: serializedData)
+        messageAttestationUnsigned.signature = "".toByteString()
+        return messageAttestationUnsigned
+    }
+    
+    func validateMessageSignature(requireSignature: Bool) throws -> Bool {
+        let pkiType = try self.getMessagePkiType()
+        
+        switch pkiType {
+        case .none:
+            return true
+        case .x509sha256:
+            if (requireSignature) {
+                
+                let messageAttestationUnsigned = try self.removeSignature()
+                
+                guard let signature = self.signature.toString() else {
+                    return false
+                }
+                
+                guard let certificate = CryptoModule().certificatePemToClientCertificate(certificatesPem: self.pkiData.toString()) else {
+                    return false
+                }
+                
+                return CryptoModule().validateSignature(signature: signature,
+                                                        data: try messageAttestationUnsigned.serializedData().toByteArray(),
+                                                        certificate: certificate)
+            } else {
+                return true
+            }
+        }
+    }
+    
+    
 }
