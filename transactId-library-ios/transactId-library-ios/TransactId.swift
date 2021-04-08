@@ -30,4 +30,18 @@ public class TransactId {
         return try self.bip75.parseInvoiceRequest(invoiceRequestBinary: invoiceRequestBinary, recipientParameters: recipientParameters)
     }
     
+    public func createPaymentRequest(paymentRequestParameters: PaymentRequestParameters) throws -> Data? {
+        return try self.bip75.createPaymentRequest(paymentRequestParameters: paymentRequestParameters)
+    }
+    
+    public func isPaymentRequestValid(paymentRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> Bool {
+        return try self.bip75.isPaymentRequestValid(paymentRequestBinary: paymentRequestBinary, recipientParameters: recipientParameters)
+    }
+    
+    public func parsePaymentRequest(paymentRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> PaymentRequest? {
+        return try self.parsePaymentRequest(paymentRequestBinary: paymentRequestBinary, recipientParameters: recipientParameters)
+    }
+    
+    
+
 }

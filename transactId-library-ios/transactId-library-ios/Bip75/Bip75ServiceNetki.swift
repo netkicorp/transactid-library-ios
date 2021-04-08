@@ -11,12 +11,14 @@ class Bip75ServiceNetki: Bip75Service {
     
     private let certificateValidator: CertificateValidator
     private let addressInformationService: AddressInformationService?
-
     
     init(certificateValidator: CertificateValidator, addressInformationService: AddressInformationService? = nil) {
         self.certificateValidator = certificateValidator
         self.addressInformationService = addressInformationService
     }
+    
+    
+    //MARK: InvoiceRequest
     
     func createInvoiceRequest(invoiceRequestParameters: InvoiceRequestParameters) throws -> Data? {
         
@@ -46,18 +48,18 @@ class Bip75ServiceNetki: Bip75Service {
         })
         
         let invoiceRequest = try messageInvoiceRequest.signMessage(senderParameters: invoiceRequestParameters.senderParameters)?.serializedData()
-                
+        
         return try invoiceRequest?.toProtocolMessageData(messageType: .invoiceRequest,
-                                                     messageInformation: invoiceRequestParameters.messageInformation,
-                                                     senderParameters: invoiceRequestParameters.senderParameters,
-                                                     recipientParameters: invoiceRequestParameters.recipientParameters)
+                                                         messageInformation: invoiceRequestParameters.messageInformation,
+                                                         senderParameters: invoiceRequestParameters.senderParameters,
+                                                         recipientParameters: invoiceRequestParameters.recipientParameters)
     }
     
     func isInvoiceRequestValid(invoiceRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> Bool {
         if let protocolMessageMetadata = try invoiceRequestBinary.extractProtocolMessageMetadata() {
             if let messageInvoiceRequestData = try invoiceRequestBinary.getSerializedMessage(encrypted: protocolMessageMetadata.encrypted, recipientParameters: recipientParameters) {
                 if let messageInvoiceRequest = try messageInvoiceRequestData.toMessageInvoiceRequest() {
-
+                    
                     if (protocolMessageMetadata.encrypted) {
                         let isSenderEncryptionSignatureValid =  try invoiceRequestBinary.validateMessageEncryptionSignature()
                         if (!isSenderEncryptionSignatureValid) {
@@ -66,9 +68,9 @@ class Bip75ServiceNetki: Bip75Service {
                     }
                     
                     let messageInvoiceRequestUnsigned = try messageInvoiceRequest.removeMessageSenderSignature()
-                
+                    
                     let isCertificateChainValid = try self.validateCertificate(pkiType: messageInvoiceRequest.getMessagePkiType(), certificate: messageInvoiceRequest.pkiData.toString())
-
+                    
                     if (!isCertificateChainValid) {
                         throw Exception.InvalidCertificateChainException(ExceptionMessages.certificateValidationInvalidSenderCertificateCA)
                     }
@@ -129,10 +131,12 @@ class Bip75ServiceNetki: Bip75Service {
                             }
                         }
                     })
+                    
+                    return true
                 }
             }
         }
-
+        
         
         return false
     }
@@ -141,7 +145,7 @@ class Bip75ServiceNetki: Bip75Service {
         return try self.parseInvoiceRequestBinary(invoiceRequestBinary: invoiceRequestBinary, recipientParameters: recipientParameters)
     }
     
-    //TODO: parseInvoiceRequestWithAddressInfo
+    //MARK: TODO parseInvoiceRequestWithAddressInfo
     
     func parseInvoiceRequestWithAddressInfo(invoiceRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> InvoiceRequest? {
         if let invoiceRequest = try self.parseInvoiceRequestBinary(invoiceRequestBinary: invoiceRequestBinary, recipientParameters: recipientParameters) {
@@ -164,10 +168,99 @@ class Bip75ServiceNetki: Bip75Service {
                 return messageInvoiceRequest?.toInvoiceRequest(protocolMessageMetadata: protocolMessageMetadata)
             }
         }
-
+        
         return nil
     }
     
+    
+    //MARK: PaymentRequest
+    
+    func createPaymentRequest(paymentRequestParameters: PaymentRequestParameters) throws -> Data? {
+        
+        try paymentRequestParameters.beneficiaryParameters.validate(required: true, ownerType: OwnerType.beneficiary)
+        
+        let messagePaymentDetails = paymentRequestParameters.toMessagePaymentDetails()
+        
+        if let senderParameters = paymentRequestParameters.senderParameters  {
+            
+            var messagePaymentRequest = try messagePaymentDetails.toPaymentRequest(senderParameters: senderParameters,
+                                                                                   paymentParametersVersion: paymentRequestParameters.paymentParametersVersion,
+                                                                                   attestationsRequested: paymentRequestParameters.attestationsRequested)
+            
+            paymentRequestParameters.beneficiaryParameters.forEach({ (beneficiary) in
+                var messageBeneficiary = beneficiary.toMessageBeneficiaryWithoutAttestations()
+                beneficiary.pkiDataParametersSets?.forEach({ (pkiData) in
+                    messageBeneficiary.addAttestation(attestation: pkiData.toMessageAttestation(requireSignature: beneficiary.isPrimaryForTransaction))
+                })
+                messagePaymentRequest.addBeneficiary(messageBeneficiary: messageBeneficiary)
+                
+            })
+            
+            
+            let paymentRequest = try messagePaymentRequest.signMessage(senderParameters: senderParameters)?.serializedData()
+            
+            
+            return try paymentRequest?.toProtocolMessageData(messageType: .paymentRequest,
+                                                             messageInformation: paymentRequestParameters.messageInformation,
+                                                             senderParameters: paymentRequestParameters.senderParameters,
+                                                             recipientParameters: paymentRequestParameters.recipientParameters)
+        }
+        
+        return nil
+    }
+    
+    func isPaymentRequestValid(paymentRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> Bool {
+        if let protocolMessageMetadata = try paymentRequestBinary.extractProtocolMessageMetadata() {
+            if let messagePaymentRequestData = try paymentRequestBinary.getSerializedMessage(encrypted: protocolMessageMetadata.encrypted) {
+                if let messagePaymentRequest = try messagePaymentRequestData.toMessagePaymentRequest() {
+                    
+                    if (protocolMessageMetadata.encrypted) {
+                        let isSenderEncryptionSignatureValid = try paymentRequestBinary.validateMessageEncryptionSignature()
+                        if (!isSenderEncryptionSignatureValid) {
+                            throw Exception.InvalidSignatureException(ExceptionMessages.signatureValidationInvalidSenderSignature)
+                        }
+                    }
+                    
+                    let messagePaymentRequestUnsigned = try messagePaymentRequest.removeMessageSenderSignature()
+                    
+                    let isCertificateChainValid = try self.validateCertificate(pkiType: messagePaymentRequest.getMessagePkiType(), certificate: messagePaymentRequest.senderPkiData.toString())
+
+                    if (!isCertificateChainValid) {
+                        throw Exception.InvalidCertificateChainException(ExceptionMessages.certificateValidationInvalidSenderCertificateCA)
+                    }
+                    
+                    if let isSenderSignatureValid  = try messagePaymentRequestUnsigned?.validateMessageSignature(signature: messagePaymentRequest.senderSignature.toString()) {
+                        if (!isSenderSignatureValid) {
+                            throw Exception.InvalidSignatureException(ExceptionMessages.signatureValidationInvalidSenderSignature)
+                        }
+                    }
+                    
+                    try messagePaymentRequestUnsigned?.beneficiaries.forEach({ (messageBeneficiary) in
+                        try messageBeneficiary.attestations.forEach { (messageAttestation) in
+                            let isCertificateOwnerChainValid = try self.validateCertificate(pkiType: messageAttestation.getMessagePkiType(), certificate: messageAttestation.pkiData.toString())
+                            if (!isCertificateOwnerChainValid) {
+                                throw Exception.InvalidCertificateChainException(ExceptionMessages.certificateValidationInvalidOwnerCertificateCA)
+                            }
+                            
+                            let isSignatureValid = try messageAttestation.validateMessageSignature(requireSignature: messageBeneficiary.isPrimaryForTransaction)
+                            
+                            if (!isSignatureValid) {
+                                throw Exception.InvalidSignatureException(ExceptionMessages.signatureValidationInvalidOwnerSignature)
+                            }
+                        }
+                    })
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    func parsePaymentRequest(paymentRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> PaymentRequest? {
+        return nil
+    }
+    
+    //MARK: Private methods
     
     private func validateCertificate(pkiType: PkiType, certificate: String?) throws -> Bool {
         guard let certificate = certificate else {

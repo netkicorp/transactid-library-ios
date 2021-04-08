@@ -8,6 +8,7 @@
 import Foundation
 
 class Bip75Netki: Bip75 {
+    
     private let bip75Service: Bip75Service
     
     init(bip75Service: Bip75Service) {
@@ -29,5 +30,18 @@ class Bip75Netki: Bip75 {
     func parseInvoiceRequestWithAddressInfo(invoiceRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> InvoiceRequest? {
         return try self.bip75Service.parseInvoiceRequestWithAddressInfo(invoiceRequestBinary: invoiceRequestBinary, recipientParameters: recipientParameters)
     }
+    
+    func createPaymentRequest(paymentRequestParameters: PaymentRequestParameters) throws -> Data? {
+        return try self.bip75Service.createPaymentRequest(paymentRequestParameters: paymentRequestParameters)
+    }
+    
+    func isPaymentRequestValid(paymentRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> Bool {
+        return try self.bip75Service.isPaymentRequestValid(paymentRequestBinary: paymentRequestBinary, recipientParameters: recipientParameters)
+    }
+    
+    func parsePaymentRequest(paymentRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> PaymentRequest? {
+        return try self.bip75Service.parsePaymentRequest(paymentRequestBinary: paymentRequestBinary, recipientParameters: recipientParameters)
+    }
+    
     
 }

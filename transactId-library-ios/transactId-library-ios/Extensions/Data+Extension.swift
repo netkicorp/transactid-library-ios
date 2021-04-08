@@ -210,10 +210,23 @@ extension Data {
      * @return Messages.InvoiceRequest
      * @throws InvalidObjectException if there is an error parsing the object.
      */
-    
     func toMessageInvoiceRequest() throws -> MessageInvoiceRequest? {
         do {
             return try MessageInvoiceRequest(serializedData: self)
+        } catch let exception {
+            throw Exception.InvalidObjectException(String(format: ExceptionMessages.parseBinaryMessageInvalidInput, exception.localizedDescription))
+        }
+    }
+    
+    /**
+     * Transform binary PaymentRequest to Messages.PaymentRequest.
+     *
+     * @return Messages.PaymentRequest
+     * @throws InvalidObjectException if there is an error parsing the object.
+     */
+    func toMessagePaymentRequest() throws -> MessagePaymentRequest? {
+        do {
+            return try MessagePaymentRequest(serializedData: self)
         } catch let exception {
             throw Exception.InvalidObjectException(String(format: ExceptionMessages.parseBinaryMessageInvalidInput, exception.localizedDescription))
         }
