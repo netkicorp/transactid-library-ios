@@ -219,7 +219,7 @@ extension Data {
     }
     
     /**
-     * Transform binary PaymentRequest to Messages.PaymentRequest.
+     * Transform binary PaymentRequest to MessagePaymentRequest.
      *
      * @return Messages.PaymentRequest
      * @throws InvalidObjectException if there is an error parsing the object.
@@ -227,6 +227,21 @@ extension Data {
     func toMessagePaymentRequest() throws -> MessagePaymentRequest? {
         do {
             return try MessagePaymentRequest(serializedData: self)
+        } catch let exception {
+            throw Exception.InvalidObjectException(String(format: ExceptionMessages.parseBinaryMessageInvalidInput, exception.localizedDescription))
+        }
+    }
+    
+    /**
+     * Transform binary PaymentDetails to MessagePaymentDetails.
+     *
+     * @return Messages.PaymentDetails
+     * @throws InvalidObjectException if there is an error parsing the object.
+     */
+    
+    func toMessagePaymentDetails() throws -> MessagePaymentDetails? {
+        do {
+            return try MessagePaymentDetails(serializedData: self)
         } catch let exception {
             throw Exception.InvalidObjectException(String(format: ExceptionMessages.parseBinaryMessageInvalidInput, exception.localizedDescription))
         }

@@ -10,7 +10,7 @@ import Foundation
 import SwiftProtobuf
 
 struct MessagePaymentRequest {
- 
+    
     fileprivate var _paymentDetailsVersion: UInt64? = nil
     fileprivate var _serializedPaymentDetails: Data? = nil
     fileprivate var _beneficiaries: [MessageBeneficiary] = []
@@ -62,7 +62,7 @@ struct MessagePaymentRequest {
     }
     
     var unknownFields = SwiftProtobuf.UnknownStorage()
-
+    
 }
 
 extension MessagePaymentRequest : SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
@@ -109,7 +109,7 @@ extension MessagePaymentRequest : SwiftProtobuf.Message, SwiftProtobuf._MessageI
         if let v = self._senderSignature {
             try visitor.visitSingularBytesField(value: v, fieldNumber: 7)
         }
-       
+        
         try unknownFields.traverse(visitor: &visitor)
     }
     
@@ -195,5 +195,50 @@ extension MessagePaymentRequest : SwiftProtobuf.Message, SwiftProtobuf._MessageI
             return CryptoModule().validateSignature(signature: signature, data: try self.serializedData().toByteArray(), certificate: self.senderPkiData.toString())
         }
     }
-
+    
+    func toPaymentRequest(protocolMessageMetadata: ProtocolMessageMetadata) throws -> PaymentRequest? {
+        if let paymentDetails = try self.serializedData().toMessagePaymentDetails() {
+            
+            var beneficiaries: Array<Beneficiary> = []
+            
+            self.beneficiaries.forEach({ (messageBeneficiary) in
+                beneficiaries.append(messageBeneficiary.toBeneficiary())
+            })
+            
+            var beneficiariesAddresses: Array<Output> = []
+            
+            paymentDetails.beneficiariesAddresses.forEach({ (messageOutput) in
+                beneficiariesAddresses.append(messageOutput.toOutput())
+            })
+            
+            var attestationsRequested: Array<Attestation> = []
+            
+            self.attestationsRequested.forEach { (messageAttestationType) in
+                if let attestation = Attestation(rawValue: messageAttestationType.rawValue) {
+                    attestationsRequested.append(attestation)
+                }
+            }
+            
+            let paymentRequest = PaymentRequest()
+            paymentRequest.paymentDetailsVersion = Int(self.paymentDetailsVersion)
+            paymentRequest.network = paymentDetails.network
+            paymentRequest.beneficiariesAddresses = beneficiariesAddresses
+            paymentRequest.time = TimeInterval(Int(paymentDetails.expires))
+            paymentRequest.memo = paymentDetails.memo
+            paymentRequest.paymentUrl = paymentDetails.paymentUrl
+            paymentRequest.merchantData = paymentDetails.merchantData.toString()
+            paymentRequest.beneficiaries = beneficiaries
+            paymentRequest.attestationsRequested = attestationsRequested
+            paymentRequest.senderPkiType = PkiType(rawValue: self.senderPkiType)
+            paymentRequest.senderPkiData = self.senderPkiData.toString()
+            paymentRequest.senderSignature = self.senderSignature.toString()
+            paymentRequest.protocolMessageMetadata = protocolMessageMetadata
+            
+            return paymentRequest
+            
+        }
+        
+        return nil
+    }
+    
 }

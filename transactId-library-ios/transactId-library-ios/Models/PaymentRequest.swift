@@ -53,7 +53,7 @@ public class PaymentRequest {
     /**
      * Array of beneficiaries for this transaction.
      */
-    public var beneficiaryParameters: Array<BeneficiaryParameters> = []
+    public var beneficiaries: Array<Beneficiary> = []
     
     /**
      * Array of attestations requested for the transaction.

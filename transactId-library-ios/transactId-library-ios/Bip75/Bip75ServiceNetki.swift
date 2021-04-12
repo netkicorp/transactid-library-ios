@@ -257,6 +257,14 @@ class Bip75ServiceNetki: Bip75Service {
     }
     
     func parsePaymentRequest(paymentRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> PaymentRequest? {
+        if let protocolMessageMetadata = try paymentRequestBinary.extractProtocolMessageMetadata() {
+            if let messagePaymentRequestData = try paymentRequestBinary.getSerializedMessage(encrypted: protocolMessageMetadata.encrypted) {
+                if let messagePaymentRequest = try messagePaymentRequestData.toMessagePaymentRequest() {
+                    return try messagePaymentRequest.toPaymentRequest(protocolMessageMetadata: protocolMessageMetadata)
+                }
+            }
+        }
+        
         return nil
     }
     
