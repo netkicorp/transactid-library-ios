@@ -301,6 +301,50 @@ class Bip75ServiceNetki: Bip75Service {
                                                   recipientParameters: paymentParameters.recipientParameters)
     }
     
+    func isPaymentValid(paymentBinary: Data, recipientParameters: RecipientParameters?) throws -> Bool {
+        if let protocolMessageMetadata = try paymentBinary.extractProtocolMessageMetadata() {
+            if let messagePaymentData = try paymentBinary.getSerializedMessage(encrypted: protocolMessageMetadata.encrypted, recipientParameters: recipientParameters) {
+                if let messagePayment = try messagePaymentData.toMessagePayment() {
+                
+                    if (protocolMessageMetadata.encrypted) {
+                        let isSenderEncryptionSignatureValid = try paymentBinary.validateMessageEncryptionSignature()
+                        if (!isSenderEncryptionSignatureValid) {
+                            throw Exception.InvalidSignatureException(ExceptionMessages.signatureValidationInvalidSenderSignature)
+                        }
+                    }
+                    
+                    try messagePayment.originators.forEach { (messageOriginator) in
+                        try messageOriginator.attestations.forEach { (messageAttestation) in
+                            
+                            let isCertificateOwnerChainValid = try validateCertificate(pkiType: messageAttestation.getMessagePkiType(), certificate: messageAttestation.pkiData.toString())
+                            
+                            if (!isCertificateOwnerChainValid) {
+                                throw Exception.InvalidCertificateChainException(ExceptionMessages.certificateValidationInvalidOwnerCertificateCA)
+                            }
+                            
+                            let isSignatureValid = try messageAttestation.validateMessageSignature(requireSignature: messageOriginator.isPrimaryForTransaction)
+                            
+                            if (!isSignatureValid) {
+                                throw Exception.InvalidSignatureException(ExceptionMessages.signatureValidationInvalidOwnerSignature)
+                            }
+                        }
+                    }
+                    
+                    try messagePayment.beneficiaries.forEach { (messageBeneficiary) in
+                        try messageBeneficiary.attestations.forEach { (messageAttestation) in
+                            let isCertificateOwnerChainValid = try self.validateCertificate(pkiType: messageAttestation.getMessagePkiType(), certificate: messageAttestation.pkiData.toString())
+                            if (!isCertificateOwnerChainValid) {
+                                throw Exception.InvalidCertificateChainException(ExceptionMessages.certificateValidationInvalidOwnerCertificateCA)
+                            }
+                        }
+                    }
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
     //MARK: Private methods
     
     private func validateCertificate(pkiType: PkiType, certificate: String?) throws -> Bool {

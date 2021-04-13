@@ -102,6 +102,21 @@ protocol Bip75Service {
      * @return binary object of the message created.
      * @throws EncryptionException if there is an error while creating the encrypted message.
      */
-    func createPayment(paymentParameters: PaymentParameters) throws -> Data? 
+    func createPayment(paymentParameters: PaymentParameters) throws -> Data?
+    
+    /**
+     * Validate if a binary Payment is valid.
+     *
+     * @param paymentBinary binary data to validate.
+     * @param recipientParameters information of the recipient of the message, the RecipientParameters.EncryptionParameters is mandatory to handle encrypted messages.
+     * @return true if is valid.
+     * @exception InvalidObjectException if the binary is malformed.
+     * @exception InvalidSignatureException if the signature in the binary is not valid.
+     * @exception InvalidCertificateException if there is a problem with the certificates.
+     * @exception InvalidCertificateChainException if the certificate chain is not valid.
+     * @exception EncryptionException if there is an error decrypting or validating the encryption.
+     */
+    func isPaymentValid(paymentBinary: Data, recipientParameters: RecipientParameters?) throws -> Bool
+    
     
 }

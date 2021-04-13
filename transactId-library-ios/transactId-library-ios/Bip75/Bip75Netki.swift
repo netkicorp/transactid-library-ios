@@ -47,5 +47,9 @@ class Bip75Netki: Bip75 {
         return try self.bip75Service.createPayment(paymentParameters: paymentParameters)
     }
     
+    func isPaymentValid(paymentBinary: Data, recipientParameters: RecipientParameters?) throws -> Bool {
+        return try self.bip75Service.isPaymentValid(paymentBinary: paymentBinary, recipientParameters: recipientParameters)
+    }
+    
     
 }
