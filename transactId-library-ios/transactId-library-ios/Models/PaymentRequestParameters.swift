@@ -8,7 +8,7 @@
 import Foundation
 
 /**
- * Representation of PaymentDetails message.
+ * Data to create PaymentRequest message.
  */
 public class PaymentRequestParameters {
     

@@ -43,5 +43,9 @@ class Bip75Netki: Bip75 {
         return try self.bip75Service.parsePaymentRequest(paymentRequestBinary: paymentRequestBinary, recipientParameters: recipientParameters)
     }
     
+    func createPayment(paymentParameters: PaymentParameters) throws -> Data? {
+        return try self.bip75Service.createPayment(paymentParameters: paymentParameters)
+    }
+    
     
 }

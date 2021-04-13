@@ -78,6 +78,9 @@
 		8BBD13AD261CB22800E62F6D /* PaymentRequestParameters+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD13AC261CB22800E62F6D /* PaymentRequestParameters+Extension.swift */; };
 		8BBD13B0261CB88100E62F6D /* MessagePaymentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD13AF261CB88100E62F6D /* MessagePaymentRequest.swift */; };
 		8BBD13B3261EEDE900E62F6D /* PaymentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD13B2261EEDE900E62F6D /* PaymentRequest.swift */; };
+		8BC29F79262487D400071401 /* PaymentParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC29F78262487D400071401 /* PaymentParameters.swift */; };
+		8BC29F7C26248AF700071401 /* PaymentParameters+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC29F7B26248AF700071401 /* PaymentParameters+Extension.swift */; };
+		8BC29F7F26248B4D00071401 /* MessagePayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC29F7E26248B4D00071401 /* MessagePayment.swift */; };
 		8BDEFBAC25ECFBF300577BAF /* ProtocolMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDEFBAB25ECFBF300577BAF /* ProtocolMessage.swift */; };
 		8BDEFBAF25ECFCA700577BAF /* ProtocolMessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDEFBAE25ECFCA700577BAF /* ProtocolMessageType.swift */; };
 		8BDEFBB225ED061700577BAF /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BDEFBB125ED061700577BAF /* Data+Extension.swift */; };
@@ -233,6 +236,9 @@
 		8BBD13AC261CB22800E62F6D /* PaymentRequestParameters+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaymentRequestParameters+Extension.swift"; sourceTree = "<group>"; };
 		8BBD13AF261CB88100E62F6D /* MessagePaymentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePaymentRequest.swift; sourceTree = "<group>"; };
 		8BBD13B2261EEDE900E62F6D /* PaymentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRequest.swift; sourceTree = "<group>"; };
+		8BC29F78262487D400071401 /* PaymentParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentParameters.swift; sourceTree = "<group>"; };
+		8BC29F7B26248AF700071401 /* PaymentParameters+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaymentParameters+Extension.swift"; sourceTree = "<group>"; };
+		8BC29F7E26248B4D00071401 /* MessagePayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePayment.swift; sourceTree = "<group>"; };
 		8BDEFBAB25ECFBF300577BAF /* ProtocolMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMessage.swift; sourceTree = "<group>"; };
 		8BDEFBAE25ECFCA700577BAF /* ProtocolMessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMessageType.swift; sourceTree = "<group>"; };
 		8BDEFBB125ED061700577BAF /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
@@ -396,6 +402,7 @@
 				8B47533725D2B58300383451 /* SenderParameters.swift */,
 				8B47532E25D2B21700383451 /* Enums */,
 				8B47532625D2B0A000383451 /* models */,
+				8BC29F78262487D400071401 /* PaymentParameters.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -493,6 +500,7 @@
 				8BDEFBB125ED061700577BAF /* Data+Extension.swift */,
 				8B8E20FE2604AC6B00139EC0 /* String+Extension.swift */,
 				8BBD13AC261CB22800E62F6D /* PaymentRequestParameters+Extension.swift */,
+				8BC29F7B26248AF700071401 /* PaymentParameters+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -537,6 +545,7 @@
 				8BDEFBAB25ECFBF300577BAF /* ProtocolMessage.swift */,
 				8BBD13A9261CA82500E62F6D /* MessagePaymentDetails.swift */,
 				8BBD13AF261CB88100E62F6D /* MessagePaymentRequest.swift */,
+				8BC29F7E26248B4D00071401 /* MessagePayment.swift */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -877,8 +886,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BC29F7F26248B4D00071401 /* MessagePayment.swift in Sources */,
 				8BF24C3025D1CB3900C922A3 /* TrustStore.swift in Sources */,
 				8BE9172125E7FCA300426912 /* OriginatorParameters+Extension.swift in Sources */,
+				8BC29F7C26248AF700071401 /* PaymentParameters+Extension.swift in Sources */,
 				8B47535025D2B9DD00383451 /* BeneficiaryParameters.swift in Sources */,
 				8BDEFBB525ED082300577BAF /* MessageType.swift in Sources */,
 				8BBD13A7261CA40000E62F6D /* PaymentRequestParameters.swift in Sources */,
@@ -890,6 +901,7 @@
 				8BE9170325E7A83E00426912 /* MessageInvoiceRequest.swift in Sources */,
 				8B8E210826090EC200139EC0 /* ProtocolMessageMetadata.swift in Sources */,
 				8B8E21172609BE9F00139EC0 /* Originator.swift in Sources */,
+				8BC29F79262487D400071401 /* PaymentParameters.swift in Sources */,
 				8BE3FDC925D1778B00D78B62 /* Request.swift in Sources */,
 				8BE9170A25E7AAAD00426912 /* MessageAttestation.swift in Sources */,
 				8B47533825D2B58300383451 /* SenderParameters.swift in Sources */,

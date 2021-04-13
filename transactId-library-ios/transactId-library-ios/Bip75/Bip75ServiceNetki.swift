@@ -268,6 +268,39 @@ class Bip75ServiceNetki: Bip75Service {
         return nil
     }
     
+    //MARK: Payment
+
+    func createPayment(paymentParameters: PaymentParameters) throws -> Data? {
+        
+        try paymentParameters.originatorParameters.validate(required: true, ownerType: .originator)
+        try paymentParameters.beneficiaryParameters.validate(required: false, ownerType: .beneficiary)
+        
+        var messagePayment = paymentParameters.toPaymentMessage()
+        
+        paymentParameters.beneficiaryParameters.forEach { (beneficiaryParameters) in
+            var beneficiaryMessage = beneficiaryParameters.toMessageBeneficiaryWithoutAttestations()
+            beneficiaryParameters.pkiDataParametersSets?.forEach({ (pkiDataParameters) in
+                beneficiaryMessage.addAttestation(attestation: pkiDataParameters.toMessageAttestation(requireSignature: false))
+            })
+            messagePayment.addBeneficiary(messageBeneficiary: beneficiaryMessage)
+        }
+        
+        paymentParameters.originatorParameters.forEach { (originatorParameters) in
+            var originatorMessage = originatorParameters.toMessageOriginatorWithoutAttestations()
+            originatorParameters.pkiDataParametersSets?.forEach({ (pkiDataParameters) in
+                originatorMessage.addAttestation(attestation: pkiDataParameters.toMessageAttestation(requireSignature: originatorParameters.isPrimaryForTransaction))
+            })
+            messagePayment.addOriginator(messageOriginator: originatorMessage)
+        }
+        
+        let payment = try messagePayment.serializedData()
+        
+        return try payment.toProtocolMessageData(messageType: .payment,
+                                                  messageInformation: paymentParameters.messageInformation,
+                                                  senderParameters: paymentParameters.senderParameters,
+                                                  recipientParameters: paymentParameters.recipientParameters)
+    }
+    
     //MARK: Private methods
     
     private func validateCertificate(pkiType: PkiType, certificate: String?) throws -> Bool {

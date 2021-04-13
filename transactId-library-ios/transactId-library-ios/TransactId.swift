@@ -42,6 +42,9 @@ public class TransactId {
         return try self.bip75.parsePaymentRequest(paymentRequestBinary: paymentRequestBinary, recipientParameters: recipientParameters)
     }
     
+    public func createPayment(paymentParameters: PaymentParameters) throws -> Data? {
+        return try self.bip75.createPayment(paymentParameters: paymentParameters)
+    }
     
 
 }

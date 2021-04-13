@@ -95,5 +95,13 @@ protocol Bip75Service {
      */
     func parsePaymentRequest(paymentRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> PaymentRequest?
     
+    /**
+     * Create binary Payment.
+     *
+     * @param paymentParameters data to create the Payment.
+     * @return binary object of the message created.
+     * @throws EncryptionException if there is an error while creating the encrypted message.
+     */
+    func createPayment(paymentParameters: PaymentParameters) throws -> Data? 
     
 }
