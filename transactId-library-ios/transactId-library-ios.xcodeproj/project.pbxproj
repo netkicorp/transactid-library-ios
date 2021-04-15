@@ -79,6 +79,11 @@
 		8BBD13AD261CB22800E62F6D /* PaymentRequestParameters+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD13AC261CB22800E62F6D /* PaymentRequestParameters+Extension.swift */; };
 		8BBD13B0261CB88100E62F6D /* MessagePaymentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD13AF261CB88100E62F6D /* MessagePaymentRequest.swift */; };
 		8BBD13B3261EEDE900E62F6D /* PaymentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD13B2261EEDE900E62F6D /* PaymentRequest.swift */; };
+		8BBD1C23262831D00029738A /* PaymentAckParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD1C22262831D00029738A /* PaymentAckParameters.swift */; };
+		8BBD1C262628336B0029738A /* Payment+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD1C252628336B0029738A /* Payment+Extension.swift */; };
+		8BBD1C29262833CB0029738A /* MessagePaymentACK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD1C28262833CB0029738A /* MessagePaymentACK.swift */; };
+		8BBD1C2C2628368A0029738A /* Beneficiary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD1C2B2628368A0029738A /* Beneficiary+Extension.swift */; };
+		8BBD1C2F26283B5E0029738A /* Originator+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD1C2E26283B5E0029738A /* Originator+Extension.swift */; };
 		8BC29F79262487D400071401 /* PaymentParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC29F78262487D400071401 /* PaymentParameters.swift */; };
 		8BC29F7C26248AF700071401 /* PaymentParameters+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC29F7B26248AF700071401 /* PaymentParameters+Extension.swift */; };
 		8BC29F7F26248B4D00071401 /* MessagePayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC29F7E26248B4D00071401 /* MessagePayment.swift */; };
@@ -238,6 +243,11 @@
 		8BBD13AC261CB22800E62F6D /* PaymentRequestParameters+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaymentRequestParameters+Extension.swift"; sourceTree = "<group>"; };
 		8BBD13AF261CB88100E62F6D /* MessagePaymentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePaymentRequest.swift; sourceTree = "<group>"; };
 		8BBD13B2261EEDE900E62F6D /* PaymentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRequest.swift; sourceTree = "<group>"; };
+		8BBD1C22262831D00029738A /* PaymentAckParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAckParameters.swift; sourceTree = "<group>"; };
+		8BBD1C252628336B0029738A /* Payment+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Payment+Extension.swift"; sourceTree = "<group>"; };
+		8BBD1C28262833CB0029738A /* MessagePaymentACK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePaymentACK.swift; sourceTree = "<group>"; };
+		8BBD1C2B2628368A0029738A /* Beneficiary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Beneficiary+Extension.swift"; sourceTree = "<group>"; };
+		8BBD1C2E26283B5E0029738A /* Originator+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Originator+Extension.swift"; sourceTree = "<group>"; };
 		8BC29F78262487D400071401 /* PaymentParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentParameters.swift; sourceTree = "<group>"; };
 		8BC29F7B26248AF700071401 /* PaymentParameters+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaymentParameters+Extension.swift"; sourceTree = "<group>"; };
 		8BC29F7E26248B4D00071401 /* MessagePayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePayment.swift; sourceTree = "<group>"; };
@@ -406,6 +416,7 @@
 				8B47533725D2B58300383451 /* SenderParameters.swift */,
 				8B47532E25D2B21700383451 /* Enums */,
 				8B47532625D2B0A000383451 /* models */,
+				8BBD1C22262831D00029738A /* PaymentAckParameters.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -504,6 +515,9 @@
 				8B8E20FE2604AC6B00139EC0 /* String+Extension.swift */,
 				8BBD13AC261CB22800E62F6D /* PaymentRequestParameters+Extension.swift */,
 				8BC29F7B26248AF700071401 /* PaymentParameters+Extension.swift */,
+				8BBD1C252628336B0029738A /* Payment+Extension.swift */,
+				8BBD1C2B2628368A0029738A /* Beneficiary+Extension.swift */,
+				8BBD1C2E26283B5E0029738A /* Originator+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -549,6 +563,7 @@
 				8BBD13A9261CA82500E62F6D /* MessagePaymentDetails.swift */,
 				8BBD13AF261CB88100E62F6D /* MessagePaymentRequest.swift */,
 				8BC29F7E26248B4D00071401 /* MessagePayment.swift */,
+				8BBD1C28262833CB0029738A /* MessagePaymentACK.swift */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -906,6 +921,7 @@
 				8B8E21172609BE9F00139EC0 /* Originator.swift in Sources */,
 				8BC29F79262487D400071401 /* PaymentParameters.swift in Sources */,
 				8BE3FDC925D1778B00D78B62 /* Request.swift in Sources */,
+				8BBD1C2C2628368A0029738A /* Beneficiary+Extension.swift in Sources */,
 				8BE9170A25E7AAAD00426912 /* MessageAttestation.swift in Sources */,
 				8B47533825D2B58300383451 /* SenderParameters.swift in Sources */,
 				8B3E007D25D68B8200B8BE68 /* CertificateChain.swift in Sources */,
@@ -929,6 +945,7 @@
 				8BE3FDD425D17B4400D78B62 /* PearlApiRouter.swift in Sources */,
 				8BE9170F25E7B67E00426912 /* PkiDataParameters+Extension.swift in Sources */,
 				8BBD13AA261CA82500E62F6D /* MessagePaymentDetails.swift in Sources */,
+				8BBD1C262628336B0029738A /* Payment+Extension.swift in Sources */,
 				8BE9170625E7A8D500426912 /* MessageBeneficiary.swift in Sources */,
 				8BE3FDBA25D1736000D78B62 /* PearlApiService.swift in Sources */,
 				8BF24C3625D29E0600C922A3 /* Bip75.swift in Sources */,
@@ -941,10 +958,12 @@
 				8B47533C25D2B5D000383451 /* EncryptionParameters.swift in Sources */,
 				8BDEFBAC25ECFBF300577BAF /* ProtocolMessage.swift in Sources */,
 				8BBD13B0261CB88100E62F6D /* MessagePaymentRequest.swift in Sources */,
+				8BBD1C2F26283B5E0029738A /* Originator+Extension.swift in Sources */,
 				8B47534925D2B96200383451 /* AddressTagInformation.swift in Sources */,
 				8B8E20FF2604AC6B00139EC0 /* String+Extension.swift in Sources */,
 				8B0A46D025FF4CDF00B879F4 /* OpenSSLSigningHelper.cpp in Sources */,
 				8BE9171225E7E39600426912 /* MessageOutput.swift in Sources */,
+				8BBD1C29262833CB0029738A /* MessagePaymentACK.swift in Sources */,
 				8BF24C5025D2A4EC00C922A3 /* Bip75ServiceNetki.swift in Sources */,
 				8B47535625D2BA8400383451 /* StatusCode.swift in Sources */,
 				8BAAE2DE260B2B6500187722 /* AddressInformaionServiceNetki.swift in Sources */,
@@ -956,6 +975,7 @@
 				8BF24C3F25D29F8200C922A3 /* RecipientParameters.swift in Sources */,
 				8B47532C25D2B19900383451 /* PkiDataParameters.swift in Sources */,
 				8B47533F25D2B77700383451 /* Output.swift in Sources */,
+				8BBD1C23262831D00029738A /* PaymentAckParameters.swift in Sources */,
 				8B36B2E625C9A68800CE14E9 /* OpenSSLTools.mm in Sources */,
 				8B47535325D2BA3300383451 /* MessageInformation.swift in Sources */,
 				8B43C75B25E631C400ED9D56 /* InvoiceRequestParameters+Extension.swift in Sources */,

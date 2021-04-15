@@ -116,5 +116,13 @@ protocol Bip75 {
      */
     func parsePayment(paymentBinary: Data, recipientParameters: RecipientParameters?) throws -> Payment?
     
+    /**
+     * Create binary PaymentAck.
+     *
+     * @param paymentAckParameters data to create the PaymentAck.
+     * @return binary object of the message created.
+     * @throws EncryptionException if there is an error while creating the encrypted message.
+     */
+    func createPaymentACK(paymentAckParameters: PaymentAckParameters) throws -> Data?
     
 }

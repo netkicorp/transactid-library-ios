@@ -15,7 +15,7 @@ import Foundation
 
 extension PaymentParameters {
     
-    func toPaymentMessage() -> MessagePayment {
+    func toMessagePayment() -> MessagePayment {
         var messagePayment = MessagePayment()
         
         if let merchantData = self.merchantData {

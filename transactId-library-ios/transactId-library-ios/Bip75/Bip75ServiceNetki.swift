@@ -275,7 +275,7 @@ class Bip75ServiceNetki: Bip75Service {
         try paymentParameters.originatorParameters.validate(required: true, ownerType: .originator)
         try paymentParameters.beneficiaryParameters.validate(required: false, ownerType: .beneficiary)
         
-        var messagePayment = paymentParameters.toPaymentMessage()
+        var messagePayment = paymentParameters.toMessagePayment()
         
         paymentParameters.beneficiaryParameters.forEach { (beneficiaryParameters) in
             var beneficiaryMessage = beneficiaryParameters.toMessageBeneficiaryWithoutAttestations()
@@ -352,6 +352,24 @@ class Bip75ServiceNetki: Bip75Service {
                     return try messagePayment.toPayment(protocolMessageMetadata: protocolMessageMetadata)
                 }
             }
+        }
+        
+        return nil
+    }
+    
+    //MARK: PaymentACK
+
+    
+    func createPaymentACK(paymentAckParameters: PaymentAckParameters) throws -> Data? {
+        
+        if let messagePaymentACK = paymentAckParameters.payment?.toMessagePaymentACK(memo: paymentAckParameters.memo) {
+            
+            let paymentACK = try messagePaymentACK.serializedData()
+            
+            return try paymentACK.toProtocolMessageData(messageType: .paymentACK,
+                                                        messageInformation: paymentAckParameters.messageInformation,
+                                                        senderParameters: paymentAckParameters.senderParameters,
+                                                        recipientParameters: paymentAckParameters.recipientParameters)
         }
         
         return nil

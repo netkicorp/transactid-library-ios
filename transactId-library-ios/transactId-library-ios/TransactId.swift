@@ -21,12 +21,12 @@ public class TransactId {
     
     
     public func isInvoiceRequestValid(invoiceRequestBinary: Data,
-                               recipientParameters: RecipientParameters? = nil) throws -> Bool {
+                                      recipientParameters: RecipientParameters? = nil) throws -> Bool {
         return try self.bip75.isInvoiceRequestValid(invoiceRequestBinary: invoiceRequestBinary, recipientParameters: recipientParameters)
     }
     
     public func parseInvoiceRequest(invoiceRequestBinary: Data,
-                             recipientParameters: RecipientParameters? = nil) throws -> InvoiceRequest? {
+                                    recipientParameters: RecipientParameters? = nil) throws -> InvoiceRequest? {
         return try self.bip75.parseInvoiceRequest(invoiceRequestBinary: invoiceRequestBinary, recipientParameters: recipientParameters)
     }
     
@@ -53,5 +53,9 @@ public class TransactId {
     public func parsePayment(paymentBinary: Data, recipientParameters: RecipientParameters?) throws -> Payment? {
         return try self.bip75.parsePayment(paymentBinary: paymentBinary, recipientParameters: recipientParameters)
     }
-
+    
+    public func createPaymentACK(paymentAckParameters: PaymentAckParameters) throws -> Data? {
+        return try self.bip75.createPaymentACK(paymentAckParameters: paymentAckParameters)
+    }
+    
 }
