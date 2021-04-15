@@ -62,6 +62,7 @@
 		8B5BF57625D300B30086E7AF /* Exception.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BF57525D300B30086E7AF /* Exception.swift */; };
 		8B5BF57A25D3015D0086E7AF /* ExceptionMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5BF57925D3015D0086E7AF /* ExceptionMessages.swift */; };
 		8B7A60B525EFAC4A00C293F1 /* EncryptedProtocolMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A60B425EFAC4A00C293F1 /* EncryptedProtocolMessage.swift */; };
+		8B7B57502627249A00210392 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B574F2627249A00210392 /* Payment.swift */; };
 		8B8E20FF2604AC6B00139EC0 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E20FE2604AC6B00139EC0 /* String+Extension.swift */; };
 		8B8E21042608809900139EC0 /* TransactIdEncryptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E21032608809900139EC0 /* TransactIdEncryptionTests.swift */; };
 		8B8E210826090EC200139EC0 /* ProtocolMessageMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E210726090EC200139EC0 /* ProtocolMessageMetadata.swift */; };
@@ -221,6 +222,7 @@
 		8B5BF57525D300B30086E7AF /* Exception.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exception.swift; sourceTree = "<group>"; };
 		8B5BF57925D3015D0086E7AF /* ExceptionMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExceptionMessages.swift; sourceTree = "<group>"; };
 		8B7A60B425EFAC4A00C293F1 /* EncryptedProtocolMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedProtocolMessage.swift; sourceTree = "<group>"; };
+		8B7B574F2627249A00210392 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		8B8E20FE2604AC6B00139EC0 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		8B8E21032608809900139EC0 /* TransactIdEncryptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactIdEncryptionTests.swift; sourceTree = "<group>"; };
 		8B8E210726090EC200139EC0 /* ProtocolMessageMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMessageMetadata.swift; sourceTree = "<group>"; };
@@ -393,6 +395,8 @@
 				8B47533E25D2B77700383451 /* Output.swift */,
 				8B8E21192609BEC200139EC0 /* Owner.swift */,
 				8B47532725D2B0C900383451 /* OwnerParameters.swift */,
+				8B7B574F2627249A00210392 /* Payment.swift */,
+				8BC29F78262487D400071401 /* PaymentParameters.swift */,
 				8BBD13B2261EEDE900E62F6D /* PaymentRequest.swift */,
 				8BBD13A6261CA40000E62F6D /* PaymentRequestParameters.swift */,
 				8B8E211C2609BF0400139EC0 /* PkiData.swift */,
@@ -402,7 +406,6 @@
 				8B47533725D2B58300383451 /* SenderParameters.swift */,
 				8B47532E25D2B21700383451 /* Enums */,
 				8B47532625D2B0A000383451 /* models */,
-				8BC29F78262487D400071401 /* PaymentParameters.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -958,6 +961,7 @@
 				8B43C75B25E631C400ED9D56 /* InvoiceRequestParameters+Extension.swift in Sources */,
 				8B47532825D2B0C900383451 /* OwnerParameters.swift in Sources */,
 				8B47534525D2B87500383451 /* AddressInformation.swift in Sources */,
+				8B7B57502627249A00210392 /* Payment.swift in Sources */,
 				8BF24C3925D29F4E00C922A3 /* InvoiceRequestParameters.swift in Sources */,
 				8B47535925D2BBD300383451 /* OwnerType.swift in Sources */,
 				8BF24C4525D2A3D000C922A3 /* Bip75Netki.swift in Sources */,

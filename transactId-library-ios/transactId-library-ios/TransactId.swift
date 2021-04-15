@@ -50,5 +50,8 @@ public class TransactId {
         return try self.bip75.isPaymentValid(paymentBinary: paymentBinary, recipientParameters: recipientParameters)
     }
     
+    public func parsePayment(paymentBinary: Data, recipientParameters: RecipientParameters?) throws -> Payment? {
+        return try self.bip75.parsePayment(paymentBinary: paymentBinary, recipientParameters: recipientParameters)
+    }
 
 }

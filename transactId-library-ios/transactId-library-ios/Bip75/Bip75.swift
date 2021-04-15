@@ -105,4 +105,16 @@ protocol Bip75 {
      */
     func isPaymentValid(paymentBinary: Data, recipientParameters: RecipientParameters?) throws -> Bool
     
+    /**
+     * Parse binary Payment.
+     *
+     * @param paymentBinary binary data with the message to parse.
+     * @param recipientParameters information of the recipient of the message, the RecipientParameters.EncryptionParameters is mandatory to handle encrypted messages.
+     * @return Payment parsed.
+     * @exception InvalidObjectException if the binary is malformed.
+     * @exception EncryptionException if there is an error decrypting or validating the encryption.
+     */
+    func parsePayment(paymentBinary: Data, recipientParameters: RecipientParameters?) throws -> Payment?
+    
+    
 }

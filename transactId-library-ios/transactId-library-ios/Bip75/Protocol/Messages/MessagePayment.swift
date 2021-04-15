@@ -116,6 +116,46 @@ extension MessagePayment : SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
         5: .same(proto: "originators"),
         6: .same(proto: "beneficiaries")
     ]
+    
+    /**
+     * Transform MessagePayment to Payment object.
+     *
+     * @return Payment.
+     */
+    func toPayment(protocolMessageMetadata: ProtocolMessageMetadata? = nil) throws -> Payment? {
+        
+        var transactions: Array<Data> = []
+        self.transactions.forEach { (transaction) in
+            transactions.append(transaction)
+        }
+        
+        var outputs: Array<Output> = []
+        self.refundTo.forEach { (messageOutput) in
+            outputs.append(messageOutput.toOutput())
+        }
+        
+        var beneficiaries: Array<Beneficiary> = []
+        self.beneficiaries.forEach { (messageBeneficiary) in
+            beneficiaries.append(messageBeneficiary.toBeneficiary())
+        }
+        
+        var originators: Array<Originator> = []
+
+        self.originators.forEach { (messageOriginator) in
+            originators.append(messageOriginator.toOriginator())
+        }
+        
+        let payment = Payment()
+        payment.merchantData = self.merchantData.toString()
+        payment.transactions = transactions
+        payment.outputs = outputs
+        payment.memo = self.memo
+        payment.beneficiaries = beneficiaries
+        payment.originators = originators
+        payment.protocolMessageMetadata = protocolMessageMetadata
+        
+        return payment
+    }
 }
 
 

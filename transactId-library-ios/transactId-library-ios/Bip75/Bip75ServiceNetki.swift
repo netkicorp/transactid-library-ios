@@ -345,6 +345,18 @@ class Bip75ServiceNetki: Bip75Service {
         return false
     }
     
+    func parsePayment(paymentBinary: Data, recipientParameters: RecipientParameters?) throws -> Payment? {
+        if let protocolMessageMetadata = try paymentBinary.extractProtocolMessageMetadata() {
+            if let messagePaymentData = try paymentBinary.getSerializedMessage(encrypted: protocolMessageMetadata.encrypted, recipientParameters: recipientParameters) {
+                if let messagePayment = try messagePaymentData.toMessagePayment() {
+                    return try messagePayment.toPayment(protocolMessageMetadata: protocolMessageMetadata)
+                }
+            }
+        }
+        
+        return nil
+    }
+    
     //MARK: Private methods
     
     private func validateCertificate(pkiType: PkiType, certificate: String?) throws -> Bool {
