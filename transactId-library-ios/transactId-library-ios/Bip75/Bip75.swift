@@ -125,4 +125,28 @@ protocol Bip75 {
      */
     func createPaymentACK(paymentAckParameters: PaymentAckParameters) throws -> Data?
     
+    /**
+     * Validate if a binary PaymentAck is valid.
+     *
+     * @param paymentAckBinary binary data to validate.
+     * @param recipientParameters information of the recipient of the message, the RecipientParameters.EncryptionParameters is mandatory to handle encrypted messages.
+     * @return true if is valid.
+     * @exception InvalidObjectException if the binary is malformed.
+     * @exception EncryptionException if there is an error decrypting or validating the encryption.
+     */
+    func isPaymentACKValid(paymentAckBinary: Data, recipientParameters: RecipientParameters?) throws -> Bool
+    
+    /**
+     * Parse binary PaymentAck.
+     *
+     * @param paymentAckBinary binary data with the message to parse.
+     * @param recipientParameters information of the recipient of the message, the RecipientParameters.EncryptionParameters is mandatory to handle encrypted messages.
+     * @return PaymentAck parsed.
+     * @exception InvalidObjectException if the binary is malformed.
+     * @exception EncryptionException if there is an error decrypting or validating the encryption.
+     */
+    
+    func parsePaymentACK(paymentAckBinary: Data, recipientParameters: RecipientParameters?) throws -> PaymentACK?
+
+    
 }

@@ -261,6 +261,20 @@ extension Data {
     }
     
     /**
+     * Transform binary PaymentACK to MessagePaymentACK.
+     *
+     * @return MessagePaymentACK
+     * @throws InvalidObjectException if there is an error parsing the object.
+     */
+    func toMessagePaymentACK() throws -> MessagePaymentACK? {
+        do {
+            return try MessagePaymentACK(serializedData: self)
+        } catch let exception {
+            throw Exception.InvalidObjectException(String(format: ExceptionMessages.parseBinaryMessageInvalidInput, exception.localizedDescription))
+        }
+    }
+    
+    /**
      * Validate if sender signature of a EncryptedProtocolMessage is valid.
      *
      * @return true if yes, false otherwise.

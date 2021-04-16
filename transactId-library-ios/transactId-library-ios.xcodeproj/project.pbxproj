@@ -84,6 +84,7 @@
 		8BBD1C29262833CB0029738A /* MessagePaymentACK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD1C28262833CB0029738A /* MessagePaymentACK.swift */; };
 		8BBD1C2C2628368A0029738A /* Beneficiary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD1C2B2628368A0029738A /* Beneficiary+Extension.swift */; };
 		8BBD1C2F26283B5E0029738A /* Originator+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD1C2E26283B5E0029738A /* Originator+Extension.swift */; };
+		8BBD1C3226296CC90029738A /* PaymentACK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD1C3126296CC90029738A /* PaymentACK.swift */; };
 		8BC29F79262487D400071401 /* PaymentParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC29F78262487D400071401 /* PaymentParameters.swift */; };
 		8BC29F7C26248AF700071401 /* PaymentParameters+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC29F7B26248AF700071401 /* PaymentParameters+Extension.swift */; };
 		8BC29F7F26248B4D00071401 /* MessagePayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC29F7E26248B4D00071401 /* MessagePayment.swift */; };
@@ -248,6 +249,7 @@
 		8BBD1C28262833CB0029738A /* MessagePaymentACK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePaymentACK.swift; sourceTree = "<group>"; };
 		8BBD1C2B2628368A0029738A /* Beneficiary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Beneficiary+Extension.swift"; sourceTree = "<group>"; };
 		8BBD1C2E26283B5E0029738A /* Originator+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Originator+Extension.swift"; sourceTree = "<group>"; };
+		8BBD1C3126296CC90029738A /* PaymentACK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentACK.swift; sourceTree = "<group>"; };
 		8BC29F78262487D400071401 /* PaymentParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentParameters.swift; sourceTree = "<group>"; };
 		8BC29F7B26248AF700071401 /* PaymentParameters+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaymentParameters+Extension.swift"; sourceTree = "<group>"; };
 		8BC29F7E26248B4D00071401 /* MessagePayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePayment.swift; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 				8B47532E25D2B21700383451 /* Enums */,
 				8B47532625D2B0A000383451 /* models */,
 				8BBD1C22262831D00029738A /* PaymentAckParameters.swift */,
+				8BBD1C3126296CC90029738A /* PaymentACK.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -944,6 +947,7 @@
 				8BF24C4225D2A18E00C922A3 /* Bip75Factory.swift in Sources */,
 				8BE3FDD425D17B4400D78B62 /* PearlApiRouter.swift in Sources */,
 				8BE9170F25E7B67E00426912 /* PkiDataParameters+Extension.swift in Sources */,
+				8BBD1C3226296CC90029738A /* PaymentACK.swift in Sources */,
 				8BBD13AA261CA82500E62F6D /* MessagePaymentDetails.swift in Sources */,
 				8BBD1C262628336B0029738A /* Payment+Extension.swift in Sources */,
 				8BE9170625E7A8D500426912 /* MessageBeneficiary.swift in Sources */,

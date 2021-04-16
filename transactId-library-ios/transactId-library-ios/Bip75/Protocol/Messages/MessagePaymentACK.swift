@@ -59,4 +59,17 @@ extension MessagePaymentACK : SwiftProtobuf.Message, SwiftProtobuf._MessageImple
         1: .same(proto: "payment"),
         2: .same(proto: "memo")
     ]
+    
+    /**
+     * Transform MessagePaymentACK to PaymentACK object.
+     *
+     * @return PaymentACK.
+     */
+    func toPaymentACK(protocolMessageMetadata: ProtocolMessageMetadata? = nil) throws -> PaymentACK? {
+        let paymentACK = PaymentACK()
+        paymentACK.payment = try self.payment.toPayment()
+        paymentACK.memo = self.memo
+        paymentACK.protocolMessageMetadata = protocolMessageMetadata
+        return paymentACK
+    }
 }
