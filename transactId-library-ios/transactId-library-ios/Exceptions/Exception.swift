@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Exception : Error {
+public enum Exception : Error {
     case AddressProviderErrorException(String)
     case AddressProviderUnauthorizedException(String)
     case CertificateProviderException(String)

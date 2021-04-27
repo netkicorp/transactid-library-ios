@@ -60,11 +60,11 @@ class Bip75Netki: Bip75 {
     }
     
     func isPaymentACKValid(paymentAckBinary: Data, recipientParameters: RecipientParameters?) throws -> Bool {
-        return try self.isPaymentACKValid(paymentAckBinary: paymentAckBinary, recipientParameters: recipientParameters)
+        return try self.bip75Service.isPaymentACKValid(paymentAckBinary: paymentAckBinary, recipientParameters: recipientParameters)
     }
     
     func parsePaymentACK(paymentAckBinary: Data, recipientParameters: RecipientParameters?) throws -> PaymentACK? {
-        return try self.parsePaymentACK(paymentAckBinary: paymentAckBinary, recipientParameters: recipientParameters)
+        return try self.bip75Service.parsePaymentACK(paymentAckBinary: paymentAckBinary, recipientParameters: recipientParameters)
     }
     
 }

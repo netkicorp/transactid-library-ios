@@ -37,7 +37,6 @@
 		8B36B2E625C9A68800CE14E9 /* OpenSSLTools.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B2E425C9A68800CE14E9 /* OpenSSLTools.mm */; };
 		8B36B2E825C9B3E000CE14E9 /* CryptoModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B2E725C9B3E000CE14E9 /* CryptoModule.swift */; };
 		8B36B32425CACE1800CE14E9 /* LocalStoreProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B32325CACE1800CE14E9 /* LocalStoreProvider.swift */; };
-		8B36B37D25CADE9E00CE14E9 /* transactId_library_ios_tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B36B37C25CADE9E00CE14E9 /* transactId_library_ios_tests.swift */; };
 		8B36B37F25CADE9E00CE14E9 /* transactId_library_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B36B2AD25C984B400CE14E9 /* transactId_library_ios.framework */; };
 		8B3E007D25D68B8200B8BE68 /* CertificateChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E007C25D68B8200B8BE68 /* CertificateChain.swift */; };
 		8B43C75B25E631C400ED9D56 /* InvoiceRequestParameters+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43C75A25E631C400ED9D56 /* InvoiceRequestParameters+Extension.swift */; };
@@ -71,6 +70,10 @@
 		8B8E211D2609BF0400139EC0 /* PkiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E211C2609BF0400139EC0 /* PkiData.swift */; };
 		8B8E21202609C8E200139EC0 /* Beneficiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E211F2609C8E200139EC0 /* Beneficiary.swift */; };
 		8B92870A25DC0C5E005AB4B0 /* TrustStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C2F25D1CB3900C922A3 /* TrustStore.swift */; };
+		8BA437E6262F008A003634FE /* TransactIdInvoiceRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA437E5262F008A003634FE /* TransactIdInvoiceRequestTests.swift */; };
+		8BA437E9262F00A2003634FE /* TransactIdPaymentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA437E8262F00A2003634FE /* TransactIdPaymentTests.swift */; };
+		8BA437EC262F00B5003634FE /* TransactIdPaymentACKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA437EB262F00B5003634FE /* TransactIdPaymentACKTests.swift */; };
+		8BA437EF262F00D8003634FE /* TransactIdPaymentRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA437EE262F00D8003634FE /* TransactIdPaymentRequestTests.swift */; };
 		8BAAE2D9260B2B3000187722 /* AddressInformationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAE2D8260B2B3000187722 /* AddressInformationService.swift */; };
 		8BAAE2DE260B2B6500187722 /* AddressInformaionServiceNetki.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAE2DD260B2B6500187722 /* AddressInformaionServiceNetki.swift */; };
 		8BAAE2E1260B326E00187722 /* AddressInformationRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAE2E0260B326E00187722 /* AddressInformationRepo.swift */; };
@@ -203,7 +206,6 @@
 		8B36B2E725C9B3E000CE14E9 /* CryptoModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoModule.swift; sourceTree = "<group>"; };
 		8B36B32325CACE1800CE14E9 /* LocalStoreProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStoreProvider.swift; sourceTree = "<group>"; };
 		8B36B37A25CADE9E00CE14E9 /* transactId_library_ios-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "transactId_library_ios-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B36B37C25CADE9E00CE14E9 /* transactId_library_ios_tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = transactId_library_ios_tests.swift; sourceTree = "<group>"; };
 		8B36B37E25CADE9E00CE14E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B3E007C25D68B8200B8BE68 /* CertificateChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateChain.swift; sourceTree = "<group>"; };
 		8B43C75A25E631C400ED9D56 /* InvoiceRequestParameters+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvoiceRequestParameters+Extension.swift"; sourceTree = "<group>"; };
@@ -236,6 +238,10 @@
 		8B8E21192609BEC200139EC0 /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
 		8B8E211C2609BF0400139EC0 /* PkiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PkiData.swift; sourceTree = "<group>"; };
 		8B8E211F2609C8E200139EC0 /* Beneficiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beneficiary.swift; sourceTree = "<group>"; };
+		8BA437E5262F008A003634FE /* TransactIdInvoiceRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactIdInvoiceRequestTests.swift; sourceTree = "<group>"; };
+		8BA437E8262F00A2003634FE /* TransactIdPaymentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactIdPaymentTests.swift; sourceTree = "<group>"; };
+		8BA437EB262F00B5003634FE /* TransactIdPaymentACKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactIdPaymentACKTests.swift; sourceTree = "<group>"; };
+		8BA437EE262F00D8003634FE /* TransactIdPaymentRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactIdPaymentRequestTests.swift; sourceTree = "<group>"; };
 		8BAAE2D8260B2B3000187722 /* AddressInformationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInformationService.swift; sourceTree = "<group>"; };
 		8BAAE2DD260B2B6500187722 /* AddressInformaionServiceNetki.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInformaionServiceNetki.swift; sourceTree = "<group>"; };
 		8BAAE2E0260B326E00187722 /* AddressInformationRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInformationRepo.swift; sourceTree = "<group>"; };
@@ -461,11 +467,14 @@
 		8B36B37B25CADE9E00CE14E9 /* transactId_library_ios-tests */ = {
 			isa = PBXGroup;
 			children = (
-				8B36B37C25CADE9E00CE14E9 /* transactId_library_ios_tests.swift */,
 				8B36B37E25CADE9E00CE14E9 /* Info.plist */,
 				8B43C77B25E66E4000ED9D56 /* TestData.swift */,
 				8B43C77E25E66E6F00ED9D56 /* TransactIdTests.swift */,
 				8B8E21032608809900139EC0 /* TransactIdEncryptionTests.swift */,
+				8BA437E5262F008A003634FE /* TransactIdInvoiceRequestTests.swift */,
+				8BA437E8262F00A2003634FE /* TransactIdPaymentTests.swift */,
+				8BA437EB262F00B5003634FE /* TransactIdPaymentACKTests.swift */,
+				8BA437EE262F00D8003634FE /* TransactIdPaymentRequestTests.swift */,
 			);
 			path = "transactId_library_ios-tests";
 			sourceTree = "<group>";
@@ -1002,11 +1011,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BA437E6262F008A003634FE /* TransactIdInvoiceRequestTests.swift in Sources */,
 				8B92870A25DC0C5E005AB4B0 /* TrustStore.swift in Sources */,
 				8B8E21042608809900139EC0 /* TransactIdEncryptionTests.swift in Sources */,
+				8BA437E9262F00A2003634FE /* TransactIdPaymentTests.swift in Sources */,
 				8B43C77F25E66E6F00ED9D56 /* TransactIdTests.swift in Sources */,
-				8B36B37D25CADE9E00CE14E9 /* transactId_library_ios_tests.swift in Sources */,
 				8B43C77C25E66E4000ED9D56 /* TestData.swift in Sources */,
+				8BA437EF262F00D8003634FE /* TransactIdPaymentRequestTests.swift in Sources */,
+				8BA437EC262F00B5003634FE /* TransactIdPaymentACKTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

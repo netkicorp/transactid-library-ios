@@ -15,24 +15,23 @@ public class PkiDataParameters {
     /**
      * Type of certificate.
      */
-    var attestation: Attestation? = .legalPersonPrimaryName
+    public var attestation: Attestation? = .legalPersonPrimaryName
     
     /**
      * PrivateKey in PEM format.
      */
     
-    var privateKeyPem: String? = nil
+    public var privateKeyPem: String? = nil
     
     /**
      * Certificate in PEM format associated with PrivateKey.
      */
-    var certificatePem: String? = nil
-    
+    public var certificatePem: String? = nil
     
     /**
      * Type of the Pki data associated.
      */
-    var type: PkiType = .none
+    public var type: PkiType = .none
     
     public init(attestation: Attestation? = nil, privateKeyPem: String? = nil, certificatePem: String? = nil, type: PkiType = .none) {
         self.attestation = attestation

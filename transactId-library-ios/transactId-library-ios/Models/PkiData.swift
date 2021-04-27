@@ -11,25 +11,25 @@ import Foundation
  * Pki data in a message.
  */
 
-class PkiData {
+public class PkiData {
     
     /**
      * Type of certificate.
      */
-    var attestation: Attestation? = nil
+    public var attestation: Attestation? = nil
     
     /**
      * Certificate in PEM format associated with PrivateKey.
      */
-    var certificate: String = ""
+    public var certificate: String = ""
     
     /**
      * Pki type.
      */
-    var pkiType: PkiType? = nil
+    public var pkiType: PkiType? = nil
     
     /**
      * Signature created with this attestation.
      */
-    var signature: String = ""
+    public var signature: String = ""
 }

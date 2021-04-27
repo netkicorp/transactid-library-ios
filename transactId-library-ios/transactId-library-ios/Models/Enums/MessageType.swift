@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum  MessageType : Int {
+public enum  MessageType : Int {
 
     case unknownMessageType
     case invoiceRequest

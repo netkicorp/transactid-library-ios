@@ -25,10 +25,10 @@ class TransactIdTests: XCTestCase {
         let originatorParameters = [TestData.Originators.PRIMARY_ORIGINATOR_PKI_X509SHA256,
                                     TestData.Originators.NO_PRIMARY_ORIGINATOR_PKI_X509SHA256]
         
-        let originatorsAddresses = TestData.Outputs.OUTPUTS
-        let beneficiaryParameters = [TestData.Beneficiaries.PRIMARY_BENEFICIARY_PKI_NONE]
-        let senderParameters = TestData.Senders.SENDER_PKI_X509SHA256
-        let attestationsRequested = TestData.Attestations.REQUESTED_ATTESTATIONS
+        let originatorsAddresses = TestData.Outputs.outputs
+        let beneficiaryParameters = [TestData.Beneficiaries.primaryBeneficiaryParametersPkiNone]
+        let senderParameters = TestData.Senders.senderPkiX509SHA256
+        let attestationsRequested = TestData.Attestations.requestedAttestations
         
         let invoiceRequestParameters = InvoiceRequestParameters()
         invoiceRequestParameters.amount = 1000
@@ -53,15 +53,15 @@ class TransactIdTests: XCTestCase {
         let originatorParameters = [TestData.Originators.PRIMARY_ORIGINATOR_PKI_X509SHA256,
                                     TestData.Originators.NO_PRIMARY_ORIGINATOR_PKI_X509SHA256]
         
-        let originatorsAddresses = TestData.Outputs.OUTPUTS
+        let originatorsAddresses = TestData.Outputs.outputs
         
-        let beneficiaryParameters = [TestData.Beneficiaries.PRIMARY_BENEFICIARY_PKI_NONE]
+        let beneficiaryParameters = [TestData.Beneficiaries.primaryBeneficiaryParametersPkiNone]
         
-        let senderParameters = TestData.Senders.SENDER_PKI_X509SHA256_WITH_ENCRYPTION
+        let senderParameters = TestData.Senders.senderPkiX509SHA256WithEncryption
         
-        let attestationsRequested = TestData.Attestations.REQUESTED_ATTESTATIONS
+        let attestationsRequested = TestData.Attestations.requestedAttestations
         
-        let recipientParameters = TestData.Recipients.RECIPIENTS_PARAMETERS_WITH_ENCRYPTION
+        let recipientParameters = TestData.Recipients.recipientsParametersWithEncryption
         
         let messageInformation = MessageInformation()
         messageInformation.encryptMessage = true

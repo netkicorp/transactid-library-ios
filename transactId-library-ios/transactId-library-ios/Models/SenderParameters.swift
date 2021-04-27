@@ -15,18 +15,18 @@ public class SenderParameters {
     /**
      * PkiData associated to the sender.
      */
-    var pkiDataParameters: PkiDataParameters? = nil
+    public var pkiDataParameters: PkiDataParameters? = nil
     
     /**
      * Parameters needed if you want to encrypt the protocol message.
      * If you add the parameters here, the encryption of the message will happen automatically.
      */
-    var encryptionParameters: EncryptionParameters? = nil
+    public var encryptionParameters: EncryptionParameters? = nil
     
     /**
      * EV Certificate in PEM format.
      */
-    var evCertificatePem: String? = nil
+    public var evCertificatePem: String? = nil
     
     public init(pkiDataParameters: PkiDataParameters? = nil, evCertificatePem: String? = nil, encryptionParameters: EncryptionParameters? = nil) {
         self.pkiDataParameters = pkiDataParameters
