@@ -251,7 +251,7 @@ struct TestData {
         
         static let noPrimaryOriginatorPkiNone = OriginatorParameters(isPrimaryForTransaction: false, pkiDataParametersSets: [TestData.PkiData.pkiDataOneOwnerX509SHA256,
                                                                                                                              TestData.PkiData.pkiDataTwoOwnerX509SHA256])
-
+        
         
     }
     
@@ -391,6 +391,10 @@ struct TestData {
     // MARK: Recipients
     
     struct Recipients {
+        
+        static let recipientsParameters = RecipientParameters(vaspName: "VASP_1",
+                                                              chainAddress: "1234567890ABCD")
+        
         static let recipientsParametersWithEncryption = RecipientParameters(vaspName: "VASP_1",
                                                                             chainAddress: "1234567890ABCD",
                                                                             encryptionParameters: TestData.Encryptions.recipientEncryptionParameters)
