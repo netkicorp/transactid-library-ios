@@ -469,9 +469,9 @@
 				8B43C77B25E66E4000ED9D56 /* TestData.swift */,
 				8B8E21032608809900139EC0 /* TransactIdEncryptionTests.swift */,
 				8BA437E5262F008A003634FE /* TransactIdInvoiceRequestTests.swift */,
-				8BA437E8262F00A2003634FE /* TransactIdPaymentTests.swift */,
 				8BA437EB262F00B5003634FE /* TransactIdPaymentACKTests.swift */,
 				8BA437EE262F00D8003634FE /* TransactIdPaymentRequestTests.swift */,
+				8BA437E8262F00A2003634FE /* TransactIdPaymentTests.swift */,
 			);
 			path = "transactId_library_ios-tests";
 			sourceTree = "<group>";
