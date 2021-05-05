@@ -12,6 +12,8 @@ import Foundation
  */
 public class Payment {
     
+    public init() { }
+    
     /**
      * Copied from PaymentDetails.merchantData.
      * Merchants may use invoice numbers or any other data they require to match Payments to PaymentRequests.

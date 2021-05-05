@@ -62,7 +62,6 @@
 		8B7A60B525EFAC4A00C293F1 /* EncryptedProtocolMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7A60B425EFAC4A00C293F1 /* EncryptedProtocolMessage.swift */; };
 		8B7B57502627249A00210392 /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B574F2627249A00210392 /* Payment.swift */; };
 		8B8E20FF2604AC6B00139EC0 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E20FE2604AC6B00139EC0 /* String+Extension.swift */; };
-		8B8E21042608809900139EC0 /* TransactIdEncryptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E21032608809900139EC0 /* TransactIdEncryptionTests.swift */; };
 		8B8E210826090EC200139EC0 /* ProtocolMessageMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E210726090EC200139EC0 /* ProtocolMessageMetadata.swift */; };
 		8B8E21172609BE9F00139EC0 /* Originator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E21162609BE9F00139EC0 /* Originator.swift */; };
 		8B8E211A2609BEC200139EC0 /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E21192609BEC200139EC0 /* Owner.swift */; };
@@ -230,7 +229,6 @@
 		8B7A60B425EFAC4A00C293F1 /* EncryptedProtocolMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedProtocolMessage.swift; sourceTree = "<group>"; };
 		8B7B574F2627249A00210392 /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		8B8E20FE2604AC6B00139EC0 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		8B8E21032608809900139EC0 /* TransactIdEncryptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactIdEncryptionTests.swift; sourceTree = "<group>"; };
 		8B8E210726090EC200139EC0 /* ProtocolMessageMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolMessageMetadata.swift; sourceTree = "<group>"; };
 		8B8E21162609BE9F00139EC0 /* Originator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Originator.swift; sourceTree = "<group>"; };
 		8B8E21192609BEC200139EC0 /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
@@ -467,7 +465,6 @@
 			children = (
 				8B36B37E25CADE9E00CE14E9 /* Info.plist */,
 				8B43C77B25E66E4000ED9D56 /* TestData.swift */,
-				8B8E21032608809900139EC0 /* TransactIdEncryptionTests.swift */,
 				8BA437E5262F008A003634FE /* TransactIdInvoiceRequestTests.swift */,
 				8BA437EB262F00B5003634FE /* TransactIdPaymentACKTests.swift */,
 				8BA437EE262F00D8003634FE /* TransactIdPaymentRequestTests.swift */,
@@ -1010,7 +1007,6 @@
 			files = (
 				8BA437E6262F008A003634FE /* TransactIdInvoiceRequestTests.swift in Sources */,
 				8B92870A25DC0C5E005AB4B0 /* TrustStore.swift in Sources */,
-				8B8E21042608809900139EC0 /* TransactIdEncryptionTests.swift in Sources */,
 				8BA437E9262F00A2003634FE /* TransactIdPaymentTests.swift in Sources */,
 				8B43C77C25E66E4000ED9D56 /* TestData.swift in Sources */,
 				8BA437EF262F00D8003634FE /* TransactIdPaymentRequestTests.swift in Sources */,
