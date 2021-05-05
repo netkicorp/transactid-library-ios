@@ -11,7 +11,7 @@ extension Array where Element : OwnerParameters  {
     
     func validate(required: Bool, ownerType: OwnerType) throws {
         if (required && self.isEmpty) {
-            throw Exception.InvalidOwnersException(String(format: ExceptionMessages.OWNERS_VALIDATION_EMPTY_ERROR, ownerType.rawValue))
+            throw Exception.InvalidOwnersException(String(format: ExceptionMessages.ownersValidationEmptyError, ownerType.rawValue))
         } else if (!required && self.isEmpty) {
             return
         }
@@ -19,11 +19,11 @@ extension Array where Element : OwnerParameters  {
         let numberOfPrimaryOwners = self.filter{ $0.isPrimaryForTransaction }.count
         
         if (numberOfPrimaryOwners == 0) {
-            throw Exception.InvalidOwnersException(String(format: ExceptionMessages.OWNERS_VALIDATION_NO_PRIMARY_OWNER, ownerType.rawValue))
+            throw Exception.InvalidOwnersException(String(format: ExceptionMessages.ownersValidationNoPrimaryOwner, ownerType.rawValue))
         }
         
         if (numberOfPrimaryOwners > 1) {
-            throw Exception.InvalidOwnersException(String(format: ExceptionMessages.OWNERS_VALIDATION_MULTIPLE_PRIMARY_OWNERS, ownerType.rawValue))
+            throw Exception.InvalidOwnersException(String(format: ExceptionMessages.ownersValidationMultiplePrimaryOwners, ownerType.rawValue))
         }
     }
 }

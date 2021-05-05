@@ -65,11 +65,11 @@ class CertificateValidator {
         if let certificates = self.pemCertificatesToArray(certificatesPem: clientCertificatePem) {
             if let clientCertificate = self.getClientCertificate(certificates: certificates) {
                 if !self.openSSLTools.validateNot(beforeExpirationCertificate: clientCertificate) {
-                    throw Exception.InvalidCertificateException(ExceptionMessages.CERTIFICATE_VALIDATION_CERTIFICATE_NOT_YET_VALID)
+                    throw Exception.InvalidCertificateException(ExceptionMessages.certificateValidationCertificateNotYetValid)
                 }
                 
                 if !self.openSSLTools.validateNot(afterExpirationCertificate: clientCertificate) {
-                    throw Exception.InvalidCertificateException(ExceptionMessages.CERTIFICATE_VALIDATION_CERTIFICATE_EXPIRED)
+                    throw Exception.InvalidCertificateException(ExceptionMessages.certificateValidationCertificateExpired)
                     
                 }
                 return true
@@ -92,7 +92,7 @@ class CertificateValidator {
                     try distributionPoints.forEach({ (distributionPoint) in
                         if let crl = distributionPoint {
                             if (self.isRevoked(crl: crl, certificate: clientCertificate)) {
-                                throw Exception.InvalidCertificateException(ExceptionMessages.CERTIFICATE_VALIDATION_CERTIFICATE_REVOKED)
+                                throw Exception.InvalidCertificateException(ExceptionMessages.certificateValidationCertificateRevoked)
                             }
                         }
                     })
@@ -150,12 +150,12 @@ class CertificateValidator {
     private func validateCertificatesInput(clientCertificate: String, intermediateCertificates: Array<String>, certificateChains: Array<CertificateChain>) throws {
         
         if !self.isClientCertificate(certificate: clientCertificate) {
-            throw Exception.InvalidOwnersException(String(format: ExceptionMessages.CERTIFICATE_VALIDATION_NOT_CORRECT_CERTIFICATE_ERROR, clientCertificate, "Client"))
+            throw Exception.InvalidOwnersException(String(format: ExceptionMessages.certificateValidationNotCorrectCertificateError, clientCertificate, "Client"))
         }
         
         try intermediateCertificates.forEach { (intermediateCertificate) in
             if !self.isIntermediateCertificate(certificate: intermediateCertificate) {
-                throw Exception.InvalidOwnersException(String(format: ExceptionMessages.CERTIFICATE_VALIDATION_NOT_CORRECT_CERTIFICATE_ERROR, intermediateCertificate, "Intermediate"))
+                throw Exception.InvalidOwnersException(String(format: ExceptionMessages.certificateValidationNotCorrectCertificateError, intermediateCertificate, "Intermediate"))
             }
         }
         
@@ -163,12 +163,12 @@ class CertificateValidator {
             let rootCertificate = certificateChain.rootCertificate
             
             if !self.isRootCertificate(certificate: rootCertificate) {
-                throw Exception.InvalidOwnersException(String(format: ExceptionMessages.CERTIFICATE_VALIDATION_NOT_CORRECT_CERTIFICATE_ERROR, rootCertificate, "Root"))
+                throw Exception.InvalidOwnersException(String(format: ExceptionMessages.certificateValidationNotCorrectCertificateError, rootCertificate, "Root"))
             }
             
             try certificateChain.intermediateCertificates.forEach { (certificate) in
                 if !self.isIntermediateCertificate(certificate: certificate) {
-                    throw Exception.InvalidOwnersException(String(format: ExceptionMessages.CERTIFICATE_VALIDATION_NOT_CORRECT_CERTIFICATE_ERROR, certificate, "Intermediate"))
+                    throw Exception.InvalidOwnersException(String(format: ExceptionMessages.certificateValidationNotCorrectCertificateError, certificate, "Intermediate"))
                 }
             }
         }
