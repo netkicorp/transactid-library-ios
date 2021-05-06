@@ -81,4 +81,72 @@ protocol Bip75 {
      * @exception EncryptionException if there is an error decrypting or validating the encryption.
      */
     func parsePaymentRequest(paymentRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> PaymentRequest?
+    
+    /**
+     * Create binary Payment.
+     *
+     * @param paymentParameters data to create the Payment.
+     * @return binary object of the message created.
+     * @throws EncryptionException if there is an error while creating the encrypted message.
+     */
+    func createPayment(paymentParameters: PaymentParameters) throws -> Data?
+    
+    /**
+     * Validate if a binary Payment is valid.
+     *
+     * @param paymentBinary binary data to validate.
+     * @param recipientParameters information of the recipient of the message, the RecipientParameters.EncryptionParameters is mandatory to handle encrypted messages.
+     * @return true if is valid.
+     * @exception InvalidObjectException if the binary is malformed.
+     * @exception InvalidSignatureException if the signature in the binary is not valid.
+     * @exception InvalidCertificateException if there is a problem with the certificates.
+     * @exception InvalidCertificateChainException if the certificate chain is not valid.
+     * @exception EncryptionException if there is an error decrypting or validating the encryption.
+     */
+    func isPaymentValid(paymentBinary: Data, recipientParameters: RecipientParameters?) throws -> Bool
+    
+    /**
+     * Parse binary Payment.
+     *
+     * @param paymentBinary binary data with the message to parse.
+     * @param recipientParameters information of the recipient of the message, the RecipientParameters.EncryptionParameters is mandatory to handle encrypted messages.
+     * @return Payment parsed.
+     * @exception InvalidObjectException if the binary is malformed.
+     * @exception EncryptionException if there is an error decrypting or validating the encryption.
+     */
+    func parsePayment(paymentBinary: Data, recipientParameters: RecipientParameters?) throws -> Payment?
+    
+    /**
+     * Create binary PaymentAck.
+     *
+     * @param paymentAckParameters data to create the PaymentAck.
+     * @return binary object of the message created.
+     * @throws EncryptionException if there is an error while creating the encrypted message.
+     */
+    func createPaymentACK(paymentAckParameters: PaymentAckParameters) throws -> Data?
+    
+    /**
+     * Validate if a binary PaymentAck is valid.
+     *
+     * @param paymentAckBinary binary data to validate.
+     * @param recipientParameters information of the recipient of the message, the RecipientParameters.EncryptionParameters is mandatory to handle encrypted messages.
+     * @return true if is valid.
+     * @exception InvalidObjectException if the binary is malformed.
+     * @exception EncryptionException if there is an error decrypting or validating the encryption.
+     */
+    func isPaymentACKValid(paymentAckBinary: Data, recipientParameters: RecipientParameters?) throws -> Bool
+    
+    /**
+     * Parse binary PaymentAck.
+     *
+     * @param paymentAckBinary binary data with the message to parse.
+     * @param recipientParameters information of the recipient of the message, the RecipientParameters.EncryptionParameters is mandatory to handle encrypted messages.
+     * @return PaymentAck parsed.
+     * @exception InvalidObjectException if the binary is malformed.
+     * @exception EncryptionException if there is an error decrypting or validating the encryption.
+     */
+    
+    func parsePaymentACK(paymentAckBinary: Data, recipientParameters: RecipientParameters?) throws -> PaymentACK?
+
+    
 }

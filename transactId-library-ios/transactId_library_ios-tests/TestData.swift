@@ -12,7 +12,7 @@ struct TestData {
     
     struct ClientKeys {
         
-        static let  CLIENT_PRIVATE_KEY_CHAIN_ONE =
+        static let clientPrivateKeyChainOne =
             "-----BEGIN PRIVATE KEY-----\n" +
             "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC6Cewmk32GFk2H\n" +
             "LvXDA+zRmDvQ0AgStmxnAbuwkSliENEZ3o12ATqT1mTelYqslfBQ7Q9Tw3bb28me\n" +
@@ -42,7 +42,7 @@ struct TestData {
             "HQXlAbM9ti7vD4xl3iK1uDfQ\n" +
             "-----END PRIVATE KEY-----\n"
         
-        static let CLIENT_PRIVATE_KEY_CHAIN_TWO =
+        static let clientPrivateKeyChainTwo =
             "-----BEGIN PRIVATE KEY-----\n" +
             "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCNlLtFpZsqX91p\n" +
             "QQ9Ko6Tok+OcpXzgsB9LD4SG91HE7fbgWC+OFZ9adczJ6E/NoznepqEma0NBODqp\n" +
@@ -120,7 +120,7 @@ struct TestData {
             "JcbgrTguZRQi0GI2V24OiEzuGRLxQIgHuFBHUR7B820f\n" +
             "-----END CERTIFICATE-----\n"
         
-        static let EV_CERT =
+        static let evCert =
             "-----BEGIN CERTIFICATE-----\n" +
             "MIIHdDCCBlygAwIBAgIQB0Haxhm5e7comqWUzibAzTANBgkqhkiG9w0BAQsFADB1MQswCQYDVQQ\n" +
             "GEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3d3cuZGlnaWNlcnQuY29tMT\n" +
@@ -159,44 +159,135 @@ struct TestData {
             "==\n" + 
             "-----END CERTIFICATE-----\n"
         
+        
+        static let clientCertificateChainTwoBundle =
+            "-----BEGIN CERTIFICATE-----\n" +
+            "MIIDkjCCAnqgAwIBAgIEXnQF2jANBgkqhkiG9w0BAQsFADBnMQswCQYDVQQGEwJU\n" +
+            "VzEQMA4GA1UECAwHUm9vdFR3bzEQMA4GA1UEBwwHUm9vdFR3bzEQMA4GA1UECgwH\n" +
+            "Um9vdFR3bzEQMA4GA1UECwwHUm9vdFR3bzEQMA4GA1UEAwwHUm9vdFR3bzAeFw0y\n" +
+            "MDAzMTkyMzUyNThaFw0yMTAzMTkyMzUyNThaMIGPMQswCQYDVQQGEwJUVzEYMBYG\n" +
+            "A1UECAwPSW50ZXJtZWRpYXRlVHdvMRgwFgYDVQQHDA9JbnRlcm1lZGlhdGVUd28x\n" +
+            "GDAWBgNVBAoMD0ludGVybWVkaWF0ZVR3bzEYMBYGA1UECwwPSW50ZXJtZWRpYXRl\n" +
+            "VHdvMRgwFgYDVQQDDA9JbnRlcm1lZGlhdGVUd28wggEiMA0GCSqGSIb3DQEBAQUA\n" +
+            "A4IBDwAwggEKAoIBAQDVJEP4dvW0xHOeMB0MRygxXOm4hEVE+A37BC3bxNgiJ1Fs\n" +
+            "4s64C04WozcGnbN299tAe8WQtz4pF6f1GO7747YaxPOYRPYF9lmdYml6VGked44H\n" +
+            "2/dbREDQzY8ky5oBNzuXe//rrFBRr7TIBycWM8a8f8zqkp+qRNDDMyzGMLRpz1V4\n" +
+            "JhnOOZIeGHz18r9VD+EHJqX3XTBLmaM4LpEmu96BzVtfIRaFaHSn3uaki/xTGbs1\n" +
+            "FzjST9PBfRdjdOT07ggpVi0SDSeGMZksZaPxVB8pdhlg28tXC6Jg8iiJ9oRZbD27\n" +
+            "kJxjSxjMasSKm4y9jGyWZXP8ykk1vUaOceE+I5T5AgMBAAGjHTAbMAwGA1UdEwQF\n" +
+            "MAMBAf8wCwYDVR0PBAQDAgEGMA0GCSqGSIb3DQEBCwUAA4IBAQBjEBeablJOLo+8\n" +
+            "2f+FCvM4Bm7xGR6rZEkWWva6hW5IUF63V3/a5dOyLbhTlOMYC24DnKL79oofFQHC\n" +
+            "Ow2efBBn17wd3YaY7wcXda7fKZSxnzVnJslkPUBap9HwhCE8Betqu1kGZ8/5O9g7\n" +
+            "7z79MqA5hIy42RYwK24Ha4TGqWyrzdsc9M+RBox20Gxsl7GY2wYN43GNgL224AYu\n" +
+            "RfTeb0eTdQmyrusy4my732tAbodeiCQWwxQb/x8p2TbS7prPv7YKN0HjZjsGett6\n" +
+            "Q77cTzYd5oAWSmNC7w9ujS5MwCfb/fYhYV116iiYSps+85TFDT2M2llxjnAZiIe7\n" +
+            "+3W2KK5G\n" +
+            "-----END CERTIFICATE-----\n" +
+            "-----BEGIN CERTIFICATE-----\n" +
+            "MIIDfTCCAmWgAwIBAgIEXnQF+TANBgkqhkiG9w0BAQsFADCBjzELMAkGA1UEBhMC\n" +
+            "VFcxGDAWBgNVBAgMD0ludGVybWVkaWF0ZVR3bzEYMBYGA1UEBwwPSW50ZXJtZWRp\n" +
+            "YXRlVHdvMRgwFgYDVQQKDA9JbnRlcm1lZGlhdGVUd28xGDAWBgNVBAsMD0ludGVy\n" +
+            "bWVkaWF0ZVR3bzEYMBYGA1UEAwwPSW50ZXJtZWRpYXRlVHdvMB4XDTIwMDMxOTIz\n" +
+            "NTMyOVoXDTIxMDMxOTIzNTMyOVowcTELMAkGA1UEBhMCVFcxEjAQBgNVBAgMCUNs\n" +
+            "aWVudFR3bzESMBAGA1UEBwwJQ2xpZW50VHdvMRIwEAYDVQQKDAlDbGllbnRUd28x\n" +
+            "EjAQBgNVBAsMCUNsaWVudFR3bzESMBAGA1UEAwwJQ2xpZW50VHdvMIIBIjANBgkq\n" +
+            "hkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjZS7RaWbKl/daUEPSqOk6JPjnKV84LAf\n" +
+            "Sw+EhvdRxO324FgvjhWfWnXMyehPzaM53qahJmtDQTg6qdi1PmikoM2dZLypzYik\n" +
+            "xJTvK+Siot/uPny5Chtt7w079ejOoEKem7tZVo7fJwp6BfvObXLt6BRJdXX20Mmy\n" +
+            "0zJH6sDGL0EZ/qJgvT3y1jdgnF/vOiqfwouCeCqtzntdEh9ryYrfiDY7bmFm8Imu\n" +
+            "2q7d50PuB2o0dq4oFUt6AML6mSgKmS2ihKCKdifvQHzdySsvIMPMTqW4KViFTxiu\n" +
+            "V+We412BNHvxUUm5WBozEutzmKpLV2R5+ckvbvsLQ9U1L6DA6nf2jQIDAQABMA0G\n" +
+            "CSqGSIb3DQEBCwUAA4IBAQB+Dfgw9N7jXsrnisk+qOH9p82FjMHyc0/R6W6PFdU2\n" +
+            "3BXWhvQTZmkDui046odoa/UB7+ia+7q3xWVYjGR898pFSkqXAcy7GMQ6+ueMFo1W\n" +
+            "Qdxg8daY5hUGJxvw6XP9POM9nABYdbmm1xyi9wg2vULoGtVfK0VSEDCFmEzcxYzO\n" +
+            "Q+Cb6Zr637DKZm1JRPloIORkIewKSc9vBw9W2IEzlgfT3fVAgmBmFlJhfn9OkdDF\n" +
+            "RPDatFu5D271ai0cZgp2nJ0OajqCi37czy5fF2KZ/RMg7sj5PwRcnLKgaieYck+Z\n" +
+            "JcbgrTguZRQi0GI2V24OiEzuGRLxQIgHuFBHUR7B820f\n" +
+            "-----END CERTIFICATE-----\n"
+        
+        
+        static let clientCertificateRandom =
+            "-----BEGIN CERTIFICATE-----\n" +
+            "MIIDODCCAiCgAwIBAgIEXkrp+zANBgkqhkiG9w0BAQsFADBeMQswCQYDVQQGEwJV\n" +
+            "UzEOMAwGA1UECAwFU3RhdGUxDjAMBgNVBAcMBUxvY2FsMQ4wDAYDVQQKDAVOZXRr\n" +
+            "aTEOMAwGA1UECwwFTmV0a2kxDzANBgNVBAMMBlJvb3RDQTAeFw0yMDAyMTcxOTMx\n" +
+            "MDdaFw0yMTAyMTYxOTMxMDdaMF4xCzAJBgNVBAYTAlVTMQswCQYDVQQIDAJDQTEL\n" +
+            "MAkGA1UEBwwCTEExDjAMBgNVBAoMBW5ldGtpMQ4wDAYDVQQLDAVOZXRraTEVMBMG\n" +
+            "A1UEAwwMSW50ZXJtZWRpYXRlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC\n" +
+            "AQEAzKJrRrpp87AeHPrBNLe6xJE347KzhQwmNubbgUtdLKkhM1CDVaYBIJH3w5yX\n" +
+            "3YFy3QGoiLscfiNGCBT7770IKOE221xUvYZxvbJ7NW244yKmy+qqnMWgNIfnoYj9\n" +
+            "ns1W2iWHlJ6PMtpGBx87bYjwOaAWIfO0imF/4pDm6ncqeIkGlUDBqRzbTvlT41SX\n" +
+            "oadpKlckgeKo8g6CpRtmXC3ExLL7sr2kByrbnkmVD8Uuny/stnSFFm4MR6j673IA\n" +
+            "pWykF3xJCj82NHiky+FiUUqgFkVfsyQNgmslj8rycPKUu4JJPghm21MO7Q5/jvZo\n" +
+            "78Q6foIrYqDB7SobCRwROTg7pQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQClgqAR\n" +
+            "DcIWmEsOwoUbdgcrhPR/OPOBlRPW69KFZ6WC5nJO6nZ0uN+f+pB75e/g2+p4YrYk\n" +
+            "ZMauJyQbj3H9Aff8MN5G/zrHZLEiPeWj2Bub7jnYHjlIPU8r2mmZbhTFmZEqoBLe\n" +
+            "1o3maTe9jk1B3uabZQA5MrkZjTG8ZXxALGmvKAmGqqpMvVyN/EEge4bjtwS5cK9E\n" +
+            "WeCdur5Pw+N2P9UrPCd4MruOvRUBA3BJYOdFEwBs5C3+qze05n+mnOIhQZlahk+T\n" +
+            "gk6jjkVPemLUkvvEoKwfGGbBvS8ypzUNdk38NzHhJQW6RPkq5lXRvlNsW/OBaBcb\n" +
+            "YdVfDDGxbfz8wx8m\n" +
+            "-----END CERTIFICATE-----"
+        
     }
     
     struct Originators {
         static let PRIMARY_ORIGINATOR_PKI_X509SHA256 = OriginatorParameters(isPrimaryForTransaction: true,
-                                                                            pkiDataParametersSets: [TestData.PkiData.PKI_DATA_ONE_OWNER_X509SHA256,
-                                                                                                    TestData.PkiData.PKI_DATA_TWO_OWNER_X509SHA256])
+                                                                            pkiDataParametersSets: [TestData.PkiData.pkiDataOneOwnerX509SHA256,
+                                                                                                    TestData.PkiData.pkiDataTwoOwnerX509SHA256])
         
         static let NO_PRIMARY_ORIGINATOR_PKI_X509SHA256 = OriginatorParameters(isPrimaryForTransaction: false,
-                                                                               pkiDataParametersSets: [TestData.PkiData.PKI_DATA_ONE_OWNER_X509SHA256,
-                                                                                                       TestData.PkiData.PKI_DATA_TWO_OWNER_X509SHA256])
+                                                                               pkiDataParametersSets: [TestData.PkiData.pkiDataOneOwnerX509SHA256,
+                                                                                                       TestData.PkiData.pkiDataTwoOwnerX509SHA256])
         
     }
     
     struct PkiData {
         
-        static let PKI_DATA_ONE_OWNER_X509SHA256 = PkiDataParameters(attestation: Attestation.legalPersonSecondaryName,
-                                                                     privateKeyPem: TestData.ClientKeys.CLIENT_PRIVATE_KEY_CHAIN_ONE,
-                                                                     certificatePem: TestData.Certificates.CLIENT_CERTIFICATE_CHAIN_ONE,
-                                                                     type: .x509sha256)
+        static let pkiDataOneOwnerX509SHA256 = PkiDataParameters(attestation: Attestation.legalPersonSecondaryName,
+                                                                 privateKeyPem: TestData.ClientKeys.clientPrivateKeyChainOne,
+                                                                 certificatePem: TestData.Certificates.CLIENT_CERTIFICATE_CHAIN_ONE,
+                                                                 type: .x509sha256)
         
-        static let PKI_DATA_TWO_OWNER_X509SHA256 = PkiDataParameters(attestation: Attestation.legalPersonPrimaryName,
-                                                                     privateKeyPem: TestData.ClientKeys.CLIENT_PRIVATE_KEY_CHAIN_TWO,
-                                                                     certificatePem: TestData.Certificates.CLIENT_CERTIFICATE_CHAIN_TWO,
-                                                                     type: .x509sha256)
+        static let pkiDataOneOwnerX509SHA256InvalidCertificate = PkiDataParameters(attestation: TestData.Attestations.invalidAttestation,
+                                                                                   privateKeyPem: TestData.ClientKeys.clientPrivateKeyChainOne,
+                                                                                   certificatePem: TestData.Certificates.clientCertificateRandom,
+                                                                                   type: .x509sha256)
         
-        static let PKI_DATA_OWNER_NONE = PkiDataParameters(attestation: nil,
-                                                           privateKeyPem: "",
-                                                           certificatePem:  "",
-                                                           type: .none)
+        static let pkiDataTwoOwnerX509SHA256 = PkiDataParameters(attestation: Attestation.legalPersonPrimaryName,
+                                                                 privateKeyPem: TestData.ClientKeys.clientPrivateKeyChainTwo,
+                                                                 certificatePem: TestData.Certificates.CLIENT_CERTIFICATE_CHAIN_TWO,
+                                                                 type: .x509sha256)
         
+        static let pkiDataOwnerNone = PkiDataParameters(attestation: nil,
+                                                        privateKeyPem: "",
+                                                        certificatePem:  "",
+                                                        type: .none)
         
-        static let PKI_DATA_SENDER_X509SHA256 = PkiDataParameters(attestation: nil,
-                                                                  privateKeyPem: TestData.ClientKeys.CLIENT_PRIVATE_KEY_CHAIN_TWO,
-                                                                  certificatePem: TestData.Certificates.CLIENT_CERTIFICATE_CHAIN_TWO,
-                                                                  type: .x509sha256)
+        static let pkiDataSenderX509SHA256 = PkiDataParameters(attestation: nil,
+                                                               privateKeyPem: TestData.ClientKeys.clientPrivateKeyChainTwo,
+                                                               certificatePem: TestData.Certificates.CLIENT_CERTIFICATE_CHAIN_TWO,
+                                                               type: .x509sha256)
+        
+        static let pkiDataOneOwnerX509SHA256BundleCertificate = PkiDataParameters(attestation: .legalPersonPrimaryName,
+                                                                                  privateKeyPem: TestData.ClientKeys.clientPrivateKeyChainTwo,
+                                                                                  certificatePem: TestData.Certificates.clientCertificateChainTwoBundle,
+                                                                                  type: .x509sha256)
+        
+        static let pkiDataSenderNone = PkiDataParameters(attestation: nil,
+                                                         privateKeyPem: "",
+                                                         certificatePem:  "",
+                                                         type: .none)
+        
+        static let pkiDataSenderX509SHA256InvalidCertificate = PkiDataParameters(attestation: nil,
+                                                                                 privateKeyPem: TestData.ClientKeys.clientPrivateKeyChainTwo,
+                                                                                 certificatePem: TestData.Certificates.clientCertificateRandom,
+                                                                                 type: .x509sha256)
+                   
     }
     
-    struct Encryption {
+    // MARK: Encryptions
+    
+    struct Encryptions {
         
         static let senderPrivateKeyPem =
             "-----BEGIN PRIVATE KEY-----\n" +
@@ -209,7 +300,7 @@ struct TestData {
             "MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEKK1shlRCVNixhwWMpLSP3e0vPy/yHMZg\n" +
             "+DnZFAQF1v2KEnNqCJjIux8x1JQV8T5zbHysaTJHT1B7ylNI4UpHYA==\n" +
             "-----END PUBLIC KEY-----"
-
+        
         
         static let senderEncryptionParameters = EncryptionParameters(privateKeyPem: senderPrivateKeyPem, publicKeyPem: senderPublicKeyPem)
         
@@ -218,7 +309,7 @@ struct TestData {
             "MD4CAQAwEAYHKoZIzj0CAQYFK4EEAAoEJzAlAgEBBCCvwcD4YayXhwOfHRZmNksy\n" +
             "x+ZTDLDIxYIaTFo9Xvb/fA==\n" +
             "-----END PRIVATE KEY-----"
-
+        
         
         static let recipientPublicKeyPem =
             "-----BEGIN PUBLIC KEY-----\n" +
@@ -230,37 +321,86 @@ struct TestData {
         
     }
     
+    // MARK: Outputs
+    
     struct Outputs {
-        static let OUTPUTS = [Output(amount: 1000, script: "Script 1", currency: .bitcoin),
+        static let outputs = [Output(amount: 1000, script: "Script 1", currency: .bitcoin),
                               Output(amount: 2000, script: "Script 2", currency: .bitcoin)]
-
+        
     }
     
+    // MARK: Beneficiaries
+    
     struct Beneficiaries {
-        static let PRIMARY_BENEFICIARY_PKI_NONE = BeneficiaryParameters(isPrimaryForTransaction: true,
-                                                                        pkiDataParametersSets: [TestData.PkiData.PKI_DATA_OWNER_NONE])
+        
+        static let noPrimaryBeneficiaryParametersPkiX509SHA256 = BeneficiaryParameters(isPrimaryForTransaction: false,
+                                                                                       pkiDataParametersSets: [TestData.PkiData.pkiDataOneOwnerX509SHA256,
+                                                                                                               TestData.PkiData.pkiDataTwoOwnerX509SHA256])
+        
+        static let noPrimaryBeneficiaryParametersPkiNone = BeneficiaryParameters(isPrimaryForTransaction: false,
+                                                                                 pkiDataParametersSets: [TestData.PkiData.pkiDataOneOwnerX509SHA256,
+                                                                                                         TestData.PkiData.pkiDataTwoOwnerX509SHA256])
+        
+        static let primaryBeneficiaryParametersPkiX509SHA256BundledCertificate =  BeneficiaryParameters(isPrimaryForTransaction: true,
+                                                                                                        pkiDataParametersSets: [TestData.PkiData.pkiDataOneOwnerX509SHA256BundleCertificate,
+                                                                                                                                TestData.PkiData.pkiDataTwoOwnerX509SHA256])
+        
+        static let primaryBeneficiaryParametersPkiNone = BeneficiaryParameters(isPrimaryForTransaction: true,
+                                                                               pkiDataParametersSets: [TestData.PkiData.pkiDataOwnerNone])
+        
+        static let primaryBeneficiaryParametersPkiX509SHA256 = BeneficiaryParameters(isPrimaryForTransaction: true,
+                                                                                     pkiDataParametersSets: [TestData.PkiData.pkiDataOneOwnerX509SHA256,
+                                                                                                             TestData.PkiData.pkiDataTwoOwnerX509SHA256])
+        
+        static let primaryBeneficiaryParametersPkiX509SHA256InvalidCertificate = BeneficiaryParameters(isPrimaryForTransaction: true,
+                                                                                                       pkiDataParametersSets: [TestData.PkiData.pkiDataOneOwnerX509SHA256InvalidCertificate,
+                                                                                                                               TestData.PkiData.pkiDataTwoOwnerX509SHA256])
     }
+    
+    // MARK: Senders
     
     struct Senders {
         
-        static let SENDER_PKI_X509SHA256 = SenderParameters(pkiDataParameters: TestData.PkiData.PKI_DATA_SENDER_X509SHA256,
-                                                            evCertificatePem: TestData.Certificates.EV_CERT)
+        static let senderPkiNone = SenderParameters(pkiDataParameters: TestData.PkiData.pkiDataSenderNone)
         
-        static let SENDER_PKI_X509SHA256_WITH_ENCRYPTION = SenderParameters(pkiDataParameters: TestData.PkiData.PKI_DATA_SENDER_X509SHA256,
-                                                                            evCertificatePem: nil,
-                                                                            encryptionParameters: TestData.Encryption.senderEncryptionParameters)
+        static let senderPkiX509SHA256 = SenderParameters(pkiDataParameters: TestData.PkiData.pkiDataSenderX509SHA256,
+                                                          evCertificatePem: TestData.Certificates.evCert)
+        
+        static let senderPkiX509SHA256WithEncryption = SenderParameters(pkiDataParameters: TestData.PkiData.pkiDataSenderX509SHA256,
+                                                                        evCertificatePem: nil,
+                                                                        encryptionParameters: TestData.Encryptions.senderEncryptionParameters)
+        
+        static let senderPkiX509SHA256InvalidCertificate = SenderParameters(pkiDataParameters: TestData.PkiData.pkiDataOneOwnerX509SHA256InvalidCertificate)
+        
     }
+    
+    // MARK: Recipients
     
     struct Recipients {
-        static let RECIPIENTS_PARAMETERS_WITH_ENCRYPTION = RecipientParameters(vaspName: "VASP_1",
-                                                                               chainAddress: "1234567890ABCD",
-                                                                               encryptionParameters: TestData.Encryption.recipientEncryptionParameters)
+        static let recipientsParametersWithEncryption = RecipientParameters(vaspName: "VASP_1",
+                                                                            chainAddress: "1234567890ABCD",
+                                                                            encryptionParameters: TestData.Encryptions.recipientEncryptionParameters)
     }
     
+    // MARK: Attestations
+    
     struct Attestations {
-        static let REQUESTED_ATTESTATIONS = [Attestation.legalPersonPrimaryName,
-                                             Attestation.legalPersonSecondaryName,
-                                             Attestation.addressDepartament,
-                                             Attestation.addressPostbox]
+        
+        static let invalidAttestation = Attestation.addressDistinctName
+
+        static let requestedAttestations = [Attestation.legalPersonPrimaryName,
+                                            Attestation.legalPersonSecondaryName,
+                                            Attestation.addressDepartament,
+                                            Attestation.addressPostbox]
+    }
+    
+    //MARK: MessageInformation
+    
+    struct MessageInformationData {
+        
+        static let messageInformationCancel = MessageInformation(statusCode: .cancel, statusMessage: "Cancel for testing")
+        
+        static let messageInformationEncryption = MessageInformation(encryptMessage: true)
+        
     }
 }

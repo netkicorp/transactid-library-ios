@@ -179,15 +179,8 @@ class KeyChainProvider : TrustStore {
             .replacingOccurrences(of: "\t", with: "")
             .replacingOccurrences(of: " ", with: "")
         
-        if let base64Data = Data(base64Encoded: base64) {
-            if let bundleIdentifier = Bundle.main.bundleIdentifier {
-                if let tag = "\(bundleIdentifier).certificate".data(using: .utf8) {
-                    
-                    if let secCert = SecCertificateCreateWithData(nil, base64Data as CFData) {
-                        
-                    }
-                }
-            }
+        if let _ = Data(base64Encoded: base64) {
+           
         }
     }
     

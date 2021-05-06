@@ -43,5 +43,28 @@ class Bip75Netki: Bip75 {
         return try self.bip75Service.parsePaymentRequest(paymentRequestBinary: paymentRequestBinary, recipientParameters: recipientParameters)
     }
     
+    func createPayment(paymentParameters: PaymentParameters) throws -> Data? {
+        return try self.bip75Service.createPayment(paymentParameters: paymentParameters)
+    }
+    
+    func isPaymentValid(paymentBinary: Data, recipientParameters: RecipientParameters?) throws -> Bool {
+        return try self.bip75Service.isPaymentValid(paymentBinary: paymentBinary, recipientParameters: recipientParameters)
+    }
+    
+    func parsePayment(paymentBinary: Data, recipientParameters: RecipientParameters?) throws -> Payment? {
+        return try self.bip75Service.parsePayment(paymentBinary: paymentBinary, recipientParameters: recipientParameters)
+    }
+    
+    func createPaymentACK(paymentAckParameters: PaymentAckParameters) throws -> Data? {
+        return try self.bip75Service.createPaymentACK(paymentAckParameters: paymentAckParameters)
+    }
+    
+    func isPaymentACKValid(paymentAckBinary: Data, recipientParameters: RecipientParameters?) throws -> Bool {
+        return try self.bip75Service.isPaymentACKValid(paymentAckBinary: paymentAckBinary, recipientParameters: recipientParameters)
+    }
+    
+    func parsePaymentACK(paymentAckBinary: Data, recipientParameters: RecipientParameters?) throws -> PaymentACK? {
+        return try self.bip75Service.parsePaymentACK(paymentAckBinary: paymentAckBinary, recipientParameters: recipientParameters)
+    }
     
 }

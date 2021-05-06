@@ -17,7 +17,6 @@ class Bip75ServiceNetki: Bip75Service {
         self.addressInformationService = addressInformationService
     }
     
-    
     //MARK: InvoiceRequest
     
     func createInvoiceRequest(invoiceRequestParameters: InvoiceRequestParameters) throws -> Data? {
@@ -59,7 +58,6 @@ class Bip75ServiceNetki: Bip75Service {
         if let protocolMessageMetadata = try invoiceRequestBinary.extractProtocolMessageMetadata() {
             if let messageInvoiceRequestData = try invoiceRequestBinary.getSerializedMessage(encrypted: protocolMessageMetadata.encrypted, recipientParameters: recipientParameters) {
                 if let messageInvoiceRequest = try messageInvoiceRequestData.toMessageInvoiceRequest() {
-                    
                     if (protocolMessageMetadata.encrypted) {
                         let isSenderEncryptionSignatureValid =  try invoiceRequestBinary.validateMessageEncryptionSignature()
                         if (!isSenderEncryptionSignatureValid) {
@@ -93,13 +91,10 @@ class Bip75ServiceNetki: Bip75Service {
                     try messageInvoiceRequestUnsigned?.originators.forEach({ (messageOriginator) in
                         try messageOriginator.attestations.forEach { (messageAttestation) in
                             let isCertificateOwnerChainValid = try validateCertificate(pkiType: messageAttestation.getMessagePkiType(), certificate: messageAttestation.pkiData.toString())
-                            
                             if (!isCertificateOwnerChainValid) {
                                 throw Exception.InvalidCertificateChainException(ExceptionMessages.certificateValidationInvalidOwnerCertificateCA)
                             }
-                            
                             let isSignatureValid = try messageAttestation.validateMessageSignature(requireSignature: messageOriginator.isPrimaryForTransaction)
-                            
                             if (!isSignatureValid) {
                                 throw Exception.InvalidSignatureException(ExceptionMessages.signatureValidationInvalidOwnerSignature)
                             }
@@ -109,13 +104,10 @@ class Bip75ServiceNetki: Bip75Service {
                     try messageInvoiceRequestUnsigned?.originators.forEach({ (messageOriginator) in
                         try messageOriginator.attestations.forEach { (messageAttestation) in
                             let isCertificateOwnerChainValid = try validateCertificate(pkiType: messageAttestation.getMessagePkiType(), certificate: messageAttestation.pkiData.toString())
-                            
                             if (!isCertificateOwnerChainValid) {
                                 throw Exception.InvalidCertificateChainException(ExceptionMessages.certificateValidationInvalidOwnerCertificateCA)
                             }
-                            
                             let isSignatureValid = try messageAttestation.validateMessageSignature(requireSignature: messageOriginator.isPrimaryForTransaction)
-                            
                             if (!isSignatureValid) {
                                 throw Exception.InvalidSignatureException(ExceptionMessages.signatureValidationInvalidOwnerSignature)
                             }
@@ -125,19 +117,15 @@ class Bip75ServiceNetki: Bip75Service {
                     try messageInvoiceRequestUnsigned?.beneficiaries.forEach({ (messageBeneficiary) in
                         try messageBeneficiary.attestations.forEach { (messageAttestation) in
                             let isCertificateOwnerChainValid = try validateCertificate(pkiType: messageAttestation.getMessagePkiType(), certificate: messageAttestation.pkiData.toString())
-                            
                             if (!isCertificateOwnerChainValid) {
                                 throw Exception.InvalidCertificateChainException(ExceptionMessages.certificateValidationInvalidOwnerCertificateCA)
                             }
                         }
                     })
-                    
                     return true
                 }
             }
         }
-        
-        
         return false
     }
     
@@ -157,7 +145,6 @@ class Bip75ServiceNetki: Bip75Service {
             }
             return invoiceRequest
         }
-        
         return nil
     }
     
@@ -168,10 +155,8 @@ class Bip75ServiceNetki: Bip75Service {
                 return messageInvoiceRequest?.toInvoiceRequest(protocolMessageMetadata: protocolMessageMetadata)
             }
         }
-        
         return nil
     }
-    
     
     //MARK: PaymentRequest
     
@@ -198,7 +183,6 @@ class Bip75ServiceNetki: Bip75Service {
             
             
             let paymentRequest = try messagePaymentRequest.signMessage(senderParameters: senderParameters)?.serializedData()
-            
             
             return try paymentRequest?.toProtocolMessageData(messageType: .paymentRequest,
                                                              messageInformation: paymentRequestParameters.messageInformation,
@@ -258,13 +242,141 @@ class Bip75ServiceNetki: Bip75Service {
     
     func parsePaymentRequest(paymentRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> PaymentRequest? {
         if let protocolMessageMetadata = try paymentRequestBinary.extractProtocolMessageMetadata() {
-            if let messagePaymentRequestData = try paymentRequestBinary.getSerializedMessage(encrypted: protocolMessageMetadata.encrypted) {
+            if let messagePaymentRequestData = try paymentRequestBinary.getSerializedMessage(encrypted: protocolMessageMetadata.encrypted, recipientParameters: recipientParameters) {
                 if let messagePaymentRequest = try messagePaymentRequestData.toMessagePaymentRequest() {
                     return try messagePaymentRequest.toPaymentRequest(protocolMessageMetadata: protocolMessageMetadata)
                 }
             }
         }
+        return nil
+    }
+    
+    //MARK: Payment
+
+    func createPayment(paymentParameters: PaymentParameters) throws -> Data? {
         
+        try paymentParameters.originatorParameters.validate(required: true, ownerType: .originator)
+        try paymentParameters.beneficiaryParameters.validate(required: false, ownerType: .beneficiary)
+        
+        var messagePayment = paymentParameters.toMessagePayment()
+        
+        paymentParameters.beneficiaryParameters.forEach { (beneficiaryParameters) in
+            var beneficiaryMessage = beneficiaryParameters.toMessageBeneficiaryWithoutAttestations()
+            beneficiaryParameters.pkiDataParametersSets?.forEach({ (pkiDataParameters) in
+                beneficiaryMessage.addAttestation(attestation: pkiDataParameters.toMessageAttestation(requireSignature: false))
+            })
+            messagePayment.addBeneficiary(messageBeneficiary: beneficiaryMessage)
+        }
+        
+        paymentParameters.originatorParameters.forEach { (originatorParameters) in
+            var originatorMessage = originatorParameters.toMessageOriginatorWithoutAttestations()
+            originatorParameters.pkiDataParametersSets?.forEach({ (pkiDataParameters) in
+                originatorMessage.addAttestation(attestation: pkiDataParameters.toMessageAttestation(requireSignature: originatorParameters.isPrimaryForTransaction))
+            })
+            messagePayment.addOriginator(messageOriginator: originatorMessage)
+        }
+        
+        let payment = try messagePayment.serializedData()
+        
+        return try payment.toProtocolMessageData(messageType: .payment,
+                                                  messageInformation: paymentParameters.messageInformation,
+                                                  senderParameters: paymentParameters.senderParameters,
+                                                  recipientParameters: paymentParameters.recipientParameters)
+    }
+    
+    func isPaymentValid(paymentBinary: Data, recipientParameters: RecipientParameters?) throws -> Bool {
+        if let protocolMessageMetadata = try paymentBinary.extractProtocolMessageMetadata() {
+            if let messagePaymentData = try paymentBinary.getSerializedMessage(encrypted: protocolMessageMetadata.encrypted, recipientParameters: recipientParameters) {
+                if let messagePayment = try messagePaymentData.toMessagePayment() {
+                
+                    if (protocolMessageMetadata.encrypted) {
+                        let isSenderEncryptionSignatureValid = try paymentBinary.validateMessageEncryptionSignature()
+                        if (!isSenderEncryptionSignatureValid) {
+                            throw Exception.InvalidSignatureException(ExceptionMessages.signatureValidationInvalidSenderSignature)
+                        }
+                    }
+                    
+                    try messagePayment.originators.forEach { (messageOriginator) in
+                        try messageOriginator.attestations.forEach { (messageAttestation) in
+                            
+                            let isCertificateOwnerChainValid = try validateCertificate(pkiType: messageAttestation.getMessagePkiType(), certificate: messageAttestation.pkiData.toString())
+                            
+                            if (!isCertificateOwnerChainValid) {
+                                throw Exception.InvalidCertificateChainException(ExceptionMessages.certificateValidationInvalidOwnerCertificateCA)
+                            }
+                            
+                            let isSignatureValid = try messageAttestation.validateMessageSignature(requireSignature: messageOriginator.isPrimaryForTransaction)
+                            
+                            if (!isSignatureValid) {
+                                throw Exception.InvalidSignatureException(ExceptionMessages.signatureValidationInvalidOwnerSignature)
+                            }
+                        }
+                    }
+                    
+                    try messagePayment.beneficiaries.forEach { (messageBeneficiary) in
+                        try messageBeneficiary.attestations.forEach { (messageAttestation) in
+                            let isCertificateOwnerChainValid = try self.validateCertificate(pkiType: messageAttestation.getMessagePkiType(), certificate: messageAttestation.pkiData.toString())
+                            if (!isCertificateOwnerChainValid) {
+                                throw Exception.InvalidCertificateChainException(ExceptionMessages.certificateValidationInvalidOwnerCertificateCA)
+                            }
+                        }
+                    }
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    func parsePayment(paymentBinary: Data, recipientParameters: RecipientParameters?) throws -> Payment? {
+        if let protocolMessageMetadata = try paymentBinary.extractProtocolMessageMetadata() {
+            if let messagePaymentData = try paymentBinary.getSerializedMessage(encrypted: protocolMessageMetadata.encrypted, recipientParameters: recipientParameters) {
+                if let messagePayment = try messagePaymentData.toMessagePayment() {
+                    return try messagePayment.toPayment(protocolMessageMetadata: protocolMessageMetadata)
+                }
+            }
+        }
+        return nil
+    }
+    
+    //MARK: PaymentACK
+
+    func createPaymentACK(paymentAckParameters: PaymentAckParameters) throws -> Data? {
+        if let messagePaymentACK = paymentAckParameters.payment?.toMessagePaymentACK(memo: paymentAckParameters.memo) {
+            let paymentACK = try messagePaymentACK.serializedData()
+            return try paymentACK.toProtocolMessageData(messageType: .paymentACK,
+                                                        messageInformation: paymentAckParameters.messageInformation,
+                                                        senderParameters: paymentAckParameters.senderParameters,
+                                                        recipientParameters: paymentAckParameters.recipientParameters)
+        }
+        return nil
+    }
+    
+    func isPaymentACKValid(paymentAckBinary: Data, recipientParameters: RecipientParameters?) throws -> Bool {
+        if let protocolMessageMetadata = try paymentAckBinary.extractProtocolMessageMetadata() {
+            if let messagePaymentAckData = try paymentAckBinary.getSerializedMessage(encrypted: protocolMessageMetadata.encrypted, recipientParameters: recipientParameters) {
+                if let _ = try messagePaymentAckData.toMessagePaymentACK() {
+                    if (protocolMessageMetadata.encrypted) {
+                        let isSenderEncryptionSignatureValid = try paymentAckBinary.validateMessageEncryptionSignature()
+                        if (!isSenderEncryptionSignatureValid) {
+                            throw Exception.InvalidSignatureException(ExceptionMessages.signatureValidationInvalidSenderSignature)
+                        }
+                    }
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    func parsePaymentACK(paymentAckBinary: Data, recipientParameters: RecipientParameters?) throws -> PaymentACK? {
+        if let protocolMessageMetadata = try paymentAckBinary.extractProtocolMessageMetadata() {
+            if let messagePaymentAckData = try paymentAckBinary.getSerializedMessage(encrypted: protocolMessageMetadata.encrypted, recipientParameters: recipientParameters) {
+                if let messagePaymentAck = try messagePaymentAckData.toMessagePaymentACK() {
+                    return try messagePaymentAck.toPaymentACK(protocolMessageMetadata: protocolMessageMetadata)
+                }
+            }
+        }
         return nil
     }
     

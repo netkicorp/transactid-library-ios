@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 import SwiftProtobuf
 
 struct MessagePaymentRequest {
@@ -197,7 +196,7 @@ extension MessagePaymentRequest : SwiftProtobuf.Message, SwiftProtobuf._MessageI
     }
     
     func toPaymentRequest(protocolMessageMetadata: ProtocolMessageMetadata) throws -> PaymentRequest? {
-        if let paymentDetails = try self.serializedData().toMessagePaymentDetails() {
+        if let paymentDetails = try self.serializedPaymentDetails.toMessagePaymentDetails() {
             
             var beneficiaries: Array<Beneficiary> = []
             
@@ -223,7 +222,8 @@ extension MessagePaymentRequest : SwiftProtobuf.Message, SwiftProtobuf._MessageI
             paymentRequest.paymentDetailsVersion = Int(self.paymentDetailsVersion)
             paymentRequest.network = paymentDetails.network
             paymentRequest.beneficiariesAddresses = beneficiariesAddresses
-            paymentRequest.time = TimeInterval(Int(paymentDetails.expires))
+            paymentRequest.time = TimeInterval(Int(paymentDetails.time)/1000)
+            paymentRequest.expires = TimeInterval(Int(paymentDetails.expires)/1000)
             paymentRequest.memo = paymentDetails.memo
             paymentRequest.paymentUrl = paymentDetails.paymentUrl
             paymentRequest.merchantData = paymentDetails.merchantData.toString()
@@ -233,11 +233,8 @@ extension MessagePaymentRequest : SwiftProtobuf.Message, SwiftProtobuf._MessageI
             paymentRequest.senderPkiData = self.senderPkiData.toString()
             paymentRequest.senderSignature = self.senderSignature.toString()
             paymentRequest.protocolMessageMetadata = protocolMessageMetadata
-            
             return paymentRequest
-            
         }
-        
         return nil
     }
     

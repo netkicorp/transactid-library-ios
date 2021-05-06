@@ -288,7 +288,7 @@ bool isClientCertificate(const char* cert_pem) {
     
     ASN1_BIT_STRING *basicConstraints = (ASN1_BIT_STRING *)X509_get_ext_d2i(x509, NID_basic_constraints, 0, 0);
     
-    bool result = !X509_verify(x509, pkey) && (keyUsage == NULL || ASN1_BIT_STRING_get_bit(keyUsage, 5) == 0) && basicConstraints->data == NULL;
+    bool result = !X509_verify(x509, pkey) && (keyUsage == NULL || ASN1_BIT_STRING_get_bit(keyUsage, 5) == 0) && (basicConstraints == NULL || basicConstraints->data == NULL);
     
     EVP_PKEY_free(pkey);
     BIO_free(bio);

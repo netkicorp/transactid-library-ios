@@ -12,22 +12,22 @@ public class PaymentRequest {
     /**
      * Version of the protocol buffer object.
      */
-    var paymentDetailsVersion: Int? = 1
+    public var paymentDetailsVersion: Int? = 1
     
     /**
      * Either "main" for payments on the production Bitcoin network, or "test" for payments on test network.
      */
-    var network: String? = "main"
+    public var network: String? = "main"
     
     /**
      * Where payment should be sent.
      */
-    var beneficiariesAddresses: Array<Output> = []
+    public var beneficiariesAddresses: Array<Output> = []
     
     /**
      * Unix timestamp (seconds since 1-Jan-1970 UTC) when the PaymentRequest was created.
      */
-    var time: TimeInterval = Date().timeIntervalSince1970
+    public var time: TimeInterval = Date().timeIntervalSince1970
     
     /**
      * Unix timestamp (UTC) after which the PaymentRequest should be considered invalid.
@@ -64,22 +64,22 @@ public class PaymentRequest {
      * Type of sender's pki data.
      */
     
-    var senderPkiType: PkiType? = PkiType.none
+    public var senderPkiType: PkiType? = PkiType.none
     
     /**
      * Sender's pki data, depends on senderPkiType.
      */
     
-    var senderPkiData: String? = nil
+    public var senderPkiData: String? = nil
     
     /**
      * Sender's Signature of the whole message.
      */
-    var senderSignature: String? = nil
+    public var senderSignature: String? = nil
     
     /**
      * Metadata for the protocol message.
      */
-    var protocolMessageMetadata: ProtocolMessageMetadata? = nil
+     public var protocolMessageMetadata: ProtocolMessageMetadata? = nil
     
 }

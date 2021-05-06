@@ -28,6 +28,10 @@ public class MessageInformation {
      */
     public var encryptMessage: Bool = false
     
-    public init() {}
+    public init(statusCode: StatusCode = .ok, statusMessage: String = "", encryptMessage: Bool = false) {
+        self.statusCode = statusCode
+        self.statusMessage = statusMessage
+        self.encryptMessage = encryptMessage
+    }
     
 }

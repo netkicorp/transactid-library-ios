@@ -221,7 +221,7 @@ extension Data {
     /**
      * Transform binary PaymentRequest to MessagePaymentRequest.
      *
-     * @return Messages.PaymentRequest
+     * @return MessagePaymentRequest
      * @throws InvalidObjectException if there is an error parsing the object.
      */
     func toMessagePaymentRequest() throws -> MessagePaymentRequest? {
@@ -235,13 +235,40 @@ extension Data {
     /**
      * Transform binary PaymentDetails to MessagePaymentDetails.
      *
-     * @return Messages.PaymentDetails
+     * @return MessagePaymentDetails
      * @throws InvalidObjectException if there is an error parsing the object.
      */
-    
     func toMessagePaymentDetails() throws -> MessagePaymentDetails? {
         do {
             return try MessagePaymentDetails(serializedData: self)
+        } catch let exception {
+            throw Exception.InvalidObjectException(String(format: ExceptionMessages.parseBinaryMessageInvalidInput, exception.localizedDescription))
+        }
+    }
+    
+    /**
+     * Transform binary Payment to MessagePayment.
+     *
+     * @return MessagePayment
+     * @throws InvalidObjectException if there is an error parsing the object.
+     */
+    func toMessagePayment() throws -> MessagePayment? {
+        do {
+            return try MessagePayment(serializedData: self)
+        } catch let exception {
+            throw Exception.InvalidObjectException(String(format: ExceptionMessages.parseBinaryMessageInvalidInput, exception.localizedDescription))
+        }
+    }
+    
+    /**
+     * Transform binary PaymentACK to MessagePaymentACK.
+     *
+     * @return MessagePaymentACK
+     * @throws InvalidObjectException if there is an error parsing the object.
+     */
+    func toMessagePaymentACK() throws -> MessagePaymentACK? {
+        do {
+            return try MessagePaymentACK(serializedData: self)
         } catch let exception {
             throw Exception.InvalidObjectException(String(format: ExceptionMessages.parseBinaryMessageInvalidInput, exception.localizedDescription))
         }
@@ -252,7 +279,6 @@ extension Data {
      *
      * @return true if yes, false otherwise.
      */
-    
     func validateMessageEncryptionSignature() throws -> Bool {
         
         let protocolMessage = try EncryptedProtocolMessage(serializedData: self)

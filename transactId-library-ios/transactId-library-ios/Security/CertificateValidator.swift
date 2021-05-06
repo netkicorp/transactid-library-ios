@@ -39,15 +39,15 @@ class CertificateValidator {
     
     func validateCertificate(clientCertificatesPem: String) throws -> Bool {
         
+        guard try self.validateCertificateChain(clientCertificatesPem: clientCertificatesPem) else {
+            return false
+        }
+        
         guard try self.validateExpiration(clientCertificatePem: clientCertificatesPem) else {
             return false
         }
         
         guard try self.validateCertificateRevocation(clientCertificatePem: clientCertificatesPem) else {
-            return false
-        }
-        
-        guard try self.validateCertificateChain(clientCertificatesPem: clientCertificatesPem) else {
             return false
         }
         
