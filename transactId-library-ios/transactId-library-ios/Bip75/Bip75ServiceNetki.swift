@@ -137,9 +137,9 @@ class Bip75ServiceNetki: Bip75Service {
     
     func parseInvoiceRequestWithAddressInfo(invoiceRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> InvoiceRequest? {
         if let invoiceRequest = try self.parseInvoiceRequestBinary(invoiceRequestBinary: invoiceRequestBinary, recipientParameters: recipientParameters) {
-            invoiceRequest.originatorsAddresses.forEach { (output) in
+            try invoiceRequest.originatorsAddresses.forEach { (output) in
                 if let addressInformationService = self.addressInformationService, let script = output.script {
-                    let addressInfo = addressInformationService.getAddressInformation(currency: output.currency, address: script)
+                    let addressInfo = try addressInformationService.getAddressInformation(currency: output.currency, address: script)
                     output.addressInformation = addressInfo
                 }
             }

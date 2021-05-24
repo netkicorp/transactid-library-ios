@@ -10,6 +10,9 @@
 		39F581BA249890FCFE356855 /* Pods_transactId_library_ios_tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA608D1A49C134C66850E0DE /* Pods_transactId_library_ios_tests.framework */; };
 		64C7EE10077813EDA34B2AA9 /* Pods_transactId_demo_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A2F49221D2BD1F4605E148 /* Pods_transactId_demo_app.framework */; };
 		86AAE378AF7573791DA7E5E3 /* Pods_transactId_library_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD5C9EA943F8C0323878031 /* Pods_transactId_library_ios.framework */; };
+		8B0A466F265BD09C00B87E0E /* MerkleAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A466E265BD09C00B87E0E /* MerkleAddress.swift */; };
+		8B0A4672265BD76700B87E0E /* MerkleTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A4671265BD76700B87E0E /* MerkleTags.swift */; };
+		8B0A4675265BD7B000B87E0E /* MerkleTagInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A4674265BD7B000B87E0E /* MerkleTagInformation.swift */; };
 		8B0A46D025FF4CDF00B879F4 /* OpenSSLSigningHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A46CE25FF4CDF00B879F4 /* OpenSSLSigningHelper.cpp */; };
 		8B0A46D125FF4CDF00B879F4 /* OpenSSLSigningHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B0A46CF25FF4CDF00B879F4 /* OpenSSLSigningHelper.h */; };
 		8B0A46D625FF4D0100B879F4 /* OpenSSLEncryptionHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8B0A46D425FF4D0100B879F4 /* OpenSSLEncryptionHelper.cpp */; };
@@ -73,7 +76,7 @@
 		8BA437EC262F00B5003634FE /* TransactIdPaymentACKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA437EB262F00B5003634FE /* TransactIdPaymentACKTests.swift */; };
 		8BA437EF262F00D8003634FE /* TransactIdPaymentRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA437EE262F00D8003634FE /* TransactIdPaymentRequestTests.swift */; };
 		8BAAE2D9260B2B3000187722 /* AddressInformationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAE2D8260B2B3000187722 /* AddressInformationService.swift */; };
-		8BAAE2DE260B2B6500187722 /* AddressInformaionServiceNetki.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAE2DD260B2B6500187722 /* AddressInformaionServiceNetki.swift */; };
+		8BAAE2DE260B2B6500187722 /* AddressInformationServiceNetki.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAE2DD260B2B6500187722 /* AddressInformationServiceNetki.swift */; };
 		8BAAE2E1260B326E00187722 /* AddressInformationRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAE2E0260B326E00187722 /* AddressInformationRepo.swift */; };
 		8BBD13A7261CA40000E62F6D /* PaymentRequestParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD13A6261CA40000E62F6D /* PaymentRequestParameters.swift */; };
 		8BBD13AA261CA82500E62F6D /* MessagePaymentDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBD13A9261CA82500E62F6D /* MessagePaymentDetails.swift */; };
@@ -111,6 +114,13 @@
 		8BE9171825E7EDA000426912 /* MessageAttestationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE9171725E7EDA000426912 /* MessageAttestationType.swift */; };
 		8BE9171B25E7FB4A00426912 /* MessageOriginator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE9171A25E7FB4A00426912 /* MessageOriginator.swift */; };
 		8BE9172125E7FCA300426912 /* OriginatorParameters+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE9172025E7FCA300426912 /* OriginatorParameters+Extension.swift */; };
+		8BF21ED82652739C00180605 /* AddressInformationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF21ED72652739C00180605 /* AddressInformationFactory.swift */; };
+		8BF21EDB2652743D00180605 /* AddressInformationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF21EDA2652743D00180605 /* AddressInformationProvider.swift */; };
+		8BF21EDE265274C400180605 /* AddressInformationNetkiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF21EDD265274C400180605 /* AddressInformationNetkiProvider.swift */; };
+		8BF21EE3265276EA00180605 /* MerkleRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF21EE2265276EA00180605 /* MerkleRepo.swift */; };
+		8BF21EE626528BCD00180605 /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF21EE526528BCD00180605 /* Dictionary+Extension.swift */; };
+		8BF21EE926528C3000180605 /* CharacterSet+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF21EE826528C3000180605 /* CharacterSet+Extension.swift */; };
+		8BF21EEC2655174800180605 /* TransactIdMerkleRepoUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF21EEB2655174800180605 /* TransactIdMerkleRepoUnitTests.swift */; };
 		8BF24C3025D1CB3900C922A3 /* TrustStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C2F25D1CB3900C922A3 /* TrustStore.swift */; };
 		8BF24C3625D29E0600C922A3 /* Bip75.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C3525D29E0600C922A3 /* Bip75.swift */; };
 		8BF24C3925D29F4E00C922A3 /* InvoiceRequestParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF24C3825D29F4E00C922A3 /* InvoiceRequestParameters.swift */; };
@@ -174,6 +184,9 @@
 		52A6C2E563E68D47ABA8BE1F /* Pods-transactId-demo-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-transactId-demo-app.release.xcconfig"; path = "Target Support Files/Pods-transactId-demo-app/Pods-transactId-demo-app.release.xcconfig"; sourceTree = "<group>"; };
 		5B0FC61304BCAD777F627973 /* Pods-transactId-library-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-transactId-library-ios.release.xcconfig"; path = "Target Support Files/Pods-transactId-library-ios/Pods-transactId-library-ios.release.xcconfig"; sourceTree = "<group>"; };
 		89A2F49221D2BD1F4605E148 /* Pods_transactId_demo_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_transactId_demo_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B0A466E265BD09C00B87E0E /* MerkleAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerkleAddress.swift; sourceTree = "<group>"; };
+		8B0A4671265BD76700B87E0E /* MerkleTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerkleTags.swift; sourceTree = "<group>"; };
+		8B0A4674265BD7B000B87E0E /* MerkleTagInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerkleTagInformation.swift; sourceTree = "<group>"; };
 		8B0A46CE25FF4CDF00B879F4 /* OpenSSLSigningHelper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenSSLSigningHelper.cpp; sourceTree = "<group>"; };
 		8B0A46CF25FF4CDF00B879F4 /* OpenSSLSigningHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenSSLSigningHelper.h; sourceTree = "<group>"; };
 		8B0A46D425FF4D0100B879F4 /* OpenSSLEncryptionHelper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenSSLEncryptionHelper.cpp; sourceTree = "<group>"; };
@@ -239,7 +252,7 @@
 		8BA437EB262F00B5003634FE /* TransactIdPaymentACKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactIdPaymentACKTests.swift; sourceTree = "<group>"; };
 		8BA437EE262F00D8003634FE /* TransactIdPaymentRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactIdPaymentRequestTests.swift; sourceTree = "<group>"; };
 		8BAAE2D8260B2B3000187722 /* AddressInformationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInformationService.swift; sourceTree = "<group>"; };
-		8BAAE2DD260B2B6500187722 /* AddressInformaionServiceNetki.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInformaionServiceNetki.swift; sourceTree = "<group>"; };
+		8BAAE2DD260B2B6500187722 /* AddressInformationServiceNetki.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInformationServiceNetki.swift; sourceTree = "<group>"; };
 		8BAAE2E0260B326E00187722 /* AddressInformationRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInformationRepo.swift; sourceTree = "<group>"; };
 		8BBD13A6261CA40000E62F6D /* PaymentRequestParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRequestParameters.swift; sourceTree = "<group>"; };
 		8BBD13A9261CA82500E62F6D /* MessagePaymentDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePaymentDetails.swift; sourceTree = "<group>"; };
@@ -277,6 +290,13 @@
 		8BE9171725E7EDA000426912 /* MessageAttestationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAttestationType.swift; sourceTree = "<group>"; };
 		8BE9171A25E7FB4A00426912 /* MessageOriginator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageOriginator.swift; sourceTree = "<group>"; };
 		8BE9172025E7FCA300426912 /* OriginatorParameters+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OriginatorParameters+Extension.swift"; sourceTree = "<group>"; };
+		8BF21ED72652739C00180605 /* AddressInformationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInformationFactory.swift; sourceTree = "<group>"; };
+		8BF21EDA2652743D00180605 /* AddressInformationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInformationProvider.swift; sourceTree = "<group>"; };
+		8BF21EDD265274C400180605 /* AddressInformationNetkiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInformationNetkiProvider.swift; sourceTree = "<group>"; };
+		8BF21EE2265276EA00180605 /* MerkleRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MerkleRepo.swift; sourceTree = "<group>"; };
+		8BF21EE526528BCD00180605 /* Dictionary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
+		8BF21EE826528C3000180605 /* CharacterSet+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterSet+Extension.swift"; sourceTree = "<group>"; };
+		8BF21EEB2655174800180605 /* TransactIdMerkleRepoUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactIdMerkleRepoUnitTests.swift; sourceTree = "<group>"; };
 		8BF24C2F25D1CB3900C922A3 /* TrustStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustStore.swift; sourceTree = "<group>"; };
 		8BF24C3525D29E0600C922A3 /* Bip75.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bip75.swift; sourceTree = "<group>"; };
 		8BF24C3825D29F4E00C922A3 /* InvoiceRequestParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceRequestParameters.swift; sourceTree = "<group>"; };
@@ -326,6 +346,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B0A466D265BD08C00B87E0E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				8B0A466E265BD09C00B87E0E /* MerkleAddress.swift */,
+				8B0A4671265BD76700B87E0E /* MerkleTags.swift */,
+				8B0A4674265BD7B000B87E0E /* MerkleTagInformation.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		8B290B9625CC3C75006B96B3 /* transactId-demo-app */ = {
 			isa = PBXGroup;
 			children = (
@@ -469,6 +499,7 @@
 				8BA437EB262F00B5003634FE /* TransactIdPaymentACKTests.swift */,
 				8BA437EE262F00D8003634FE /* TransactIdPaymentRequestTests.swift */,
 				8BA437E8262F00A2003634FE /* TransactIdPaymentTests.swift */,
+				8BF21EEB2655174800180605 /* TransactIdMerkleRepoUnitTests.swift */,
 			);
 			path = "transactId_library_ios-tests";
 			sourceTree = "<group>";
@@ -524,6 +555,8 @@
 				8BBD1C252628336B0029738A /* Payment+Extension.swift */,
 				8BBD1C2B2628368A0029738A /* Beneficiary+Extension.swift */,
 				8BBD1C2E26283B5E0029738A /* Originator+Extension.swift */,
+				8BF21EE526528BCD00180605 /* Dictionary+Extension.swift */,
+				8BF21EE826528C3000180605 /* CharacterSet+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -540,9 +573,13 @@
 		8BAAE2D5260B2A6D00187722 /* AddressInformation */ = {
 			isa = PBXGroup;
 			children = (
-				8BAAE2D8260B2B3000187722 /* AddressInformationService.swift */,
-				8BAAE2DD260B2B6500187722 /* AddressInformaionServiceNetki.swift */,
+				8BF21ED72652739C00180605 /* AddressInformationFactory.swift */,
+				8BF21EDD265274C400180605 /* AddressInformationNetkiProvider.swift */,
+				8BF21EDA2652743D00180605 /* AddressInformationProvider.swift */,
 				8BAAE2E0260B326E00187722 /* AddressInformationRepo.swift */,
+				8BAAE2D8260B2B3000187722 /* AddressInformationService.swift */,
+				8BAAE2DD260B2B6500187722 /* AddressInformationServiceNetki.swift */,
+				8BF21EE1265276D600180605 /* Merkle */,
 			);
 			path = AddressInformation;
 			sourceTree = "<group>";
@@ -581,6 +618,15 @@
 				8BDEFBAE25ECFCA700577BAF /* ProtocolMessageType.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		8BF21EE1265276D600180605 /* Merkle */ = {
+			isa = PBXGroup;
+			children = (
+				8B0A466D265BD08C00B87E0E /* Data */,
+				8BF21EE2265276EA00180605 /* MerkleRepo.swift */,
+			);
+			path = Merkle;
 			sourceTree = "<group>";
 		};
 		8BF24C2E25D1CB0F00C922A3 /* TrustStore */ = {
@@ -917,16 +963,20 @@
 				8B47535025D2B9DD00383451 /* BeneficiaryParameters.swift in Sources */,
 				8BDEFBB525ED082300577BAF /* MessageType.swift in Sources */,
 				8BBD13A7261CA40000E62F6D /* PaymentRequestParameters.swift in Sources */,
+				8B0A466F265BD09C00B87E0E /* MerkleAddress.swift in Sources */,
 				8BF24C3C25D29F6800C922A3 /* InvoiceRequest.swift in Sources */,
 				8B290AE325CBE369006B96B3 /* KeyChainProvider.swift in Sources */,
 				8BDEFBB225ED061700577BAF /* Data+Extension.swift in Sources */,
 				8B47534225D2B7F300383451 /* AddressCurrency.swift in Sources */,
 				8B47536125D2BE1A00383451 /* Array<OwnerParameters>+Extension.swift in Sources */,
 				8BE9170325E7A83E00426912 /* MessageInvoiceRequest.swift in Sources */,
+				8BF21EE3265276EA00180605 /* MerkleRepo.swift in Sources */,
 				8B8E210826090EC200139EC0 /* ProtocolMessageMetadata.swift in Sources */,
 				8B8E21172609BE9F00139EC0 /* Originator.swift in Sources */,
 				8BC29F79262487D400071401 /* PaymentParameters.swift in Sources */,
 				8BE3FDC925D1778B00D78B62 /* Request.swift in Sources */,
+				8BF21EE926528C3000180605 /* CharacterSet+Extension.swift in Sources */,
+				8BF21EDE265274C400180605 /* AddressInformationNetkiProvider.swift in Sources */,
 				8BBD1C2C2628368A0029738A /* Beneficiary+Extension.swift in Sources */,
 				8BE9170A25E7AAAD00426912 /* MessageAttestation.swift in Sources */,
 				8B47533825D2B58300383451 /* SenderParameters.swift in Sources */,
@@ -954,6 +1004,7 @@
 				8BBD13AA261CA82500E62F6D /* MessagePaymentDetails.swift in Sources */,
 				8BBD1C262628336B0029738A /* Payment+Extension.swift in Sources */,
 				8BE9170625E7A8D500426912 /* MessageBeneficiary.swift in Sources */,
+				8BF21EDB2652743D00180605 /* AddressInformationProvider.swift in Sources */,
 				8BE3FDBA25D1736000D78B62 /* PearlApiService.swift in Sources */,
 				8BF24C3625D29E0600C922A3 /* Bip75.swift in Sources */,
 				8BAAE2D9260B2B3000187722 /* AddressInformationService.swift in Sources */,
@@ -963,20 +1014,24 @@
 				8B36B2DF25C99AAE00CE14E9 /* OpenSSLCSRHelper.cpp in Sources */,
 				8BE3FDD025D1780000D78B62 /* TokenRequest.swift in Sources */,
 				8B47533C25D2B5D000383451 /* EncryptionParameters.swift in Sources */,
+				8B0A4672265BD76700B87E0E /* MerkleTags.swift in Sources */,
 				8BDEFBAC25ECFBF300577BAF /* ProtocolMessage.swift in Sources */,
 				8BBD13B0261CB88100E62F6D /* MessagePaymentRequest.swift in Sources */,
 				8BBD1C2F26283B5E0029738A /* Originator+Extension.swift in Sources */,
 				8B47534925D2B96200383451 /* AddressTagInformation.swift in Sources */,
 				8B8E20FF2604AC6B00139EC0 /* String+Extension.swift in Sources */,
+				8BF21ED82652739C00180605 /* AddressInformationFactory.swift in Sources */,
 				8B0A46D025FF4CDF00B879F4 /* OpenSSLSigningHelper.cpp in Sources */,
 				8BE9171225E7E39600426912 /* MessageOutput.swift in Sources */,
 				8BBD1C29262833CB0029738A /* MessagePaymentACK.swift in Sources */,
 				8BF24C5025D2A4EC00C922A3 /* Bip75ServiceNetki.swift in Sources */,
+				8B0A4675265BD7B000B87E0E /* MerkleTagInformation.swift in Sources */,
 				8B47535625D2BA8400383451 /* StatusCode.swift in Sources */,
-				8BAAE2DE260B2B6500187722 /* AddressInformaionServiceNetki.swift in Sources */,
+				8BAAE2DE260B2B6500187722 /* AddressInformationServiceNetki.swift in Sources */,
 				8B5BF57A25D3015D0086E7AF /* ExceptionMessages.swift in Sources */,
 				8BDEFBAF25ECFCA700577BAF /* ProtocolMessageType.swift in Sources */,
 				8BE9171525E7E58B00426912 /* Output+Extension.swift in Sources */,
+				8BF21EE626528BCD00180605 /* Dictionary+Extension.swift in Sources */,
 				8BE3FDC625D1776600D78B62 /* Response.swift in Sources */,
 				8BBD13B3261EEDE900E62F6D /* PaymentRequest.swift in Sources */,
 				8BF24C3F25D29F8200C922A3 /* RecipientParameters.swift in Sources */,
@@ -1009,6 +1064,7 @@
 				8B92870A25DC0C5E005AB4B0 /* TrustStore.swift in Sources */,
 				8BA437E9262F00A2003634FE /* TransactIdPaymentTests.swift in Sources */,
 				8B43C77C25E66E4000ED9D56 /* TestData.swift in Sources */,
+				8BF21EEC2655174800180605 /* TransactIdMerkleRepoUnitTests.swift in Sources */,
 				8BA437EF262F00D8003634FE /* TransactIdPaymentRequestTests.swift in Sources */,
 				8BA437EC262F00B5003634FE /* TransactIdPaymentACKTests.swift in Sources */,
 			);
