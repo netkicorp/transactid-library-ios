@@ -99,7 +99,7 @@ extension Data {
         
     }
     
-    func toByteArray() -> Data {
+    public func toByteArray() -> Data {
         let byteArray : [UInt8] = self.withUnsafeBytes ({ (ptr : UnsafeRawBufferPointer) in
             [UInt8](UnsafeRawBufferPointer(start: ptr.baseAddress, count: self.count))
         })
