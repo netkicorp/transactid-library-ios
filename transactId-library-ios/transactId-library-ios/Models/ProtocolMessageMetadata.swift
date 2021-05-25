@@ -9,6 +9,8 @@ import Foundation
 
 public class ProtocolMessageMetadata {
     
+    public init() { }
+    
     /**
      * Protocol version number.
      */

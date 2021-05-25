@@ -13,6 +13,8 @@ import Foundation
 
 public class PkiData {
     
+    public init() { }
+    
     /**
      * Type of certificate.
      */

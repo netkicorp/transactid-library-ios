@@ -8,6 +8,9 @@
 import Foundation
 
 public class Beneficiary : Owner {
+    
+    public init() { }
+
     /**
      * True if this is the primary account owner for this transaction, there can be only one primary owner per transaction.
      */

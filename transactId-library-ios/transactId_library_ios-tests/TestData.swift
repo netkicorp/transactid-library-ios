@@ -421,4 +421,5 @@ struct TestData {
         static let messageInformationEncryption = MessageInformation(encryptMessage: true)
         
     }
+
 }

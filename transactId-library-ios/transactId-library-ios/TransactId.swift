@@ -62,7 +62,7 @@ public class TransactId {
         return try self.bip75.isPaymentACKValid(paymentAckBinary: paymentAckBinary, recipientParameters: recipientParameters)
     }
     
-    public func parsePaymentACK(paymentAckBinary: Data, recipientParameters: RecipientParameters?) throws -> PaymentACK? {
+    public func parsePaymentACK(paymentAckBinary: Data, recipientParameters: RecipientParameters? = nil) throws -> PaymentACK? {
         return try self.bip75.parsePaymentACK(paymentAckBinary: paymentAckBinary, recipientParameters: recipientParameters)
     }
 

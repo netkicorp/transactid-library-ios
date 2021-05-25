@@ -6,8 +6,6 @@
 //
 
 import Foundation
-
-import Foundation
 import XCTest
 import transactId_library_ios
 
@@ -18,7 +16,6 @@ class TransactIdPaymentTests: XCTestCase {
     //MARK: Create and validate PaymentBinary
     
     func testCreateAndValidatePaymentBinary() throws {
-        
         let paymentParameters = PaymentParameters()
         paymentParameters.merchantData = "merchant data"
         paymentParameters.transactions = ["transaction1".toByteString(),
@@ -135,7 +132,7 @@ class TransactIdPaymentTests: XCTestCase {
         } else {
             XCTFail("Failed to Create InvoiceRequestBinary")
         }
-        
+    
     }
     
     //MARK: Create and validate PaymentBinary Encrypted, Owners and Sender with PkiData without RecipientParametersEncryptionParameters
@@ -267,5 +264,5 @@ class TransactIdPaymentTests: XCTestCase {
             }
         }
     }
-    
+
 }
