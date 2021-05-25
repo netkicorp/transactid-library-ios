@@ -74,7 +74,7 @@ struct TestData {
     }
     
     struct Certificates {
-        static let CLIENT_CERTIFICATE_CHAIN_ONE =
+        static let clientCertificateChainOne =
             "-----BEGIN CERTIFICATE-----\n" +
             "MIIDfTCCAmWgAwIBAgIEXnQAUDANBgkqhkiG9w0BAQsFADCBjzELMAkGA1UEBhMC\n" +
             "T04xGDAWBgNVBAgMD0ludGVybWVkaWF0ZU9uZTEYMBYGA1UEBwwPSW50ZXJtZWRp\n" +
@@ -97,7 +97,7 @@ struct TestData {
             "jiG80ehyepS2B16NaB0ckigkhZtpjeXYauadsvpH6Fro\n" +
             "-----END CERTIFICATE-----\n"
         
-        static let CLIENT_CERTIFICATE_CHAIN_TWO =
+        static let clientCertificateChainTwo =
             "-----BEGIN CERTIFICATE-----\n" +
             "MIIDfTCCAmWgAwIBAgIEXnQF+TANBgkqhkiG9w0BAQsFADCBjzELMAkGA1UEBhMC\n" +
             "VFcxGDAWBgNVBAgMD0ludGVybWVkaWF0ZVR3bzEYMBYGA1UEBwwPSW50ZXJtZWRp\n" +
@@ -231,13 +231,27 @@ struct TestData {
     }
     
     struct Originators {
-        static let PRIMARY_ORIGINATOR_PKI_X509SHA256 = OriginatorParameters(isPrimaryForTransaction: true,
-                                                                            pkiDataParametersSets: [TestData.PkiData.pkiDataOneOwnerX509SHA256,
-                                                                                                    TestData.PkiData.pkiDataTwoOwnerX509SHA256])
+        static let primaryOriginatorPkiX509SHA256 = OriginatorParameters(isPrimaryForTransaction: true,
+                                                                         pkiDataParametersSets: [TestData.PkiData.pkiDataOneOwnerX509SHA256,
+                                                                                                 TestData.PkiData.pkiDataTwoOwnerX509SHA256])
         
-        static let NO_PRIMARY_ORIGINATOR_PKI_X509SHA256 = OriginatorParameters(isPrimaryForTransaction: false,
-                                                                               pkiDataParametersSets: [TestData.PkiData.pkiDataOneOwnerX509SHA256,
-                                                                                                       TestData.PkiData.pkiDataTwoOwnerX509SHA256])
+        static let primaryOriginatorPkiX509SHA256BundledCertificate = OriginatorParameters(isPrimaryForTransaction: true,
+                                                                                           pkiDataParametersSets: [TestData.PkiData.pkiDataOneOwnerX509SHA256BundleCertificate,
+                                                                                                                   TestData.PkiData.pkiDataTwoOwnerX509SHA256])
+        
+        static let primaryOriginatorPkiNone = OriginatorParameters(isPrimaryForTransaction: true, pkiDataParametersSets: [TestData.PkiData.pkiDataOwnerNone])
+        
+        static let primaryOriginatorPkiX509SHA256InvalidCertificate = OriginatorParameters(isPrimaryForTransaction: true,
+                                                                                           pkiDataParametersSets: [TestData.PkiData.pkiDataOneOwnerX509SHA256InvalidCertificate,
+                                                                                                                   TestData.PkiData.pkiDataTwoOwnerX509SHA256])
+        
+        static let noPrimaryOriginatorPkiX509SHA256 = OriginatorParameters(isPrimaryForTransaction: false,
+                                                                           pkiDataParametersSets: [TestData.PkiData.pkiDataOneOwnerX509SHA256,
+                                                                                                   TestData.PkiData.pkiDataTwoOwnerX509SHA256])
+        
+        static let noPrimaryOriginatorPkiNone = OriginatorParameters(isPrimaryForTransaction: false, pkiDataParametersSets: [TestData.PkiData.pkiDataOneOwnerX509SHA256,
+                                                                                                                             TestData.PkiData.pkiDataTwoOwnerX509SHA256])
+        
         
     }
     
@@ -245,7 +259,7 @@ struct TestData {
         
         static let pkiDataOneOwnerX509SHA256 = PkiDataParameters(attestation: Attestation.legalPersonSecondaryName,
                                                                  privateKeyPem: TestData.ClientKeys.clientPrivateKeyChainOne,
-                                                                 certificatePem: TestData.Certificates.CLIENT_CERTIFICATE_CHAIN_ONE,
+                                                                 certificatePem: TestData.Certificates.clientCertificateChainOne,
                                                                  type: .x509sha256)
         
         static let pkiDataOneOwnerX509SHA256InvalidCertificate = PkiDataParameters(attestation: TestData.Attestations.invalidAttestation,
@@ -255,7 +269,7 @@ struct TestData {
         
         static let pkiDataTwoOwnerX509SHA256 = PkiDataParameters(attestation: Attestation.legalPersonPrimaryName,
                                                                  privateKeyPem: TestData.ClientKeys.clientPrivateKeyChainTwo,
-                                                                 certificatePem: TestData.Certificates.CLIENT_CERTIFICATE_CHAIN_TWO,
+                                                                 certificatePem: TestData.Certificates.clientCertificateChainTwo,
                                                                  type: .x509sha256)
         
         static let pkiDataOwnerNone = PkiDataParameters(attestation: nil,
@@ -265,7 +279,7 @@ struct TestData {
         
         static let pkiDataSenderX509SHA256 = PkiDataParameters(attestation: nil,
                                                                privateKeyPem: TestData.ClientKeys.clientPrivateKeyChainTwo,
-                                                               certificatePem: TestData.Certificates.CLIENT_CERTIFICATE_CHAIN_TWO,
+                                                               certificatePem: TestData.Certificates.clientCertificateChainTwo,
                                                                type: .x509sha256)
         
         static let pkiDataOneOwnerX509SHA256BundleCertificate = PkiDataParameters(attestation: .legalPersonPrimaryName,
@@ -282,7 +296,7 @@ struct TestData {
                                                                                  privateKeyPem: TestData.ClientKeys.clientPrivateKeyChainTwo,
                                                                                  certificatePem: TestData.Certificates.clientCertificateRandom,
                                                                                  type: .x509sha256)
-                   
+        
     }
     
     // MARK: Encryptions
@@ -377,6 +391,10 @@ struct TestData {
     // MARK: Recipients
     
     struct Recipients {
+        
+        static let recipientsParameters = RecipientParameters(vaspName: "VASP_1",
+                                                              chainAddress: "1234567890ABCD")
+        
         static let recipientsParametersWithEncryption = RecipientParameters(vaspName: "VASP_1",
                                                                             chainAddress: "1234567890ABCD",
                                                                             encryptionParameters: TestData.Encryptions.recipientEncryptionParameters)
@@ -387,7 +405,7 @@ struct TestData {
     struct Attestations {
         
         static let invalidAttestation = Attestation.addressDistinctName
-
+        
         static let requestedAttestations = [Attestation.legalPersonPrimaryName,
                                             Attestation.legalPersonSecondaryName,
                                             Attestation.addressDepartament,

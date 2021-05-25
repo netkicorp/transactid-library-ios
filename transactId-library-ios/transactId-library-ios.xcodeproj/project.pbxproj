@@ -41,7 +41,6 @@
 		8B3E007D25D68B8200B8BE68 /* CertificateChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E007C25D68B8200B8BE68 /* CertificateChain.swift */; };
 		8B43C75B25E631C400ED9D56 /* InvoiceRequestParameters+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43C75A25E631C400ED9D56 /* InvoiceRequestParameters+Extension.swift */; };
 		8B43C77C25E66E4000ED9D56 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43C77B25E66E4000ED9D56 /* TestData.swift */; };
-		8B43C77F25E66E6F00ED9D56 /* TransactIdTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B43C77E25E66E6F00ED9D56 /* TransactIdTests.swift */; };
 		8B47532825D2B0C900383451 /* OwnerParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47532725D2B0C900383451 /* OwnerParameters.swift */; };
 		8B47532C25D2B19900383451 /* PkiDataParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47532B25D2B19900383451 /* PkiDataParameters.swift */; };
 		8B47533025D2B22F00383451 /* PkiType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B47532F25D2B22F00383451 /* PkiType.swift */; };
@@ -210,7 +209,6 @@
 		8B3E007C25D68B8200B8BE68 /* CertificateChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateChain.swift; sourceTree = "<group>"; };
 		8B43C75A25E631C400ED9D56 /* InvoiceRequestParameters+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvoiceRequestParameters+Extension.swift"; sourceTree = "<group>"; };
 		8B43C77B25E66E4000ED9D56 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
-		8B43C77E25E66E6F00ED9D56 /* TransactIdTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactIdTests.swift; sourceTree = "<group>"; };
 		8B47532725D2B0C900383451 /* OwnerParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerParameters.swift; sourceTree = "<group>"; };
 		8B47532B25D2B19900383451 /* PkiDataParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PkiDataParameters.swift; sourceTree = "<group>"; };
 		8B47532F25D2B22F00383451 /* PkiType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PkiType.swift; sourceTree = "<group>"; };
@@ -469,7 +467,6 @@
 			children = (
 				8B36B37E25CADE9E00CE14E9 /* Info.plist */,
 				8B43C77B25E66E4000ED9D56 /* TestData.swift */,
-				8B43C77E25E66E6F00ED9D56 /* TransactIdTests.swift */,
 				8B8E21032608809900139EC0 /* TransactIdEncryptionTests.swift */,
 				8BA437E5262F008A003634FE /* TransactIdInvoiceRequestTests.swift */,
 				8BA437E8262F00A2003634FE /* TransactIdPaymentTests.swift */,
@@ -1015,7 +1012,6 @@
 				8B92870A25DC0C5E005AB4B0 /* TrustStore.swift in Sources */,
 				8B8E21042608809900139EC0 /* TransactIdEncryptionTests.swift in Sources */,
 				8BA437E9262F00A2003634FE /* TransactIdPaymentTests.swift in Sources */,
-				8B43C77F25E66E6F00ED9D56 /* TransactIdTests.swift in Sources */,
 				8B43C77C25E66E4000ED9D56 /* TestData.swift in Sources */,
 				8BA437EF262F00D8003634FE /* TransactIdPaymentRequestTests.swift in Sources */,
 				8BA437EC262F00B5003634FE /* TransactIdPaymentACKTests.swift in Sources */,
