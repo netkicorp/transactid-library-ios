@@ -20,6 +20,6 @@ protocol AddressInformationService {
      * @return information of the address.
      */
     
-    func getAddressInformation(currency: AddressCurrency, address: String) -> AddressInformation
+    func getAddressInformation(currency: AddressCurrency, address: String) throws -> AddressInformation?
 
 }

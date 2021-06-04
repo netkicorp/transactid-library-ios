@@ -26,7 +26,7 @@ public class AddressInformation {
     /**
      * A list of entities who were beneficiaries in a transaction.
      */
-    var beneficiary: Array<AddressTagInformation>? = nil
+    var beneficiary: Array<AddressTagInformation> = []
     
     /**
      * Case status for transaction.
@@ -61,7 +61,7 @@ public class AddressInformation {
     /**
      * A list of entities who were originators in a transaction.
      */
-    var originator: Array<AddressTagInformation>? = nil
+    var originator: Array<AddressTagInformation> = []
     
     /**
      * An integer indicating if this address is Low Risk [1], Medium Risk [2] or High Risk [3] address or if no risks were detected [0], [-1] if could not fetch the risk level.

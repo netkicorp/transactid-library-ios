@@ -1,13 +1,16 @@
 //
-//  AddressInformationRepo.swift
+//  AddressInformationProvider.swift
 //  transactId-library-ios
 //
-//  Created by Developer on 24.03.2021.
+//  Created by Developer on 17.05.2021.
 //
 
 import Foundation
 
-protocol AddressInformationRepo {
+/**
+ * Fetch the detailed information about an address.
+ */
+protocol AddressInformationProvider {
     
     /**
      * Fetch the information of a given address.
@@ -21,5 +24,4 @@ protocol AddressInformationRepo {
     
     func getAddressInformation(currency: AddressCurrency, address: String) throws -> AddressInformation?
 
-    
 }
