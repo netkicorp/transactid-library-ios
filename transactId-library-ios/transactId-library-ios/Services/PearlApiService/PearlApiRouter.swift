@@ -56,10 +56,10 @@ enum PearlApiRouter: URLRequestConvertible {
         case .getToken(let parameters):
             urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
-        case .createUser(let parameters):
+        case .createUser(let parameters, let token):
             urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
-            urlRequest.setValue("Token 4a4adfbbb3f9782af60d03eefb9d351e3eca9f4a", forHTTPHeaderField: "Authorization")
-            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters.parameters)
+            urlRequest.setValue("Token \(token)", forHTTPHeaderField: "Authorization")
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         case .getTransactions( _, let token):
             urlRequest.setValue(token, forHTTPHeaderField: "Authorization")
         case .generateCertificate( _, let token, let parameters):

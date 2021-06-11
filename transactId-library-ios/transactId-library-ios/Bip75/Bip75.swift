@@ -48,6 +48,20 @@ protocol Bip75 {
     func parseInvoiceRequest(invoiceRequestBinary: Data, recipientParameters: RecipientParameters?)throws -> InvoiceRequest?
     
     /**
+     * Parse binary PaymentRequest and also get the detailed information of the addresses.
+     *
+     * @param paymentRequestBinary binary data with the message to parse.
+     * @param recipientParameters information of the recipient of the message, the RecipientParameters.EncryptionParameters is mandatory to handle encrypted messages.
+     * @return PaymentRequest parsed with the detailed information for each address.
+     * @exception InvalidObjectException if the binary is malformed.
+     * @exception AddressProviderErrorException if there is an error fetching the information from the provider.
+     * @exception AddressProviderUnauthorizedException if there is an error with the authorization to connect to the provider.
+     * @exception EncryptionException if there is an error decrypting or validating the encryption.
+     */
+    
+    func parseInvoiceRequestWithAddressInfo(invoiceRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> InvoiceRequest?
+
+    /**
      * Create binary PaymentRequest.
      *
      * @param paymentRequestParameters data to create the PaymentRequest.

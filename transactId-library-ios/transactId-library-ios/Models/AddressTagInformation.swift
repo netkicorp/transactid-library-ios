@@ -7,25 +7,25 @@
 
 import Foundation
 
-class AddressTagInformation {
+public class AddressTagInformation {
     
     /**
      * Entity type.
      */
-    var tagNameVerbose: String? = nil
+    public var tagNameVerbose: String? = nil
     
     /**
      * Entity subtype.
      */
-    var tagSubtypeVerbose: String? = nil
+    public var tagSubtypeVerbose: String? = nil
     
     /**
      * Entity name.
      */
-    var tagTypeVerbose: String? = nil
+    public var tagTypeVerbose: String? = nil
     
     /**
      * Value sent by entity in this transaction.
      */
-    var totalValueUsd: String? = nil
+    public var totalValueUsd: String? = nil
 }
