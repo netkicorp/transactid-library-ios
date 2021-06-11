@@ -29,6 +29,10 @@ public class TransactId {
                                     recipientParameters: RecipientParameters? = nil) throws -> InvoiceRequest? {
         return try self.bip75.parseInvoiceRequest(invoiceRequestBinary: invoiceRequestBinary, recipientParameters: recipientParameters)
     }
+
+    public func parseInvoiceRequestWithAddressInfo(invoiceRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> InvoiceRequest? {
+        return try self.bip75.parseInvoiceRequestWithAddressInfo(invoiceRequestBinary: invoiceRequestBinary, recipientParameters: recipientParameters)
+    }
     
     public func createPaymentRequest(paymentRequestParameters: PaymentRequestParameters) throws -> Data? {
         return try self.bip75.createPaymentRequest(paymentRequestParameters: paymentRequestParameters)
@@ -65,6 +69,4 @@ public class TransactId {
     public func parsePaymentACK(paymentAckBinary: Data, recipientParameters: RecipientParameters? = nil) throws -> PaymentACK? {
         return try self.bip75.parsePaymentACK(paymentAckBinary: paymentAckBinary, recipientParameters: recipientParameters)
     }
-
-    
 }

@@ -30,8 +30,13 @@ class Bip75Factory {
     func getInstance(trustStore: TrustStore? = nil, autorizationKey: String? = nil, developmentMode: Bool = false) -> Bip75 {
         
         let certificateValidator: CertificateValidator = CertificateValidator(trustStore: trustStore, developmentMode: developmentMode)
-        let bip75Service: Bip75Service = Bip75ServiceNetki(certificateValidator: certificateValidator)
         
+        let addressInformationRepo = MerkleRepo(authorizationKey: autorizationKey ?? "")
+        
+        let addressInformationService = AddressInformationServiceNetki(addressInformationRepo: addressInformationRepo)
+        
+        let bip75Service: Bip75Service = Bip75ServiceNetki(certificateValidator: certificateValidator, addressInformationService: addressInformationService)
+
         return Bip75Netki(bip75Service: bip75Service)
     }
 }

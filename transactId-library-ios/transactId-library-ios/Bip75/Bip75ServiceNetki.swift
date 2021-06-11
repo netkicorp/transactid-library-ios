@@ -132,9 +132,7 @@ class Bip75ServiceNetki: Bip75Service {
     func parseInvoiceRequest(invoiceRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> InvoiceRequest? {
         return try self.parseInvoiceRequestBinary(invoiceRequestBinary: invoiceRequestBinary, recipientParameters: recipientParameters)
     }
-    
-    //MARK: TODO parseInvoiceRequestWithAddressInfo
-    
+        
     func parseInvoiceRequestWithAddressInfo(invoiceRequestBinary: Data, recipientParameters: RecipientParameters?) throws -> InvoiceRequest? {
         if let invoiceRequest = try self.parseInvoiceRequestBinary(invoiceRequestBinary: invoiceRequestBinary, recipientParameters: recipientParameters) {
             try invoiceRequest.originatorsAddresses.forEach { (output) in

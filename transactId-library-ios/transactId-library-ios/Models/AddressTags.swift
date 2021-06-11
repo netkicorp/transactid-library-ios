@@ -7,9 +7,9 @@
 
 import Foundation
 
-class AddressTags {
+public class AddressTags {
 
-    var owner: AddressTagInformation? = nil
+    public var owner: AddressTagInformation? = nil
 
-    var user: AddressTagInformation? = nil
+    public var user: AddressTagInformation? = nil
 }

@@ -8,8 +8,7 @@
 import Foundation
 
 protocol AddressInformationService {
-    
-    
+
     /**
      * Fetch the information of a given address.
      *
